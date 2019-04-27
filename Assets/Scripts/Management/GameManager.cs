@@ -10,17 +10,16 @@ public class GameManager : MonoBehaviour
     public float timeBetweenEnemySpawns = 5; // how long to wait before spawning a batch of zombies
     public int amountOfEnemiesToSpawn = 5;
 
-    [Header("UI")]
-    public GameObject gameMenu;
-
     [Header("Player Settings")]
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
-
     [Header("Enemy Settings")]
     public ObjectPool zombiePool;
     public Transform[] enemySpawnPoints;
+
+    [Header("UI Manager")]
+    UIManager uiManager;
 
     [Header("Game Data")]
     public float timeSinceLastWave = 0;
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = FindObjectOfType<UIManager>();
         SpawnPlayer();
     }
 
@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour
                 inBetweenWaves = false;
             }
         }
+
+        //If player is dead, game over
+        if(!player.GetComponent<Player>().alive)
+        {
+            uiManager.GameOver();
+        }
     }
 
     private void SpawnPlayer()
@@ -105,17 +111,5 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-    }
-
-    private void PauseGame()
-    {
-        gameMenu.SetActive(true);
-        Time.timeScale = 0;
-    }
-
-    private void UnPauseGame()
-    {
-        gameMenu.SetActive(false);
-        Time.timeScale = 1;
     }
 }
