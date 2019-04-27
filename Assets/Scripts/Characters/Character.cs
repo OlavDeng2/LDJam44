@@ -43,6 +43,10 @@ public class Character : MonoBehaviour
     public void MoveCharacter(Vector3 moveDirection)
     {
         gameObject.transform.position += moveDirection * moveSpeed;
-        //gameObject.transform.rotation = Quaternion.LookRotation(moveDirection);
+    }
+
+    public void LookDirection(Vector3 lookDirection)
+    {
+        gameObject.transform.right = lookDirection;
     }
 }

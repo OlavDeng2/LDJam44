@@ -24,7 +24,9 @@ public class Zombie : Character
     {
         if(player)
         {
-            MoveCharacter(Vector3.Normalize(player.transform.position - this.gameObject.transform.position));
+            Vector3 directionToPlayer = Vector3.Normalize(player.transform.position - this.gameObject.transform.position);
+            MoveCharacter(directionToPlayer);
+            LookDirection(directionToPlayer);
         }
     }
 

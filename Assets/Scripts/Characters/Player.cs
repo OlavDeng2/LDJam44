@@ -18,7 +18,7 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        
+        MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
     }
 
     private void ShootGun()
