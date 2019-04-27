@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
+    [Header("Shop Settings")]
+    public ObjectPool shopPool;
+    public Transform[] shopSpawnPoints;
+
     [Header("Enemy Settings")]
     public ObjectPool zombiePool;
     public Transform[] enemySpawnPoints;
@@ -66,10 +70,15 @@ public class GameManager : MonoBehaviour
 
         if(inBetweenWaves)
         {
+            //spawn the shop
+
+
             //if certain button pressed, start next wave
             if(false)
             {
                 inBetweenWaves = false;
+
+                //return the shop
             }
         }
 

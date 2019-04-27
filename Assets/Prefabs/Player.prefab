@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 438110515}
   - component: {fileID: 438110514}
   - component: {fileID: 438110513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1914412116429152663}
   - component: {fileID: 6663609107042498819}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 2144648354}
   - component: {fileID: 2144648353}
   - component: {fileID: -6795129340089768877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +217,12 @@ MonoBehaviour:
   totalAmmo: 90
   currentAmmoInMag: 30
   maxAmmoInMag: 30
+  gunRange: 10
+  fireRate: 0.1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  timeSinceLastShot: 0
 --- !u!50 &2144648354
 Rigidbody2D:
   serializedVersion: 4

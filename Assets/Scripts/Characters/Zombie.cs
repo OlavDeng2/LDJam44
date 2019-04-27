@@ -18,6 +18,10 @@ public class Zombie : Character
     void Update()
     {
         MoveTowardsPlayer();
+        if(!alive)
+        {
+            this.GetComponent<PooledObject>().ReturnToPool();
+        }
     }
 
     private void MoveTowardsPlayer()
