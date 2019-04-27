@@ -12,6 +12,16 @@ public class GameManager : MonoBehaviour
     [Header("Zombie Settings")]
     public ObjectPool zombiePool;
     public Transform[] zombieSpawnPoints;
+    public float zombieSpawnRate = 5f;
+
+    [Header("Game Settings")]
+    public float waveLength;
+
+
+    [Header("Game Data")]
+    public float currentTime;
+    public float currentScore;
+    public float currentWave;
 
     // Start is called before the first frame update
     void Start()

@@ -12,19 +12,6 @@ public class Character : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 1;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //The character should take damage
     public void TakeDamage(float damage)
     {

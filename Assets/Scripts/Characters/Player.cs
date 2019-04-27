@@ -9,12 +9,6 @@ public class Player : Character
     public int currentAmmoInMag = 30;
     public int maxAmmoInMag = 30;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
