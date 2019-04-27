@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerPool.GetObject();
+        zombiePool.GetObject().gameObject.transform.position = new Vector3(1, 1, 0);
     }
 
     // Update is called once per frame

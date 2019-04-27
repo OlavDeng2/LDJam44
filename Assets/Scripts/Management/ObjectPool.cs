@@ -14,25 +14,43 @@ public class ObjectPool : MonoBehaviour
     {
         for(int i = 0; i < spawnCount; i++)
         {
-            GameObject go = Instantiate(objectPrefab, this.transform);
-            PooledObject pooledObject = go.GetComponent<PooledObject>();
-            pooledObject.pool = this;
-            objects.Add(pooledObject);
-            go.SetActive(false);
+            SpawnObject();
         }
     }
 
     public PooledObject GetObject()
     {
-        PooledObject objectToGet = objects[objects.Count - 1];
-        objects.RemoveAt(objects.Count - 1);
-        objectToGet.gameObject.SetActive(true);
-        return objectToGet;
+        if(objects.Count != 0)
+        {
+            PooledObject objectToGet = objects[objects.Count - 1];
+            objects.RemoveAt(objects.Count - 1);
+            objectToGet.gameObject.SetActive(true);
+            return objectToGet;
+        }
+
+        else
+        {
+            SpawnObject();
+            PooledObject objectToGet = objects[objects.Count - 1];
+            objects.RemoveAt(objects.Count - 1);
+            objectToGet.gameObject.SetActive(true);
+            return objectToGet;
+        }
+        
     }
 
     public void ReturnToPool(PooledObject objectToReturn)
     {
         objects.Add(objectToReturn);
         objectToReturn.gameObject.SetActive(false);
+    }
+
+    private void SpawnObject()
+    {
+        GameObject go = Instantiate(objectPrefab, this.transform);
+        PooledObject pooledObject = go.GetComponent<PooledObject>();
+        pooledObject.pool = this;
+        objects.Add(pooledObject);
+        go.SetActive(false);
     }
 }
