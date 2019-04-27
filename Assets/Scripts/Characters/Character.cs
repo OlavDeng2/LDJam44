@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("Health")]
     public float health = 100;
     public float damage = 100;
-    public float moveSpeed = 1;
     public bool alive = true;
+
+    [Header("Movement")]
+    public float moveSpeed = 1;
+
 
     // Start is called before the first frame update
     void Start()

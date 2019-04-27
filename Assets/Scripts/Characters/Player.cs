@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+    [Header("Gun")]
     public int totalAmmo = 90;
     public int currentAmmoInMag = 30;
     public int maxAmmoInMag = 30;

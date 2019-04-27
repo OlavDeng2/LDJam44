@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    GameObject playerPrefab;
-    GameObject zombiePrefab;
+
+    [Header("Player Settings")]
+    public GameObject playerPrefab;
+    public Transform[] playerSpawnPoints;
+
+    [Header("Zombie Settings")]
+    public GameObject zombiePrefab;
+    public Transform[] zombieSpawnPoints;
 
     // Start is called before the first frame update
     void Start()
