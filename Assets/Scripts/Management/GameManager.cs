@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     [Header("Game Settings")]
     public float waveLength = 60; //this is in seconds
     public float timeBetweenEnemySpawns = 5; // how long to wait before spawning a batch of zombies
@@ -14,13 +13,14 @@ public class GameManager : MonoBehaviour
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
-    [Header("Shop Settings")]
-    public ObjectPool shopPool;
-    public Transform[] shopSpawnPoints;
-
     [Header("Enemy Settings")]
     public ObjectPool zombiePool;
     public Transform[] enemySpawnPoints;
+
+    [Header("Shop Settings")]
+    public ObjectPool shopPool;
+    public Transform[] shopSpawnPoints;
+    public PooledObject shop;
 
     [Header("UI Manager")]
     UIManager uiManager;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if(!inBetweenWaves)
         {
+            //Spawn enemies
             timeSinceLastSpawn += Time.deltaTime;
             timeSinceLastWave += Time.deltaTime;
             if (timeSinceLastSpawn > timeBetweenEnemySpawns)
@@ -54,31 +55,19 @@ public class GameManager : MonoBehaviour
                 SpawnEnemies();
             }
 
-
             //if certain amount of time has passed
             if(timeSinceLastWave >= waveLength)
             {
-                Debug.Log("yes");
-                foreach (PooledObject enemy in allEnemies)
-                {
-                    enemy.ReturnToPool();
-                }
-                timeSinceLastWave = 0;
-                inBetweenWaves = true;
+                EndWave();
             }
         }
 
         if(inBetweenWaves)
         {
-            //spawn the shop
-
-
             //if certain button pressed, start next wave
             if(false)
             {
-                inBetweenWaves = false;
-
-                //return the shop
+                StartWave();
             }
         }
 
@@ -120,5 +109,29 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void EndWave()
+    {
+        //Clear the previous wave
+        foreach (PooledObject enemy in allEnemies)
+        {
+            enemy.ReturnToPool();
+        }
+        timeSinceLastWave = 0;
+
+        //Spawn the shop
+        if (shop)
+        {
+            shop.ReturnToPool();
+        }
+        Transform randomSpawnPos = shopSpawnPoints[Random.Range(0, shopSpawnPoints.Length - 1)];
+        shop = shopPool.GetObject();
+        shop.transform.position = randomSpawnPos.position;
+    }
+
+    private void StartWave()
+    {
+        inBetweenWaves = false;
     }
 }
