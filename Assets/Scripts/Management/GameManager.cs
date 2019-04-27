@@ -6,17 +6,17 @@ public class GameManager : MonoBehaviour
 {
 
     [Header("Player Settings")]
-    public GameObject playerPrefab;
+    public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
     [Header("Zombie Settings")]
-    public GameObject zombiePrefab;
+    public ObjectPool zombiePool;
     public Transform[] zombieSpawnPoints;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerPool.GetObject();
     }
 
     // Update is called once per frame
