@@ -32,19 +32,13 @@ public class Shop : MonoBehaviour
             {
                 if (!storeIsOpen)
                 {
-
-                    //pause the game
-                    Time.timeScale = 0;
-                    storeIsOpen = true;
-                    ui.SetActive(true);
+                    OpenStore();
+                    
                 }
 
                 else if(storeIsOpen)
                 {
-                    //unpause game
-                    Time.timeScale = 1;
-                    storeIsOpen = false;
-                    ui.SetActive(false);
+                    CloseStore();
                 }
             }
         }
@@ -62,7 +56,21 @@ public class Shop : MonoBehaviour
         }    
     }
 
+    public void OpenStore()
+    {
+        //pause the game
+        Time.timeScale = 0;
+        storeIsOpen = true;
+        ui.SetActive(true);
+    }
 
+    public void CloseStore()
+    {
+        //unpause game
+        Time.timeScale = 1;
+        storeIsOpen = false;
+        ui.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

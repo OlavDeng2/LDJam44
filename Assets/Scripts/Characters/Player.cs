@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -18,6 +20,10 @@ public class Player : Character
     public float timeSinceReloadStart = 0f;
     public bool isReloading = false;
 
+    [Header("UI")]
+    public Text healthText;
+    public Text ammoText;
+
     private void Start()
     {
         timeSinceLastShot = fireRate;
@@ -27,6 +33,7 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+        UpdateUI();
 
         //keep counter going to keep track of when shot was last fired
         timeSinceLastShot += Time.deltaTime;
@@ -123,5 +130,11 @@ public class Player : Character
 
         }
         
+    }
+
+    private void UpdateUI()
+    {
+        ammoText.text = currentAmmoInMag + "/" + totalAmmo;
+        healthText.text = health.ToString();
     }
 }
