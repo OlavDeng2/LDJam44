@@ -52,11 +52,14 @@ public class Shop : MonoBehaviour
 
     public void BuyBullets()
     {
-        if (player.health > healthPerBuy)
+        if(player)
         {
-            player.totalAmmo += bulletsPerHealth * healthPerBuy;
-            player.health -= healthPerBuy;
-        }
+            if (player.health > healthPerBuy)
+            {
+                player.totalAmmo += bulletsPerHealth * healthPerBuy;
+                player.health -= healthPerBuy;
+            }
+        }    
     }
 
 
