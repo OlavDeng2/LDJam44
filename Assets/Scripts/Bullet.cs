@@ -6,6 +6,13 @@ public class Bullet : MonoBehaviour
 {
     public float damage = 100;
     public GameObject shooter;
+    public AudioClip shootSound;
+    public AudioSource source;
+
+    private void Start()
+    {
+        source.PlayOneShot(shootSound);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour
         {
             //select a random number for chosing what to spawn
             int randomEnemyType = Random.Range(0, 2);
-            print(randomEnemyType);
             //select a random spawnpoint to spawn enemy
             Transform randomSpawnPos = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1 )];
 
