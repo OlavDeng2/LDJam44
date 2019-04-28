@@ -343,7 +343,7 @@ MonoBehaviour:
   alive: 1
   moveSpeed: 0.1
   bulletPool: {fileID: 468063683396067015}
-  bulletSpeed: 10
+  bulletSpeed: 1
   totalAmmo: 90
   currentAmmoInMag: 30
   maxAmmoInMag: 30

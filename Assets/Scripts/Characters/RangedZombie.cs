@@ -124,7 +124,10 @@ public class RangedZombie : Character
 
                 //New shoot
                 PooledObject bullet = bulletPool.GetObject();
+                bullet.transform.position = this.transform.position;
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+                bullet.GetComponent<Bullet>().shooter = this.gameObject;
+
             }
         }
     }
