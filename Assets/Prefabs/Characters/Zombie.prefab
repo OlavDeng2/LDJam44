@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b5de2c03040b4418737d4bb5893865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 30
   damage: 100
   alive: 1
-  moveSpeed: 0.1
+  moveSpeed: 0.05
   player: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!61 &1041797769705767959

@@ -42,7 +42,7 @@ public class Player : Character
 
         //Handle input
         MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
-        Vector3 lookDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position;
+        Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
         //LookDirection(lookDirection );
 
 
@@ -88,6 +88,8 @@ public class Player : Character
                 bullet.transform.position = this.transform.position;
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
                 bullet.GetComponent<Bullet>().shooter = this.gameObject;
+                bullet.GetComponent<Bullet>().damage = damage;
+
 
                 /*
                 //Old shoot

@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public float timeBetweenEnemySpawns = 5; // how long to wait before spawning a batch of zombies
     public int amountOfEnemiesToSpawn = 5;
 
+    [Header("Global Pools")]
+    public ObjectPool bulletPool;
+
     [Header("Player Settings")]
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
         //select a random spawnpoint to spawn player
         Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
         player = playerPool.GetObject();
+        player.GetComponent<Player>().bulletPool = bulletPool;
         player.transform.position = randomSpawnPos.position;
     }
 
@@ -110,6 +114,13 @@ public class GameManager : MonoBehaviour
                     PooledObject enemy = zombiePool.GetObject();
                     allEnemies.Add(enemy);
                     enemy.gameObject.transform.position = randomSpawnPos.position;
+                    break;
+
+                case 1:
+                    PooledObject rangedEnemy = rangedZombiePool.GetObject();
+                    allEnemies.Add(rangedEnemy);
+                    rangedEnemy.gameObject.transform.position = randomSpawnPos.position;
+                    rangedEnemy.GetComponent<RangedZombie>().bulletPool = bulletPool;
                     break;
             }
         }
