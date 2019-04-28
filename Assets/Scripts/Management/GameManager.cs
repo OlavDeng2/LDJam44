@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public float timeSinceLastWave = 0;
     public float timeSinceLastSpawn = 0;
     public float currentScore = 0;
-    public float currentWave = 0;
+    public float currentWave = 1; // Current wave always starts at 1
     public bool inBetweenWaves = false;
     public List<PooledObject> allEnemies;
     public PooledObject player;
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             if(timeSinceLastWave >= waveLength)
             {
                 EndWave();
+                currentWave++;
             }
         }
 
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        for(int i = 0; i < amountOfEnemiesToSpawn; i++)
+        for(int i = 0; i < amountOfEnemiesToSpawn * currentWave; i++)
         {
             //select a random number for chosing what to spawn
             int randomEnemyType = Random.Range(0, 1);
