@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class Player : Character
 {
     [Header("Gun")]
+    public ObjectPool bulletPool;
+    public float bulletSpeed = 10;
     public int totalAmmo = 90;
     public int currentAmmoInMag = 30;
     public int maxAmmoInMag = 30;
@@ -68,11 +70,7 @@ public class Player : Character
                 timeSinceReloadStart = 0f;
                 isReloading = false;
             }
-
         }
-
-
-
     }
 
     private void ShootGun(Vector3 direction)
@@ -83,10 +81,16 @@ public class Player : Character
             if (timeSinceLastShot >= fireRate)
             {
                 timeSinceLastShot = 0f;
+                currentAmmoInMag -= 1;
 
+                //New shoot
+                PooledObject bullet = bulletPool.GetObject();
+                bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+
+                /*
+                //Old shoot
                 //shoot
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, gunRange, enemyLayer);
-                currentAmmoInMag -= 1;
 
                 Debug.DrawRay(transform.position, direction * gunRange, Color.yellow, 5f);
 
@@ -94,7 +98,7 @@ public class Player : Character
                 if (hit)
                 {
                     hit.collider.gameObject.GetComponent<Character>().TakeDamage(damage);
-                }
+                }*/
             }
         }
     }
@@ -127,9 +131,7 @@ public class Player : Character
                 currentAmmoInMag += totalAmmo;
                 totalAmmo = 0;
             }
-
         }
-        
     }
 
     private void UpdateUI()

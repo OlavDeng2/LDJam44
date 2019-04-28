@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RangedZombie : Character
 {
-    
-
     [Header("Gun")]
+    public ObjectPool bulletPool;
+    public float bulletSpeed = 10;
     public int totalAmmo = 90;
     public int currentAmmoInMag = 30;
     public int maxAmmoInMag = 30;
@@ -119,18 +119,12 @@ public class RangedZombie : Character
             if (timeSinceLastShot >= fireRate)
             {
                 timeSinceLastShot = 0f;
-
-                //shoot
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, gunRange, enemyLayer);
                 currentAmmoInMag -= 1;
 
-                Debug.DrawRay(transform.position, direction * gunRange, Color.yellow, 5f);
 
-                // Does the ray intersect any objects excluding the player layer
-                if (hit)
-                {
-                    hit.collider.gameObject.GetComponent<Character>().TakeDamage(damage);
-                }
+                //New shoot
+                PooledObject bullet = bulletPool.GetObject();
+                bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
             }
         }
     }
