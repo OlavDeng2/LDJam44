@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy Settings")]
     public ObjectPool zombiePool;
+    public ObjectPool rangedZombiePool;
     public Transform[] enemySpawnPoints;
 
     [Header("Shop Settings")]
@@ -67,8 +68,8 @@ public class GameManager : MonoBehaviour
 
         if(inBetweenWaves)
         {
-            //if certain button pressed, start next wave
-            if(false)
+            //if enter is pressed, start wave
+            if(Input.GetKeyDown(KeyCode.Return))
             {
                 StartWave();
             }
@@ -120,7 +121,10 @@ public class GameManager : MonoBehaviour
         foreach (PooledObject enemy in allEnemies)
         {
             enemy.ReturnToPool();
+
         }
+
+        allEnemies.Clear();
         timeSinceLastWave = 0;
 
         //Spawn the shop
@@ -128,6 +132,7 @@ public class GameManager : MonoBehaviour
         {
             shop.ReturnToPool();
         }
+        inBetweenWaves = true;
         Transform randomSpawnPos = shopSpawnPoints[Random.Range(0, shopSpawnPoints.Length - 1)];
         shop = shopPool.GetObject();
         shop.transform.position = randomSpawnPos.position;

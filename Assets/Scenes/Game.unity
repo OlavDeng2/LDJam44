@@ -322,26 +322,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3855472109154360922, guid: 3c494d5170e059f40b99fced79d7768b,
-        type: 3}
-      propertyPath: inBetweenWaves
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855472109154360922, guid: 3c494d5170e059f40b99fced79d7768b,
-        type: 3}
-      propertyPath: gameMenu
-      value: 
-      objectReference: {fileID: 8157072612448473770}
-    - target: {fileID: 3855472109154360922, guid: 3c494d5170e059f40b99fced79d7768b,
-        type: 3}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c494d5170e059f40b99fced79d7768b, type: 3}
---- !u!1 &8157072612448473770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7149100540922382991, guid: e90d7aafcc77ef04dac4a226b879c32b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1298456449104762917}
-  m_PrefabAsset: {fileID: 0}

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 4943934517081144830, guid: 924ce6d77805adf43bd068490c33651a,
     type: 3}
-  spawnCount: 5
+  spawnCount: 50
   objects: []
 --- !u!1 &1891374210714615332
 GameObject:
@@ -357,6 +357,53 @@ Transform:
   m_Father: {fileID: 8213675024709521973}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7676267839940815089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131678405618555639}
+  - component: {fileID: 4659268649589202466}
+  m_Layer: 0
+  m_Name: rangedZombie
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131678405618555639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676267839940815089}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5690484080032466564}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4659268649589202466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676267839940815089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16759acd94cd552489b5c0eb195bf747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 5523471019990400206, guid: 3eeaed242c61cf6448d6c1dd18b0c278,
+    type: 3}
+  spawnCount: 50
+  objects: []
 --- !u!1 &8002499228802211392
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,19 +456,20 @@ MonoBehaviour:
   playerSpawnPoints:
   - {fileID: 6811064772349307713}
   zombiePool: {fileID: 4060265245475301111}
+  rangedZombiePool: {fileID: 4659268649589202466}
   enemySpawnPoints:
   - {fileID: 1115185691778461157}
   shopPool: {fileID: 6113572808146668466}
   shopSpawnPoints:
   - {fileID: 7979611693926110255}
-  shop: {fileID: 0}
   timeSinceLastWave: 0
   timeSinceLastSpawn: 0
   currentScore: 0
   currentWave: 0
-  inBetweenWaves: 1
+  inBetweenWaves: 0
   allEnemies: []
   player: {fileID: 0}
+  shop: {fileID: 0}
 --- !u!1 &8806556104832028353
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +500,7 @@ Transform:
   - {fileID: 1261082281154549324}
   - {fileID: 4293861487206879199}
   - {fileID: 6127195440363776038}
+  - {fileID: 1131678405618555639}
   m_Father: {fileID: 2534944088199883680}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
