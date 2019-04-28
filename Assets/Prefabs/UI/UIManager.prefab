@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMenuCanvas: {fileID: 7149100540922382991}
-  gameOverCanvas: {fileID: 0}
+  gameOverCanvas: {fileID: 7890771891513759105}
   mainMenu: MainMenu
   gameOver: 0
   isPaused: 0

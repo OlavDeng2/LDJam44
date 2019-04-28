@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [Header("Shop Settings")]
     public ObjectPool shopPool;
     public Transform[] shopSpawnPoints;
-    public PooledObject shop;
 
     [Header("UI Manager")]
     UIManager uiManager;
@@ -33,18 +32,22 @@ public class GameManager : MonoBehaviour
     public bool inBetweenWaves = false;
     public List<PooledObject> allEnemies;
     public PooledObject player;
+    public PooledObject shop;
+
 
     // Start is called before the first frame update
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
         SpawnPlayer();
+        inBetweenWaves = false;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!inBetweenWaves)
+        if (!inBetweenWaves)
         {
             //Spawn enemies
             timeSinceLastSpawn += Time.deltaTime;
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
 
         //If player is dead, game over
-        if(!player.GetComponent<Player>().alive)
+        if(!player.GetComponent<Character>().alive)
         {
             uiManager.GameOver();
         }
@@ -132,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     private void StartWave()
     {
+        shop.ReturnToPool();
         inBetweenWaves = false;
     }
 }

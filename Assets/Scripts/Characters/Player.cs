@@ -27,6 +27,7 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+
         //keep counter going to keep track of when shot was last fired
         timeSinceLastShot += Time.deltaTime;
 
