@@ -104,7 +104,8 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < amountOfEnemiesToSpawn * currentWave; i++)
         {
             //select a random number for chosing what to spawn
-            int randomEnemyType = Random.Range(0, 1);
+            int randomEnemyType = Random.Range(0, 2);
+            print(randomEnemyType);
             //select a random spawnpoint to spawn enemy
             Transform randomSpawnPos = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1 )];
 
