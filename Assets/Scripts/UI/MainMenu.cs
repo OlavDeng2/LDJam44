@@ -6,7 +6,13 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public Panel[] allPanels;
+    public Panel mainMenuPanel;
 
+    public void Start()
+    {
+        allPanels = FindObjectsOfType<Panel>();
+        SwitchPanel(mainMenuPanel);
+    }
     public void SwitchPanel(Panel nextPanel)
     {
         foreach(Panel panel in allPanels)
