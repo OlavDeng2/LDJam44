@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Health")]
+    public float defaultHealth = 100;
     public float health = 100;
     public float damage = 100;
     public bool alive = true;

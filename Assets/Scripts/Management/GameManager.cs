@@ -95,7 +95,10 @@ public class GameManager : MonoBehaviour
         //select a random spawnpoint to spawn player
         Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
         player = playerPool.GetObject();
-        player.GetComponent<Player>().bulletPool = bulletPool;
+        Player playerScript = player.GetComponent<Player>();
+        playerScript.bulletPool = bulletPool;
+        playerScript.health = playerScript.defaultHealth;
+        
         player.transform.position = randomSpawnPos.position;
     }
 
@@ -115,13 +118,17 @@ public class GameManager : MonoBehaviour
                     PooledObject enemy = zombiePool.GetObject();
                     allEnemies.Add(enemy);
                     enemy.gameObject.transform.position = randomSpawnPos.position;
+                    Zombie enemyScript = enemy.GetComponent<Zombie>();
+                    enemyScript.health = enemyScript.defaultHealth;
                     break;
 
                 case 1:
                     PooledObject rangedEnemy = rangedZombiePool.GetObject();
                     allEnemies.Add(rangedEnemy);
                     rangedEnemy.gameObject.transform.position = randomSpawnPos.position;
-                    rangedEnemy.GetComponent<RangedZombie>().bulletPool = bulletPool;
+                    RangedZombie rangedEnemyScript = rangedEnemy.GetComponent<RangedZombie>();
+                    rangedEnemyScript.bulletPool = bulletPool;
+                    rangedEnemyScript.health = rangedEnemyScript.defaultHealth;
                     break;
             }
         }
