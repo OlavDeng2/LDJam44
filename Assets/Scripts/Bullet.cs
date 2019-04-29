@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         source.PlayOneShot(shootSound);
+        currentTime = 0;
     }
 
     private void Update()
@@ -22,6 +23,7 @@ public class Bullet : MonoBehaviour
         currentTime += Time.deltaTime;
         if(currentTime > bulletSurviveTime)
         {
+            currentTime = 0;
             this.GetComponent<PooledObject>().ReturnToPool();
         }
     }
@@ -33,6 +35,7 @@ public class Bullet : MonoBehaviour
         {
             if(collision.gameObject != shooter)
             {
+                currentTime = 0;
                 hitCharacter.TakeDamage(damage);
                 this.GetComponent<PooledObject>().ReturnToPool();
             }

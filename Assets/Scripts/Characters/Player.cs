@@ -141,6 +141,6 @@ public class Player : Character
     private void UpdateUI()
     {
         ammoText.text = currentAmmoInMag + "/" + totalAmmo;
-        healthText.text = health.ToString();
+        healthText.text = "Health: " + health;
     }
 }
