@@ -8,12 +8,9 @@ public class Bullet : MonoBehaviour
     public GameObject shooter;
     public float bulletSurviveTime = 10;
     public float currentTime = 0;
-    public AudioClip shootSound;
-    public AudioSource source;
 
     private void Start()
     {
-        source.PlayOneShot(shootSound);
         currentTime = 0;
     }
 
