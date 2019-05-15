@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 4562148002303150068}
   - component: {fileID: 3269206734049215401}
   - component: {fileID: 3042107415283492917}
+  - component: {fileID: 4051826703739844600}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -130,8 +131,6 @@ MonoBehaviour:
   shooter: {fileID: 0}
   bulletSurviveTime: 10
   currentTime: 0
-  shootSound: {fileID: 8300000, guid: ffc3ce9c8a786d74babce59d6b041d20, type: 3}
-  source: {fileID: 0}
 --- !u!50 &4562148002303150068
 Rigidbody2D:
   serializedVersion: 4
@@ -182,3 +181,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
+--- !u!114 &4051826703739844600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446701549417867979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
