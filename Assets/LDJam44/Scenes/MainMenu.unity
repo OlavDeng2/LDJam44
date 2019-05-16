@@ -1448,9 +1448,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 739731112014621081, guid: 6010780c38cac2948ad8fd4412df0251,
         type: 3}
+      propertyPath: allPanels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 739731112014621081, guid: 6010780c38cac2948ad8fd4412df0251,
+        type: 3}
       propertyPath: mainMenuPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1582809932}
+    - target: {fileID: 739731112014621081, guid: 6010780c38cac2948ad8fd4412df0251,
+        type: 3}
+      propertyPath: allPanels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1582809932}
+    - target: {fileID: 739731112014621081, guid: 6010780c38cac2948ad8fd4412df0251,
+        type: 3}
+      propertyPath: allPanels.Array.data[1]
+      value: 
+      objectReference: {fileID: 20091347}
     - target: {fileID: 2691965642871813564, guid: 6010780c38cac2948ad8fd4412df0251,
         type: 3}
       propertyPath: m_LocalPosition.x
