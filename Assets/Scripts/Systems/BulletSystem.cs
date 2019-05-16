@@ -16,7 +16,8 @@ public class BulletSystem : ComponentSystem
                     if (col.gameObject != bullet.shooter)
                     {
                         hitCharacter.TakeDamage(bullet.damage);
-                        UnityEngine.Object.Destroy(bullet.gameObject);
+                        
+
                     }
                 }
 
