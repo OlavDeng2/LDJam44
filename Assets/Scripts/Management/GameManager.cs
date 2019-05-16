@@ -9,20 +9,13 @@ public class GameManager : MonoBehaviour
     public float timeBetweenEnemySpawns = 5; // how long to wait before spawning a batch of zombies
     public int amountOfEnemiesToSpawn = 5;
 
-    [Header("Global Pools")]
-    public ObjectPool bulletPool;
-
     [Header("Player Settings")]
-    public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
     [Header("Enemy Settings")]
-    public ObjectPool zombiePool;
-    public ObjectPool rangedZombiePool;
     public Transform[] enemySpawnPoints;
 
     [Header("Shop Settings")]
-    public ObjectPool shopPool;
     public Transform[] shopSpawnPoints;
 
     [Header("UI Manager")]
@@ -34,9 +27,6 @@ public class GameManager : MonoBehaviour
     public float currentScore = 0;
     public float currentWave = 1; // Current wave always starts at 1
     public bool inBetweenWaves = false;
-    public List<PooledObject> allEnemies;
-    public PooledObject player;
-    public PooledObject shop;
 
 
     // Start is called before the first frame update
