@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 6091492582540064840}
   - component: {fileID: 6091492582540064843}
   - component: {fileID: 6091492582540064842}
-  - component: {fileID: 3221714577762846557}
+  - component: {fileID: 7007217933452936488}
   m_Layer: 10
   m_Name: Shop
   m_TagString: Untagged
@@ -757,7 +757,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.1749983, y: 3.043045}
   m_EdgeRadius: 0
---- !u!114 &3221714577762846557
+--- !u!114 &7007217933452936488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -766,7 +766,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6091492582540064845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 638e1344f6296b14f88f273527d597d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pool: {fileID: 0}

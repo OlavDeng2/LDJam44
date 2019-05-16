@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 7050589014912704111}
   - component: {fileID: 4562148002303150068}
   - component: {fileID: 3269206734049215401}
-  - component: {fileID: 3042107415283492917}
   - component: {fileID: 4051826703739844600}
   m_Layer: 0
   m_Name: Bullet
@@ -129,8 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   shooter: {fileID: 0}
-  bulletSurviveTime: 10
-  currentTime: 0
+  bulletSpeed: 1
+  moveDirection: {x: 0, y: 0, z: 0}
+  collisions: []
 --- !u!50 &4562148002303150068
 Rigidbody2D:
   serializedVersion: 4
@@ -168,19 +168,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &3042107415283492917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2446701549417867979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 638e1344f6296b14f88f273527d597d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: {fileID: 0}
 --- !u!114 &4051826703739844600
 MonoBehaviour:
   m_ObjectHideFlags: 0
