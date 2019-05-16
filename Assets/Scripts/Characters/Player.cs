@@ -4,10 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : Character
+public class Player : MonoBehaviour
 {
+    [Header("Health")]
+    public float defaultHealth = 100;
+    public float health = 100;
+    public float damage = 100;
+    public bool alive = true;
+
+    [Header("Movement")]
+    public float moveSpeed = 1;
+
     [Header("Gun")]
-    public ObjectPool bulletPool;
+    public GameObject bulletPrefab;
     public float bulletSpeed = 10;
     public int totalAmmo = 90;
     public int currentAmmoInMag = 30;
@@ -84,7 +93,7 @@ public class Player : Character
                 currentAmmoInMag -= 1;
 
                 //New shoot
-                PooledObject bullet = bulletPool.GetObject();
+                GameObject bullet = Instantiate(bulletPrefab);
                 bullet.transform.position = this.transform.position;
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
                 bullet.GetComponent<Bullet>().shooter = this.gameObject;
@@ -142,5 +151,30 @@ public class Player : Character
     {
         ammoText.text = currentAmmoInMag + "/" + totalAmmo;
         healthText.text = "Health: " + health;
+    }
+
+    //The character should take damage
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0f)
+        {
+            KillCharacter();
+        }
+    }
+
+    public void KillCharacter()
+    {
+        alive = false;
+    }
+
+    public void MoveCharacter(Vector3 moveDirection)
+    {
+        gameObject.transform.position += moveDirection * moveSpeed;
+    }
+
+    public void LookDirection(Vector3 lookDirection)
+    {
+        gameObject.transform.right = lookDirection;
     }
 }

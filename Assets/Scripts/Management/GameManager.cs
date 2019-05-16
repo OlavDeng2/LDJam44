@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour
         Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
         player = playerPool.GetObject();
         Player playerScript = player.GetComponent<Player>();
-        playerScript.bulletPool = bulletPool;
         playerScript.health = playerScript.defaultHealth;
         
         player.transform.position = randomSpawnPos.position;
