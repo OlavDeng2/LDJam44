@@ -9,20 +9,13 @@ public class GameManager : MonoBehaviour
     public float timeBetweenEnemySpawns = 5; // how long to wait before spawning a batch of zombies
     public int amountOfEnemiesToSpawn = 5;
 
-    [Header("Global Pools")]
-    public ObjectPool bulletPool;
-
     [Header("Player Settings")]
-    public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
     [Header("Enemy Settings")]
-    public ObjectPool zombiePool;
-    public ObjectPool rangedZombiePool;
     public Transform[] enemySpawnPoints;
 
     [Header("Shop Settings")]
-    public ObjectPool shopPool;
     public Transform[] shopSpawnPoints;
 
     [Header("UI Manager")]
@@ -34,9 +27,6 @@ public class GameManager : MonoBehaviour
     public float currentScore = 0;
     public float currentWave = 1; // Current wave always starts at 1
     public bool inBetweenWaves = false;
-    public List<PooledObject> allEnemies;
-    public PooledObject player;
-    public PooledObject shop;
 
 
     // Start is called before the first frame update
@@ -79,26 +69,29 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //If player is dead, game over
-        if(!player.GetComponent<Character>().alive)
-        {
-            uiManager.GameOver();
-        }
+        
+        ////If player is dead, game over
+        //if(!player.GetComponent<Character>().alive)
+        //{
+        //    uiManager.GameOver();
+        //}
     }
 
     private void SpawnPlayer()
     {
-        if(player)
-        {
-            player.ReturnToPool();
-        }
-        //select a random spawnpoint to spawn player
-        Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
-        player = playerPool.GetObject();
-        Player playerScript = player.GetComponent<Player>();
-        playerScript.health = playerScript.defaultHealth;
         
-        player.transform.position = randomSpawnPos.position;
+        //if(player)
+        //{
+        //    player.ReturnToPool();
+        //}
+        ////select a random spawnpoint to spawn player
+        //Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
+        //player = playerPool.GetObject();
+        //Player playerScript = player.GetComponent<Player>();
+        //playerScript.bulletPool = bulletPool;
+        //playerScript.health = playerScript.defaultHealth;
+        
+        //player.transform.position = randomSpawnPos.position;
     }
 
     private void SpawnEnemies()
@@ -111,54 +104,54 @@ public class GameManager : MonoBehaviour
             Transform randomSpawnPos = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length - 1 )];
 
             //Based on the previous numbers spawn an enemy
-            switch (randomEnemyType)
-            {
-                case 0:
-                    PooledObject enemy = zombiePool.GetObject();
-                    allEnemies.Add(enemy);
-                    enemy.gameObject.transform.position = randomSpawnPos.position;
-                    Zombie enemyScript = enemy.GetComponent<Zombie>();
-                    enemyScript.health = enemyScript.defaultHealth;
-                    break;
+            //switch (randomEnemyType)
+            //{
+            //    case 0:
+            //        PooledObject enemy = zombiePool.GetObject();
+            //        allEnemies.Add(enemy);
+            //        enemy.gameObject.transform.position = randomSpawnPos.position;
+            //        Zombie enemyScript = enemy.GetComponent<Zombie>();
+            //        enemyScript.health = enemyScript.defaultHealth;
+            //        break;
 
-                case 1:
-                    PooledObject rangedEnemy = rangedZombiePool.GetObject();
-                    allEnemies.Add(rangedEnemy);
-                    rangedEnemy.gameObject.transform.position = randomSpawnPos.position;
-                    RangedZombie rangedEnemyScript = rangedEnemy.GetComponent<RangedZombie>();
-                    rangedEnemyScript.bulletPool = bulletPool;
-                    rangedEnemyScript.health = rangedEnemyScript.defaultHealth;
-                    break;
-            }
+            //    case 1:
+            //        PooledObject rangedEnemy = rangedZombiePool.GetObject();
+            //        allEnemies.Add(rangedEnemy);
+            //        rangedEnemy.gameObject.transform.position = randomSpawnPos.position;
+            //        RangedZombie rangedEnemyScript = rangedEnemy.GetComponent<RangedZombie>();
+            //        rangedEnemyScript.bulletPool = bulletPool;
+            //        rangedEnemyScript.health = rangedEnemyScript.defaultHealth;
+            //        break;
+            //}
         }
     }
 
     private void EndWave()
     {
-        //Clear the previous wave
-        foreach (PooledObject enemy in allEnemies)
-        {
-            enemy.ReturnToPool();
+        ////Clear the previous wave
+        //foreach (PooledObject enemy in allEnemies)
+        //{
+        //    enemy.ReturnToPool();
 
-        }
+        //}
 
-        allEnemies.Clear();
-        timeSinceLastWave = 0;
+        //allEnemies.Clear();
+        //timeSinceLastWave = 0;
 
-        //Spawn the shop
-        if (shop)
-        {
-            shop.ReturnToPool();
-        }
-        inBetweenWaves = true;
-        Transform randomSpawnPos = shopSpawnPoints[Random.Range(0, shopSpawnPoints.Length - 1)];
-        shop = shopPool.GetObject();
-        shop.transform.position = randomSpawnPos.position;
+        ////Spawn the shop
+        //if (shop)
+        //{
+        //    shop.ReturnToPool();
+        //}
+        //inBetweenWaves = true;
+        //Transform randomSpawnPos = shopSpawnPoints[Random.Range(0, shopSpawnPoints.Length - 1)];
+        //shop = shopPool.GetObject();
+        //shop.transform.position = randomSpawnPos.position;
     }
 
     private void StartWave()
     {
-        shop.ReturnToPool();
-        inBetweenWaves = false;
+        //shop.ReturnToPool();
+        //inBetweenWaves = false;
     }
 }
