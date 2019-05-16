@@ -6,44 +6,22 @@ public class Bullet : MonoBehaviour
 {
     public float damage = 100;
     public GameObject shooter;
-    public float bulletSurviveTime = 10;
-    public float currentTime = 0;
+    public float bulletSpeed = 1;
+    public Vector3 moveDirection;
+    public List<Collider2D> collisions;
 
-    private void Start()
-    {
-        currentTime = 0;
-    }
-
-    private void Update()
-    {
-        //temporary fix to eventually despawn the bullet
-        currentTime += Time.deltaTime;
-        if(currentTime > bulletSurviveTime)
-        {
-            currentTime = 0;
-            this.GetComponent<PooledObject>().ReturnToPool();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Character hitCharacter = collision.gameObject.GetComponent<Character>();
-        if (hitCharacter)
+        collisions.Add( collision);
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collisions.Contains(collision))
         {
-            if(collision.gameObject != shooter)
-            {
-                currentTime = 0;
-                hitCharacter.TakeDamage(damage);
-                this.GetComponent<PooledObject>().ReturnToPool();
-            }
+            collisions.Remove(collision);
         }
-
-        /*
-        else if (!hitCharacter);
-        {
-            Debug.Log("hit");
-
-            this.GetComponent<PooledObject>().ReturnToPool();
-        }*/
     }
 }
