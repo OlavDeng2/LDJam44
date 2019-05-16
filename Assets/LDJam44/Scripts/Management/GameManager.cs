@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
     public ObjectPool shopPool;
     public Transform[] shopSpawnPoints;
 
-    [Header("UI Manager")]
-    UIManager uiManager;
-
     [Header("Game Data")]
     public float timeSinceLastWave = 0;
     public float timeSinceLastSpawn = 0;
@@ -42,7 +39,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
         SpawnPlayer();
         inBetweenWaves = false;
         Time.timeScale = 1;
@@ -82,7 +78,7 @@ public class GameManager : MonoBehaviour
         //If player is dead, game over
         if(!player.GetComponent<Character>().alive)
         {
-            uiManager.GameOver();
+            player.GetComponent<Player>().playerUI.GameOver();
         }
     }
 

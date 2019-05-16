@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
+    [Header("UI")]
+    public PlayerUI playerUI;
+
     [Header("Gun")]
     public ObjectPool bulletPool;
     public float bulletSpeed = 10;
@@ -22,9 +26,12 @@ public class Player : Character
     public float timeSinceReloadStart = 0f;
     public bool isReloading = false;
 
-    [Header("UI")]
-    public Text healthText;
-    public Text ammoText;
+    [Header("Canvases")]
+    public GameObject gameMenuCanvas;
+    public GameObject gameOverCanvas;
+
+    [Header("Scenes")]
+    public string mainMenu = "MainMenu";
 
     private void Start()
     {
@@ -35,7 +42,9 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
+        //update UI
+        playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
+        playerUI.UpdateHealthText(health);
 
         //keep counter going to keep track of when shot was last fired
         timeSinceLastShot += Time.deltaTime;
@@ -45,8 +54,30 @@ public class Player : Character
         Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
         //LookDirection(lookDirection );
 
+        //Interact with something
+        if (Input.GetButtonDown("Interact"))
+        {
+            Interact();
+        }
 
-        if(!isReloading)
+        //if escape is pressed, pause the game
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
+        {
+
+            if (!playerUI.isPaused)
+            {
+                playerUI.PauseGame();
+                
+            }
+
+            else if (playerUI.isPaused)
+            {
+                playerUI.UnPauseGame();
+            }
+        }
+
+
+        if (!isReloading)
         {
             if (Input.GetButton("Fire1"))
             {
@@ -55,12 +86,13 @@ public class Player : Character
 
             if (Input.GetButton("Reload"))
             {
-                if(totalAmmo > 0)
+                if (totalAmmo > 0)
                 {
                     isReloading = true;
                 }
             }
         }
+
         else if(isReloading)
         {
             timeSinceReloadStart += Time.deltaTime;
@@ -138,9 +170,8 @@ public class Player : Character
         }
     }
 
-    private void UpdateUI()
+    private void Interact()
     {
-        ammoText.text = currentAmmoInMag + "/" + totalAmmo;
-        healthText.text = "Health: " + health;
+
     }
 }
