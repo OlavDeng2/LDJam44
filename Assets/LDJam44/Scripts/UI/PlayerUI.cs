@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
     public GameObject gameOverCanvas;
+    public GameObject loadingScreen;
 
     [Header("Scenes")]
     public string mainMenu = "MainMenu";
@@ -21,6 +22,12 @@ public class PlayerUI : MonoBehaviour
     public bool gameOver = false;
     public bool isPaused = false;
 
+    private void Start()
+    {
+        gameMenuCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
+        loadingScreen.SetActive(false);
+    }
 
     public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
     {
@@ -51,6 +58,7 @@ public class PlayerUI : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        loadingScreen.SetActive(true);
         SceneManager.LoadScene(mainMenu);
     }
 

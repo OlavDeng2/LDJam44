@@ -7,11 +7,13 @@ public class MainMenu : MonoBehaviour
 {
     public Panel[] allPanels;
     public Panel mainMenuPanel;
+    public GameObject loadingScreen;
 
     public void Start()
     {
         allPanels = FindObjectsOfType<Panel>();
         SwitchPanel(mainMenuPanel);
+        loadingScreen.SetActive(false);
     }
     public void SwitchPanel(Panel nextPanel)
     {
@@ -25,6 +27,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel(int scene)
     {
+        loadingScreen.SetActive(true);
         SceneManager.LoadScene(scene);
     }
 
