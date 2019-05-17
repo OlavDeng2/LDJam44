@@ -33,6 +33,9 @@ public class Player : Character
     [Header("Scenes")]
     public string mainMenu = "MainMenu";
 
+    [Header("Data")]
+    public Interactable interactable = null;
+
     private void Start()
     {
         timeSinceLastShot = fireRate;
@@ -55,9 +58,10 @@ public class Player : Character
         //LookDirection(lookDirection );
 
         //Interact with something
-        if (Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact") && interactable != null)
         {
-            Interact();
+            interactable.Interact();
+            
         }
 
         //if escape is pressed, pause the game
@@ -170,8 +174,17 @@ public class Player : Character
         }
     }
 
-    private void Interact()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        interactable = collision.gameObject.GetComponent<Interactable>();
+        Debug.Log(interactable);
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(interactable = collision.gameObject.GetComponent<Interactable>())
+        {
+            interactable = null;
+        }
     }
 }

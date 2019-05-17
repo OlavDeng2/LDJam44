@@ -1446,6 +1446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Loading Screen
       objectReference: {fileID: 0}
+    - target: {fileID: 6735142587732306880, guid: 5c562730ce87db54b9bb81c844876bbc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6369447007972087858, guid: 5c562730ce87db54b9bb81c844876bbc,
         type: 3}
       propertyPath: m_LocalPosition.x

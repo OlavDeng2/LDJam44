@@ -82,4 +82,6 @@ public class PlayerUI : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
     }
+
+
 }

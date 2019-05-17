@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : MonoBehaviour
+public class Shop : Interactable
 {
 
     [Header("UI")]
@@ -22,38 +22,16 @@ public class Shop : MonoBehaviour
         ui.SetActive(false);
     }
 
-    private void Update()
-    {
-
-        if(canOpenStore)
-        {
-            //when a certain button is pressed, open the store
-            if (Input.GetButtonDown("Interact"))
-            {
-                if (!storeIsOpen)
-                {
-                    OpenStore();
-                    
-                }
-
-                else if(storeIsOpen)
-                {
-                    CloseStore();
-                }
-            }
-        }
-    }
-
     public void BuyBullets()
     {
-        if(player)
+        if (player)
         {
             if (player.health > healthPerBuy)
             {
                 player.totalAmmo += bulletsPerHealth * healthPerBuy;
                 player.health -= healthPerBuy;
             }
-        }    
+        }
     }
 
     public void OpenStore()
@@ -72,23 +50,17 @@ public class Shop : MonoBehaviour
         ui.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void Interact()
     {
-        player = collision.GetComponent<Player>();
-
-        if(player)
+        if (!storeIsOpen)
         {
-            canOpenStore = true;
+            OpenStore();
+
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        player = collision.GetComponent<Player>();
-
-        if (player)
+        else if (storeIsOpen)
         {
-            canOpenStore = false;
+            CloseStore();
         }
     }
 }
