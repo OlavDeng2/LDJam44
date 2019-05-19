@@ -1,0 +1,405 @@
+fileFormatVersion: 2
+guid: 3c49e0933dec24348839fd6479f0c6dd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4360390788417139489
+    second: sand_0
+  - first:
+      213: 5804625333536067221
+    second: sand_1
+  - first:
+      213: 8363470912824194618
+    second: sand_2
+  - first:
+      213: 4640418506762625372
+    second: sand_3
+  - first:
+      213: -4879936915944305487
+    second: sand_4
+  - first:
+      213: 3873693989045737049
+    second: sand_5
+  - first:
+      213: -5208840736160344916
+    second: sand_6
+  - first:
+      213: -2395829283879305415
+    second: sand_7
+  - first:
+      213: -6118453146159910627
+    second: sand_8
+  - first:
+      213: 7147706812949010814
+    second: sand_9
+  - first:
+      213: -4674977733493773419
+    second: sand_10
+  - first:
+      213: -7257371996624634434
+    second: sand_11
+  - first:
+      213: 2341174088569508392
+    second: sand_12
+  - first:
+      213: 6496501752664036759
+    second: sand_13
+  - first:
+      213: 2363717366907432664
+    second: sand_14
+  - first:
+      213: 3887684718818787849
+    second: sand_15
+  - first:
+      213: -5021085490659415874
+    second: sand_16
+  - first:
+      213: -301482029705008975
+    second: sand_17
+  - first:
+      213: 3347868445947137204
+    second: sand_18
+  - first:
+      213: 5726966970861077588
+    second: sand_19
+  - first:
+      213: -6225729356647724669
+    second: sand_20
+  - first:
+      213: -8075225671417649117
+    second: sand_21
+  - first:
+      213: -2669741539476063257
+    second: sand_22
+  - first:
+      213: -469803081223691602
+    second: sand_23
+  - first:
+      213: 1092943506184554513
+    second: sand_24
+  - first:
+      213: -7982121097935168531
+    second: sand_25
+  - first:
+      213: -6298806362410332827
+    second: sand_26
+  - first:
+      213: -4266841552259910239
+    second: sand_27
+  - first:
+      213: 7359823385409021409
+    second: sand_28
+  - first:
+      213: 4671389407648162838
+    second: sand_29
+  - first:
+      213: 5147848698470786032
+    second: sand_30
+  - first:
+      213: 5743421430898349016
+    second: sand_31
+  - first:
+      213: 5763410940831677450
+    second: sand_32
+  - first:
+      213: 3811115375000535129
+    second: sand_33
+  - first:
+      213: 2613757966875179890
+    second: sand_34
+  - first:
+      213: 223317209275191724
+    second: sand_35
+  - first:
+      213: -2816954127094308954
+    second: sand_36
+  - first:
+      213: -4875767934785968033
+    second: sand_37
+  - first:
+      213: -300019604769244653
+    second: sand_38
+  - first:
+      213: 5113168179707339972
+    second: sand_39
+  - first:
+      213: 7656324412887241001
+    second: sand_40
+  - first:
+      213: 7853687058213013268
+    second: sand_41
+  - first:
+      213: 8159375336160241515
+    second: sand_42
+  - first:
+      213: 3961361052996356585
+    second: sand_43
+  - first:
+      213: 4450115126991876987
+    second: sand_44
+  - first:
+      213: -3836815859846004764
+    second: sand_45
+  - first:
+      213: -9143011868556245310
+    second: sand_46
+  - first:
+      213: 1827202043559974425
+    second: sand_47
+  - first:
+      213: -3928476402923343798
+    second: sand_48
+  - first:
+      213: -7553413781007151174
+    second: sand_49
+  - first:
+      213: -503419805824184519
+    second: sand_50
+  - first:
+      213: 392749737635812888
+    second: sand_51
+  - first:
+      213: -4526544981374512637
+    second: sand_52
+  - first:
+      213: -4098645411762568297
+    second: sand_53
+  - first:
+      213: 1674121922811956512
+    second: sand_54
+  - first:
+      213: 6684594570432809019
+    second: sand_55
+  - first:
+      213: -6752182475635122596
+    second: sand_56
+  - first:
+      213: -8130528591387715043
+    second: sand_57
+  - first:
+      213: -8198504955374824744
+    second: sand_58
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sand_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e88fa2db88b934f88416144acd3dc5
+      internalID: 4360390788417139489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sand_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92bbf817e12e71e4a996cae3c34adfde
+      internalID: 5804625333536067221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sand_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd3a9c724f6fcbb4e8f7bf69686df96e
+      internalID: 8363470912824194618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sand_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e673c94a98d7c3b42a4ba3083a9632b4
+      internalID: 4640418506762625372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sand_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 501ce15c4ab244e4ca0eca576601ed33
+      internalID: -4879936915944305487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 15c7bf9dc2dc3684bb5dd96cf50bc6ef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

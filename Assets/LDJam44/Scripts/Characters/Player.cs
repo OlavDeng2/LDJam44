@@ -177,7 +177,6 @@ public class Player : Character
     private void OnCollisionEnter2D(Collision2D collision)
     {
         interactable = collision.gameObject.GetComponent<Interactable>();
-        Debug.Log(interactable);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
