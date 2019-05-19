@@ -44,3 +44,9 @@ TagManager:
   - name: Terrain
     uniqueID: 1264394691
     locked: 0
+  - name: Foilage and Roads
+    uniqueID: 1513214013
+    locked: 0
+  - name: Buildings
+    uniqueID: 1617077415
+    locked: 0
