@@ -44,3 +44,18 @@ TagManager:
   - name: Terrain
     uniqueID: 1264394691
     locked: 0
+  - name: Foilage and Roads
+    uniqueID: 1513214013
+    locked: 0
+  - name: Buildings
+    uniqueID: 1617077415
+    locked: 0
+  - name: Interactables
+    uniqueID: 3763547097
+    locked: 0
+  - name: Weapons
+    uniqueID: 2333309623
+    locked: 0
+  - name: Characters
+    uniqueID: 4249767489
+    locked: 0
