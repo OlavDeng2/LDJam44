@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 535f8e525ff367c4ba67961e201a05ed, type: 3}
-  m_Name: Rocks
+  m_Name: Trees
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -35,5 +35,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   m_Sprites:
-  - {fileID: 1887494081247492234, guid: 8df29e5184b911d4d9fbc2614276fdab, type: 3}
-  - {fileID: 2007986136508003152, guid: 8df29e5184b911d4d9fbc2614276fdab, type: 3}
+  - {fileID: 2572236292851511218, guid: 230056650c2eb5f4f9ca783650c8451f, type: 3}
+  - {fileID: 6224024930817484846, guid: 230056650c2eb5f4f9ca783650c8451f, type: 3}
