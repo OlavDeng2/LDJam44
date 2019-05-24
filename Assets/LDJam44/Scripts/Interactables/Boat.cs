@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Boat : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Interact(Player interactingPlayer)
     {
-        
-    }
+        base.Interact(interactingPlayer);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        interactingPlayer.playerUI.GameWin();
     }
 }

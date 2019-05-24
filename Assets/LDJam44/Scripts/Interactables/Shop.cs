@@ -12,8 +12,7 @@ public class Shop : Interactable
     public int bulletsPerHealth = 1;
     public int healthPerBuy = 30;
 
-    [Header("Data")]
-    public Player player;
+
     public bool canOpenStore = false;
     public bool storeIsOpen = false;
 
@@ -50,8 +49,10 @@ public class Shop : Interactable
         ui.SetActive(false);
     }
 
-    public override void Interact()
+    public override void Interact(Player interactingPlayer)
     {
+        base.Interact(interactingPlayer);
+        
         if (!storeIsOpen)
         {
             OpenStore();

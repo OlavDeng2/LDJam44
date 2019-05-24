@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public virtual void Interact()
+    [Header("Data")]
+    public Player player;
+
+    public virtual void Interact(Player interactingPlayer)
     {
         //do something
+        interactingPlayer = player;
     }
 }

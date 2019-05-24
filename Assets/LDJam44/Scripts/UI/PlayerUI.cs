@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
     public GameObject gameOverCanvas;
+    public GameObject gameWinCanvas;
     public GameObject loadingScreen;
 
     [Header("Scenes")]
@@ -20,6 +21,7 @@ public class PlayerUI : MonoBehaviour
 
     [Header("Data")]
     public bool gameOver = false;
+    public bool gameWin = false;
     public bool isPaused = false;
 
     private void Start()
@@ -47,6 +49,15 @@ public class PlayerUI : MonoBehaviour
             gameOverCanvas.SetActive(true);
             Time.timeScale = 0;
             gameOver = true;
+        }
+    }
+    public void GameWin()
+    {
+        if (gameWinCanvas)
+        {
+            gameWinCanvas.SetActive(true);
+            Time.timeScale = 0;
+            gameWin = true;
         }
     }
 

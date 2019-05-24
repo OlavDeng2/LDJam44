@@ -60,8 +60,7 @@ public class Player : Character
         //Interact with something
         if (Input.GetButtonDown("Interact") && interactable != null)
         {
-            interactable.Interact();
-            
+            interactable.Interact(this);
         }
 
         //if escape is pressed, pause the game
