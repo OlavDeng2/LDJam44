@@ -554,7 +554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7440038884065172982
 Transform:
   m_ObjectHideFlags: 0
@@ -1455,6 +1455,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 9188658773829668260}
   mainMenu: MainMenu
   interactable: {fileID: 0}
+  tutorial: {fileID: 0}
 --- !u!114 &5274386302105170222
 MonoBehaviour:
   m_ObjectHideFlags: 0

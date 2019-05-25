@@ -8,18 +8,30 @@ public class TutorialPoint : MonoBehaviour
     public bool hasBeenOpened = false;
     public string talkText = "Tutorial";
 
-
     [Header("Data")]
     public Player player;
 
-    public void OpenTutorial(Player interactingPlayer)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        player = interactingPlayer;
-        player.playerUI.InteractWithObjectTalk(talkText);
+        if(!hasBeenOpened)
+        {
+            player = collision.GetComponent<Player>();
+            if (player)
+            {
+                player.tutorial = this;
+                player.playerUI.InteractWithObjectTalk(talkText);
+                hasBeenOpened = true;
+            }
+        }
     }
 
-    public void CloseTutorial()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        player.playerUI.CloseTalk();
+        if (player)
+        {
+            player.tutorial = null;
+            player = null;
+            this.gameObject.SetActive(false);
+        }
     }
 }

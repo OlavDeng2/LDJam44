@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &838867268541933280
 MonoBehaviour:
@@ -71,5 +71,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBeenOpened: 0
-  player: {fileID: 0}
   talkText: Tutorial
+  player: {fileID: 0}

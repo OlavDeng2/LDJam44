@@ -10,11 +10,8 @@ public class Interactable : MonoBehaviour
     public bool playerHasTalked = false;
 
 
-    public void tryToInteract(Player interactingPlayer)
+    public void tryToInteract()
     {
-        //do something
-        player = interactingPlayer;
-
         if (!playerHasTalked)
         {
             talk();
@@ -35,5 +32,27 @@ public class Interactable : MonoBehaviour
     {
         player.playerUI.InteractWithObjectTalk(talkText);
         playerHasTalked = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        player = collision.GetComponent<Player>();
+        if(player)
+        {
+            player.interactable = this;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(player)
+        {
+            //if (collision.gameObject == player.gameObject)
+            {
+                player.interactable = null;
+                player = null;
+            }
+        }
+        
     }
 }
