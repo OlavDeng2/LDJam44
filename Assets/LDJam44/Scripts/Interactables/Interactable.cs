@@ -13,7 +13,7 @@ public class Interactable : MonoBehaviour
     public void tryToInteract(Player interactingPlayer)
     {
         //do something
-        interactingPlayer = player;
+        player = interactingPlayer;
 
         if (!playerHasTalked)
         {
@@ -27,6 +27,7 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         player.playerUI.CloseTalk();
+        playerHasTalked = false;
         //doSomething
 
     }

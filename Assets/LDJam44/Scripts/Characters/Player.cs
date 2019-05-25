@@ -198,8 +198,9 @@ public class Player : Character
         interactable = collision.gameObject.GetComponent<Interactable>();
         tutorial = collision.gameObject.GetComponent<TutorialPoint>();
 
-        if(tutorial && !tutorial.hasBeenOpened)
+        if(tutorial)
         {
+            if(!tutorial.hasBeenOpened)
             tutorial.OpenTutorial(this);
             tutorial.hasBeenOpened = true;
         }
@@ -207,14 +208,21 @@ public class Player : Character
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(interactable.gameObject == collision.gameObject)
+        if (interactable)
         {
-            interactable = null;
+            if (interactable.gameObject == collision.gameObject)
+            {
+                interactable = null;
+            }
         }
-
-        if(tutorial.gameObject == collision.gameObject)
+      
+        if(tutorial)
         {
-            tutorial.CloseTutorial();
+            if (tutorial.gameObject == collision.gameObject)
+            {
+                tutorial.CloseTutorial();
+            }
         }
+        
     }
 }
