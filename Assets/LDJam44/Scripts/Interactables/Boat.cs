@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Boat : Interactable
 {
-    public override void Interact(Player interactingPlayer)
+    public override void Interact()
     {
-        base.Interact(interactingPlayer);
+        base.Interact();
 
-        interactingPlayer.playerUI.GameWin();
+        player.playerUI.GameWin();
     }
 }

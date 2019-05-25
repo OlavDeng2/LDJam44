@@ -10,6 +10,9 @@ public class Player : Character
     [Header("UI")]
     public PlayerUI playerUI;
 
+    [Header("PlayerTalk")]
+    string nothingToInteractWithText = "nothing";
+
     [Header("Gun")]
     public ObjectPool bulletPool;
     public float bulletSpeed = 10;
@@ -35,6 +38,7 @@ public class Player : Character
 
     [Header("Data")]
     public Interactable interactable = null;
+    public TutorialPoint tutorial = null;
 
     private void Start()
     {
@@ -58,9 +62,25 @@ public class Player : Character
         //LookDirection(lookDirection );
 
         //Interact with something
-        if (Input.GetButtonDown("Interact") && interactable != null)
+        if (Input.GetButtonDown("Interact"))
         {
-            interactable.Interact(this);
+            if(interactable == null)
+            {
+                if(!playerUI.isTalking)
+                {
+                    playerUI.InteractWithObjectTalk(nothingToInteractWithText);
+                }
+                else if(playerUI.isTalking)
+                {
+                    playerUI.CloseTalk();
+                }
+            }
+            else if (interactable != null)
+            {
+                interactable.tryToInteract();
+            }
+
+            
         }
 
         //if escape is pressed, pause the game
@@ -124,20 +144,6 @@ public class Player : Character
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
                 bullet.GetComponent<Bullet>().shooter = this.gameObject;
                 bullet.GetComponent<Bullet>().damage = damage;
-
-
-                /*
-                //Old shoot
-                //shoot
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, gunRange, enemyLayer);
-
-                Debug.DrawRay(transform.position, direction * gunRange, Color.yellow, 5f);
-
-                // Does the ray intersect any objects excluding the player layer
-                if (hit)
-                {
-                    hit.collider.gameObject.GetComponent<Character>().TakeDamage(damage);
-                }*/
             }
         }
     }
@@ -170,19 +176,6 @@ public class Player : Character
                 currentAmmoInMag += totalAmmo;
                 totalAmmo = 0;
             }
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        interactable = collision.gameObject.GetComponent<Interactable>();
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(interactable = collision.gameObject.GetComponent<Interactable>())
-        {
-            interactable = null;
         }
     }
 }

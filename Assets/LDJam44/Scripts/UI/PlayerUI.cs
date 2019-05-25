@@ -10,18 +10,23 @@ public class PlayerUI : MonoBehaviour
     public Text healthText;
     public Text ammoText;
 
+    [Header("playerTalking")]
+    public Text talkText;
+    public GameObject talkTextCanvas;
+    public bool isTalking = false;
+
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
     public GameObject gameOverCanvas;
     public GameObject gameWinCanvas;
     public GameObject loadingScreen;
 
+
     [Header("Scenes")]
     public string mainMenu = "MainMenu";
 
     [Header("Data")]
     public bool gameOver = false;
-    public bool gameWin = false;
     public bool isPaused = false;
 
     private void Start()
@@ -57,7 +62,7 @@ public class PlayerUI : MonoBehaviour
         {
             gameWinCanvas.SetActive(true);
             Time.timeScale = 0;
-            gameWin = true;
+            gameOver = true;
         }
     }
 
@@ -94,5 +99,18 @@ public class PlayerUI : MonoBehaviour
         isPaused = false;
     }
 
+    //Stuff for talk
+    public void InteractWithObjectTalk(string text)
+    {
+        isTalking = true;
+        talkText.text = text;
+        talkTextCanvas.SetActive(true);
 
+    }
+
+    public void CloseTalk()
+    {
+        talkTextCanvas.SetActive(false);
+        isTalking = false;
+    }
 }

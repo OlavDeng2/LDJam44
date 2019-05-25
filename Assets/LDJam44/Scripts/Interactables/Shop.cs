@@ -49,9 +49,9 @@ public class Shop : Interactable
         ui.SetActive(false);
     }
 
-    public override void Interact(Player interactingPlayer)
+    public override void Interact()
     {
-        base.Interact(interactingPlayer);
+        base.Interact();
         
         if (!storeIsOpen)
         {
