@@ -10,6 +10,9 @@ public class Player : Character
     [Header("UI")]
     public PlayerUI playerUI;
 
+    [Header("PlayerTalk")]
+    string nothingToInteractWithText = "nothing";
+
     [Header("Gun")]
     public ObjectPool bulletPool;
     public float bulletSpeed = 10;
@@ -35,6 +38,7 @@ public class Player : Character
 
     [Header("Data")]
     public Interactable interactable = null;
+    public TutorialPoint tutorial = null;
 
     private void Start()
     {
@@ -58,9 +62,25 @@ public class Player : Character
         //LookDirection(lookDirection );
 
         //Interact with something
-        if (Input.GetButtonDown("Interact") && interactable != null)
+        if (Input.GetButtonDown("Interact"))
         {
-            interactable.Interact(this);
+            if(interactable == null)
+            {
+                if(!playerUI.isTalking)
+                {
+                    playerUI.InteractWithObjectTalk(nothingToInteractWithText);
+                }
+                else if(playerUI.isTalking)
+                {
+                    playerUI.CloseTalk();
+                }
+            }
+            else if (interactable != null)
+            {
+                interactable.tryToInteract(this);
+            }
+
+            
         }
 
         //if escape is pressed, pause the game
@@ -176,13 +196,25 @@ public class Player : Character
     private void OnCollisionEnter2D(Collision2D collision)
     {
         interactable = collision.gameObject.GetComponent<Interactable>();
+        tutorial = collision.gameObject.GetComponent<TutorialPoint>();
+
+        if(tutorial && !tutorial.hasBeenOpened)
+        {
+            tutorial.OpenTutorial(this);
+            tutorial.hasBeenOpened = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(interactable = collision.gameObject.GetComponent<Interactable>())
+        if(interactable.gameObject == collision.gameObject)
         {
             interactable = null;
+        }
+
+        if(tutorial.gameObject == collision.gameObject)
+        {
+            tutorial.CloseTutorial();
         }
     }
 }
