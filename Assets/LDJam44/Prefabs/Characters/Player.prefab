@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 2261271483031834664}
   - component: {fileID: 5933497742205579969}
   m_Layer: 5
-  m_Name: Closed
+  m_Name: Regular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1270,6 +1270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8898747605314570073}
+  - component: {fileID: 8449750379148899845}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -1293,6 +1294,19 @@ Transform:
   m_Father: {fileID: 4530069008518953612}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8449750379148899845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722775250992507289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc279b89441a4294088d40aebfcbabfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: 6
 --- !u!1 &3895169823599224396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1781,7 @@ MonoBehaviour:
   alive: 1
   moveSpeed: 0.05
   playerUI: {fileID: 5274386302105170222}
+  inventory: {fileID: 0}
   bulletPool: {fileID: 0}
   bulletSpeed: 10
   totalAmmo: 90

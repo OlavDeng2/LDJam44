@@ -9,6 +9,7 @@ public class Player : Character
 {
     [Header("UI")]
     public PlayerUI playerUI;
+    public Inventory inventory;
 
     [Header("PlayerTalk")]
     string nothingToInteractWithText = "nothing";
@@ -176,6 +177,15 @@ public class Player : Character
                 currentAmmoInMag += totalAmmo;
                 totalAmmo = 0;
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IInventoryItem item = collision.collider.GetComponent<IInventoryItem>();
+        if(item != null)
+        {
+            inventory.AddItem(item);
         }
     }
 }

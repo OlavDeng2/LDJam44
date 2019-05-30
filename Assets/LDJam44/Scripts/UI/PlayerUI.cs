@@ -10,6 +10,9 @@ public class PlayerUI : MonoBehaviour
     public Text healthText;
     public Text ammoText;
 
+    [Header("Inventory")]
+    public Inventory inventory;
+
     [Header("playerTalking")]
     public Text talkText;
     public GameObject talkTextCanvas;
@@ -34,6 +37,8 @@ public class PlayerUI : MonoBehaviour
         gameMenuCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         loadingScreen.SetActive(false);
+
+        inventory.itemAdded += InventoryScript_ItemAdded;
     }
 
     public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
@@ -113,4 +118,25 @@ public class PlayerUI : MonoBehaviour
         talkTextCanvas.SetActive(false);
         isTalking = false;
     }
+
+    //Inventory stuff
+    private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
+    {
+        Transform inventoryPanel = transform.Find("Regular");
+        foreach(Transform slot in inventoryPanel)
+        {
+            Image image = slot.GetChild(0).GetChild(0).GetComponent<Image>();
+
+            if(!image.enabled)
+            {
+                image.enabled = true;
+                image.sprite = e.Item.Image;
+
+                //TODO: Store a reference to the item
+
+                break;
+            }
+        }
+    }
+
 }
