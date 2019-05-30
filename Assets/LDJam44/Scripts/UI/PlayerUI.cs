@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -39,7 +40,9 @@ public class PlayerUI : MonoBehaviour
         loadingScreen.SetActive(false);
 
         inventory.itemAdded += InventoryScript_ItemAdded;
+        inventory.itemRemoved += InventoryScript_ItemRemoved;
     }
+
 
     public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
     {
@@ -123,16 +126,39 @@ public class PlayerUI : MonoBehaviour
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
         Transform inventoryPanel = transform.Find("Regular");
+
         foreach(Transform slot in inventoryPanel)
         {
-            Image image = slot.GetChild(0).GetChild(0).GetComponent<Image>();
+            Transform imageTransform = slot.GetChild(0).GetChild(0);
+            Image image = imageTransform.GetComponent<Image>();
+            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
 
             if(!image.enabled)
             {
                 image.enabled = true;
                 image.sprite = e.Item.Image;
+                itemDragHandler.item = e.Item;
 
-                //TODO: Store a reference to the item
+                break;
+            }
+        }
+    }
+
+
+    private void InventoryScript_ItemRemoved(object sender, InventoryEventsArgs e)
+    {
+        Transform inventoryPanel = transform.Find("Regular");
+        foreach (Transform slot in inventoryPanel)
+        {
+            Transform imageTransform = slot.GetChild(0).GetChild(0);
+            Image image = imageTransform.GetComponent<Image>();
+            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+
+            if (itemDragHandler.item.Equals(e.Item))
+            {
+                image.enabled = false;
+                image.sprite = null;
+                itemDragHandler.item = null;
 
                 break;
             }

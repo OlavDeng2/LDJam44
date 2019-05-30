@@ -8,13 +8,14 @@ public class Inventory : MonoBehaviour
     public int slots = 6;
     private List<IInventoryItem> mItems = new List<IInventoryItem>();
     public event EventHandler<InventoryEventsArgs> itemAdded;
+    public event EventHandler<InventoryEventsArgs> itemRemoved;
 
     // Start is called before the first frame update
     public void AddItem(IInventoryItem item)
     {
         if (mItems.Count < slots)
         {
-            Collider collider = (item as MonoBehaviour).GetComponent<Collider>();
+            Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
             if (collider.enabled)
             {
                 collider.enabled = false;
@@ -25,6 +26,27 @@ public class Inventory : MonoBehaviour
                 {
                     itemAdded(this, new InventoryEventsArgs(item));
                 }
+            }
+        }
+    }
+
+    public void RemoveItem(IInventoryItem item)
+    {
+        if (mItems.Contains(item))
+        {
+            mItems.Remove(item);
+
+            item.OnDrop();
+
+            Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
+
+            if (itemRemoved != null)
+            {
+                itemRemoved(this, new InventoryEventsArgs(item));
             }
         }
     }

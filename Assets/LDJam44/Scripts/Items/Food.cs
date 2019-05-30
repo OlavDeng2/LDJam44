@@ -27,8 +27,18 @@ public class Food : MonoBehaviour, IInventoryItem
         //Do something when picked up
     }
 
+    public void OnDrop()
+    {
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        gameObject.SetActive(true);
+        gameObject.transform.position = worldPoint;
+    }
+
     public void OnUse()
     {
         //Do something when used
     }
+
+   
 }

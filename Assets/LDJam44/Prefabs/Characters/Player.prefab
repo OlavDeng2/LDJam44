@@ -1271,6 +1271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8898747605314570073}
   - component: {fileID: 8449750379148899845}
+  - component: {fileID: 128225829176633782}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -1307,6 +1308,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: 6
+--- !u!114 &128225829176633782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722775250992507289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc133e27da122c44ab2c796443eb3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3895169823599224396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 2120126325181623007}
   ammoText: {fileID: 8887716512695673514}
+  inventory: {fileID: 0}
   talkText: {fileID: 2328069205998862125}
   talkTextCanvas: {fileID: 691391845759739168}
   isTalking: 0
