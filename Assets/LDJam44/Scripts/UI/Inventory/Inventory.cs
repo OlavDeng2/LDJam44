@@ -31,8 +31,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    internal void UseItem(IInventoryItem item)
+    public void UseItem(IInventoryItem item)
     {
+        item.OnUse();
         if (itemUsed != null)
         {
             itemUsed(this, new InventoryEventsArgs(item));
