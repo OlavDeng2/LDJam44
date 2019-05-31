@@ -6,9 +6,10 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int slots = 6;
-    private List<IInventoryItem> mItems = new List<IInventoryItem>();
+    public List<IInventoryItem> mItems = new List<IInventoryItem>();
     public event EventHandler<InventoryEventsArgs> itemAdded;
     public event EventHandler<InventoryEventsArgs> itemRemoved;
+    public event EventHandler<InventoryEventsArgs> itemUsed;
 
     // Start is called before the first frame update
     public void AddItem(IInventoryItem item)
@@ -27,6 +28,14 @@ public class Inventory : MonoBehaviour
                     itemAdded(this, new InventoryEventsArgs(item));
                 }
             }
+        }
+    }
+
+    internal void UseItem(IInventoryItem item)
+    {
+        if (itemUsed != null)
+        {
+            itemUsed(this, new InventoryEventsArgs(item));
         }
     }
 

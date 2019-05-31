@@ -13,6 +13,9 @@ public class PlayerUI : MonoBehaviour
 
     [Header("Inventory")]
     public Inventory inventory;
+    public Transform inventoryPanelRegular;
+    public Transform inventoryPanelOpen;
+
 
     [Header("playerTalking")]
     public Text talkText;
@@ -125,15 +128,16 @@ public class PlayerUI : MonoBehaviour
     //Inventory stuff
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
-        Transform inventoryPanel = transform.Find("Regular");
 
-        foreach(Transform slot in inventoryPanel)
+        foreach (Transform slot in inventoryPanelRegular)
         {
             Transform imageTransform = slot.GetChild(0).GetChild(0);
             Image image = imageTransform.GetComponent<Image>();
             ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
 
-            if(!image.enabled)
+            Debug.Log("Test");
+
+            if (!image.enabled)
             {
                 image.enabled = true;
                 image.sprite = e.Item.Image;
@@ -147,8 +151,7 @@ public class PlayerUI : MonoBehaviour
 
     private void InventoryScript_ItemRemoved(object sender, InventoryEventsArgs e)
     {
-        Transform inventoryPanel = transform.Find("Regular");
-        foreach (Transform slot in inventoryPanel)
+        foreach (Transform slot in inventoryPanelRegular)
         {
             Transform imageTransform = slot.GetChild(0).GetChild(0);
             Image image = imageTransform.GetComponent<Image>();

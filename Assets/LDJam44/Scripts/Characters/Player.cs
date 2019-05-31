@@ -46,7 +46,6 @@ public class Player : Character
         timeSinceLastShot = fireRate;
     }
 
-
     // Update is called once per frame
     void Update()
     {

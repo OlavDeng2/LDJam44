@@ -33,7 +33,7 @@ public class Item : MonoBehaviour, IInventoryItem
 
     public void OnPickup()
     {
-        throw new System.NotImplementedException();
+        gameObject.SetActive(false);
     }
 
     public virtual void OnUse()

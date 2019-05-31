@@ -1794,7 +1794,7 @@ MonoBehaviour:
   alive: 1
   moveSpeed: 0.05
   playerUI: {fileID: 5274386302105170222}
-  inventory: {fileID: 0}
+  inventory: {fileID: 8449750379148899845}
   bulletPool: {fileID: 0}
   bulletSpeed: 10
   totalAmmo: 90
@@ -1828,7 +1828,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 2120126325181623007}
   ammoText: {fileID: 8887716512695673514}
-  inventory: {fileID: 0}
+  inventory: {fileID: 8449750379148899845}
+  inventoryPanelRegular: {fileID: 5334067819815420090}
+  inventoryPanelOpen: {fileID: 4659343897307328987}
   talkText: {fileID: 2328069205998862125}
   talkTextCanvas: {fileID: 691391845759739168}
   isTalking: 0
