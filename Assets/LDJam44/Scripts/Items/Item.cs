@@ -29,6 +29,8 @@ public class Item : MonoBehaviour, IInventoryItem
 
         gameObject.SetActive(true);
         gameObject.transform.position = worldPoint;
+
+        Debug.Log("dropping item");
     }
 
     public void OnPickup()

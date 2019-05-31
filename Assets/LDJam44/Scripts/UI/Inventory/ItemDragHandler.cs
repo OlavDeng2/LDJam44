@@ -7,6 +7,12 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 {
 
     public IInventoryItem item;
+    public Inventory inventory;
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -16,5 +22,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.localPosition = Vector3.zero;
+        inventory.RemoveItem(item);
+
     }
 }
