@@ -21,6 +21,8 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+
+        //TODO: logic for if the item is trying to be dropped on to another slot, if not, drop the item infront of the player at a certain distance away
         transform.localPosition = Vector3.zero;
         inventory.RemoveItem(item);
 
