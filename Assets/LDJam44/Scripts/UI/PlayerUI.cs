@@ -126,6 +126,18 @@ public class PlayerUI : MonoBehaviour
     }
 
     //Inventory stuff
+    public void OpenInventory()
+    {
+        inventoryPanelOpen.gameObject.SetActive(true);
+        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void CloseInventory()
+    {
+        inventoryPanelOpen.gameObject.SetActive(false);
+        this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
 

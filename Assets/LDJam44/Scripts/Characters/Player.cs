@@ -83,6 +83,19 @@ public class Player : Character
             
         }
 
+        if(Input.GetButtonDown("Inventory"))
+        {
+            if(playerUI.inventoryPanelOpen.gameObject.activeSelf)
+            {
+                playerUI.CloseInventory();
+            }
+
+            else
+            {
+                playerUI.OpenInventory();
+            }
+        }
+
         //if escape is pressed, pause the game
         if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
         {
