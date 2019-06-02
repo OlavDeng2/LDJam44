@@ -1,44 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This is the monobehaviour for the item in the world, all it does is interact with the inventory item scriptable object
 public class Item : MonoBehaviour
 {
-    public string name = "Item";
-    public int amount = 1;
-    public Sprite image = null;
+    public InventoryItem inventoryItem = null;
 
-    public void OnDrop()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        gameObject.SetActive(true);
-        gameObject.transform.position = worldPoint;
-
-        Debug.Log("dropping item");
-    }
-
-    public void OnPickup()
-    {
+        inventoryItem.OnPickup();
         gameObject.SetActive(false);
     }
-
-    public virtual void OnUse()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    
-}
-
-public class InventoryEventsArgs : EventArgs
-{
-    public InventoryEventsArgs(Item item)
-    {
-        Item = item;
-    }
-
-    public Item Item;
-
 }

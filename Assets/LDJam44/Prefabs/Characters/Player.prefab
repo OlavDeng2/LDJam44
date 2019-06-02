@@ -1801,7 +1801,7 @@ MonoBehaviour:
   mainMenu: MainMenu
   interactable: {fileID: 0}
   tutorial: {fileID: 0}
-  currentItem: {fileID: 0}
+  currentItem: {fileID: 11400000, guid: 7314ce9f85f8922419000feb5ed1a653, type: 2}
 --- !u!114 &5274386302105170222
 MonoBehaviour:
   m_ObjectHideFlags: 0

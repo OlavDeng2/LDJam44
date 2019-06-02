@@ -40,12 +40,12 @@ public class Player : Character
     [Header("Data")]
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
-    public Item currentItem = null;
+    public InventoryItem currentItem = null;
 
     private void Start()
     {
         timeSinceLastShot = fireRate;
-        inventory.itemSelected += Inventory_itemSelected;
+        //inventory.itemSelected += Inventory_itemSelected;
     }
 
 
@@ -53,11 +53,6 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        if(inventory.inventoryItems[0, 0] != null)
-        {
-            Debug.Log(inventory.inventoryItems[0, 0].amount);
-
-        }
 
         //update UI
         playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
@@ -120,7 +115,7 @@ public class Player : Character
         {
             if (currentItem != null)
             {
-                currentItem.OnUse();
+                currentItem.UseItem();
             }
         }
 
@@ -206,16 +201,16 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Item item = collision.collider.GetComponent<Item>();
-        if (item != null)
-        {
-            inventory.PickupItem(item);
-        }
+        //InventoryItem item = collision.collider.GetComponent<InventoryItem>();
+        //if (item != null)
+        //{
+        //    inventory.PickupItem(item);
+        //}
     }
 
     //Get the item from inventory if item selected
-    private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
-    {
-        currentItem = e.Item;
-    }
+    //private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
+    //{
+    //    currentItem = e.Item;
+    //}
 }

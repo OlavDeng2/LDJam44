@@ -45,7 +45,7 @@ public class PlayerUI : MonoBehaviour
 
         inventorySlots = GetComponentsInChildren<InventorySlot>(true);
 
-        inventory.inventoryUpdated += Inventory_inventoryUpdated;
+        //inventory.inventoryUpdated += Inventory_inventoryUpdated;
     }
 
     public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
@@ -147,19 +147,19 @@ public class PlayerUI : MonoBehaviour
         
     }
 
-    private void Inventory_inventoryUpdated(object sender, InventoryEventsArgs e)
-    {
-        for(int x = 0; x < inventory.inventoryItems.GetLength(0); x++)
-        {
-            for(int y = 0; y < inventory.inventoryItems.GetLength(1); y++)
-            {
-                if (inventory.inventoryItems[x, y] != null)
-                {
-                    InventorySlot slot = inventorySlots[x + y];
-                    slot.AddItem(inventory.inventoryItems[x, y]);                    
-                }
-            }
-        }
-    }
+    //private void Inventory_inventoryUpdated(object sender, InventoryEventsArgs e)
+    //{
+    //    for(int x = 0; x < inventory.inventoryItems.GetLength(0); x++)
+    //    {
+    //        for(int y = 0; y < inventory.inventoryItems.GetLength(1); y++)
+    //        {
+    //            if (inventory.inventoryItems[x, y] != null)
+    //            {
+    //                InventorySlot slot = inventorySlots[x + y];
+    //                slot.AddItem(inventory.inventoryItems[x, y]);                    
+    //            }
+    //        }
+    //    }
+    //}
 }
 

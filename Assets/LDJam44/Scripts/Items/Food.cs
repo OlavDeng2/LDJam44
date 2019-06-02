@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : Item
+public class Food : InventoryItem
 {  
 }

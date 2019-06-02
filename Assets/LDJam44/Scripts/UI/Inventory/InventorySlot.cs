@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Inventory inventory;
-    public Item item;
+    public InventoryItem item;
     public Image itemImage;
 
     public KeyCode key;
@@ -21,14 +21,14 @@ public class InventorySlot : MonoBehaviour
 
     private void Update()
     {
-        //only select the item when the appropriate button is pressed
-        if(Input.GetKeyDown(key))
-        {
-            inventory.SelectItem(item);
-        }
+        ////only select the item when the appropriate button is pressed
+        //if(Input.GetKeyDown(key))
+        //{
+        //    inventory.SelectItem(item);
+        //}
     }
 
-    public void AddItem(Item itemToAdd)
+    public void AddItem(InventoryItem itemToAdd)
     {
         item = itemToAdd;
         if(!itemImage.enabled)
