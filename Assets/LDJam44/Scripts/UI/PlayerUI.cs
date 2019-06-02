@@ -13,8 +13,8 @@ public class PlayerUI : MonoBehaviour
 
     [Header("Inventory")]
     public Inventory inventory;
-    public Transform inventoryPanelRegular;
-    public Transform inventoryPanelOpen;
+    public GameObject HotBar;
+    public GameObject inventoryPanel;
 
 
     [Header("playerTalking")]
@@ -35,6 +35,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Data")]
     public bool gameOver = false;
     public bool isPaused = false;
+    public InventorySlot[] inventorySlots;
 
     private void Start()
     {
@@ -42,10 +43,10 @@ public class PlayerUI : MonoBehaviour
         gameOverCanvas.SetActive(false);
         loadingScreen.SetActive(false);
 
-        inventory.itemAdded += InventoryScript_ItemAdded;
-        inventory.itemRemoved += InventoryScript_ItemRemoved;
-    }
+        inventorySlots = GetComponentsInChildren<InventorySlot>(true);
 
+        inventory.inventoryUpdated += Inventory_inventoryUpdated;
+    }
 
     public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
     {
@@ -126,75 +127,39 @@ public class PlayerUI : MonoBehaviour
     }
 
     //Inventory stuff
-    public void OpenInventory()
+    public void ToggleInventory()
     {
-        inventoryPanelOpen.gameObject.SetActive(true);
-        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        if(!inventoryPanel.activeSelf)
+        {
+            inventoryPanel.SetActive(true);
+            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+
+        else if(inventoryPanel.activeSelf)
+        {
+            inventoryPanel.SetActive(false);
+            this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
     }
 
     public void CloseInventory()
     {
-        inventoryPanelOpen.gameObject.SetActive(false);
-        this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        
     }
 
-    private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
+    private void Inventory_inventoryUpdated(object sender, InventoryEventsArgs e)
     {
-        bool spotInHotbar = false;
-        foreach (Transform slot in inventoryPanelRegular)
+        for(int x = 0; x < inventory.inventoryItems.GetLength(0); x++)
         {
-            Transform imageTransform = slot.GetChild(0).GetChild(0);
-            Image image = imageTransform.GetComponent<Image>();
-            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-
-            if (!image.enabled)
+            for(int y = 0; y < inventory.inventoryItems.GetLength(1); y++)
             {
-                image.enabled = true;
-                image.sprite = e.Item.Image;
-                itemDragHandler.item = e.Item;
-                spotInHotbar = true;
-                break;
-            }
-        }
-
-        if(!spotInHotbar)
-        {
-            foreach (Transform slot in inventoryPanelOpen)
-            {
-                Transform imageTransform = slot.GetChild(0).GetChild(0);
-                Image image = imageTransform.GetComponent<Image>();
-                ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-
-                if (!image.enabled)
+                if (inventory.inventoryItems[x, y] != null)
                 {
-                    image.enabled = true;
-                    image.sprite = e.Item.Image;
-                    itemDragHandler.item = e.Item;
-                    spotInHotbar = true;
-                    break;
+                    InventorySlot slot = inventorySlots[x + y];
+                    slot.AddItem(inventory.inventoryItems[x, y]);                    
                 }
             }
         }
     }
-
-
-    private void InventoryScript_ItemRemoved(object sender, InventoryEventsArgs e)
-    {
-        foreach (Transform slot in inventoryPanelRegular)
-        {
-            Transform imageTransform = slot.GetChild(0).GetChild(0);
-            Image image = imageTransform.GetComponent<Image>();
-            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-
-            if (itemDragHandler.item.Equals(e.Item))
-            {
-                image.enabled = false;
-                image.sprite = null;
-                itemDragHandler.item = null;
-
-                break;
-            }
-        }
-    }
-
 }
+

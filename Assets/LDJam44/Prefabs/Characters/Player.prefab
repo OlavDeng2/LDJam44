@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 5676888349183395339}
   - component: {fileID: 3478733705455775587}
   m_Layer: 5
-  m_Name: Expanded
+  m_Name: InventoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,9 +1306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc279b89441a4294088d40aebfcbabfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: 6
-  height: 4
-  width: 6
 --- !u!1 &3895169823599224396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,6 +1801,7 @@ MonoBehaviour:
   mainMenu: MainMenu
   interactable: {fileID: 0}
   tutorial: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!114 &5274386302105170222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,8 +1817,8 @@ MonoBehaviour:
   healthText: {fileID: 2120126325181623007}
   ammoText: {fileID: 8887716512695673514}
   inventory: {fileID: 8449750379148899845}
-  inventoryPanelRegular: {fileID: 5334067819815420090}
-  inventoryPanelOpen: {fileID: 4659343897307328987}
+  HotBar: {fileID: 3162823335217793842}
+  inventoryPanel: {fileID: 3368490324231651391}
   talkText: {fileID: 2328069205998862125}
   talkTextCanvas: {fileID: 691391845759739168}
   isTalking: 0
@@ -1831,6 +1829,7 @@ MonoBehaviour:
   mainMenu: MainMenu
   gameOver: 0
   isPaused: 0
+  inventorySlots: []
 --- !u!50 &2144648354
 Rigidbody2D:
   serializedVersion: 4

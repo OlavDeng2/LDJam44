@@ -40,7 +40,7 @@ public class Player : Character
     [Header("Data")]
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
-    public IInventoryItem currentItem = null;
+    public Item currentItem = null;
 
     private void Start()
     {
@@ -53,6 +53,12 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+        if(inventory.inventoryItems[0, 0] != null)
+        {
+            Debug.Log(inventory.inventoryItems[0, 0].amount);
+
+        }
+
         //update UI
         playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
         playerUI.UpdateHealthText(health);
@@ -89,15 +95,8 @@ public class Player : Character
 
         if(Input.GetButtonDown("Inventory"))
         {
-            if(playerUI.inventoryPanelOpen.gameObject.activeSelf)
-            {
-                playerUI.CloseInventory();
-            }
 
-            else
-            {
-                playerUI.OpenInventory();
-            }
+            playerUI.ToggleInventory();
         }
 
         //if escape is pressed, pause the game
@@ -117,7 +116,7 @@ public class Player : Character
         }
 
         //use item
-        if(Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (currentItem != null)
             {
@@ -207,10 +206,10 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IInventoryItem item = collision.collider.GetComponent<IInventoryItem>();
-        if(item != null)
+        Item item = collision.collider.GetComponent<Item>();
+        if (item != null)
         {
-            inventory.AddItem(item);
+            inventory.PickupItem(item);
         }
     }
 

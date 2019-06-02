@@ -1,27 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour, IInventoryItem
+public class Item : MonoBehaviour
 {
-    public string name;
-    public Sprite image;
-
-    public string Name
-    {
-        get
-        {
-            return name;
-        }
-    }
-
-    public Sprite Image
-    {
-        get
-        {
-            return image;
-        }
-    }
+    public string name = "Item";
+    public int amount = 1;
+    public Sprite image = null;
 
     public void OnDrop()
     {
@@ -42,4 +28,17 @@ public class Item : MonoBehaviour, IInventoryItem
     {
         throw new System.NotImplementedException();
     }
+
+    
+}
+
+public class InventoryEventsArgs : EventArgs
+{
+    public InventoryEventsArgs(Item item)
+    {
+        Item = item;
+    }
+
+    public Item Item;
+
 }

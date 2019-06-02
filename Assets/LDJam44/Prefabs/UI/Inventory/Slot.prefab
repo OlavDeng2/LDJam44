@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1296107963188057802}
   - component: {fileID: 4031396676800874496}
   - component: {fileID: 1212664770590078719}
-  - component: {fileID: 7482789175445549055}
   m_Layer: 5
   m_Name: ItemImage
   m_TagString: Untagged
@@ -75,18 +74,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &7482789175445549055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613550588278559122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6102fc627a4d294da5819b316e89652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3374558064795522619
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +86,6 @@ GameObject:
   - component: {fileID: 3951602412359627804}
   - component: {fileID: 2742532770636383356}
   - component: {fileID: 1282163565638441677}
-  - component: {fileID: 4225248803437604890}
   m_Layer: 5
   m_Name: Border
   m_TagString: Untagged
@@ -207,7 +193,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225248803437604890}
+      - m_Target: {fileID: 0}
         m_MethodName: OnItemClicked
         m_Mode: 1
         m_Arguments:
@@ -220,19 +206,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4225248803437604890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3374558064795522619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c4993a48ddf674a8da02cc560b26f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
 --- !u!1 &5553457701951803135
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +217,7 @@ GameObject:
   - component: {fileID: 2832201735771436245}
   - component: {fileID: 3051298046876298476}
   - component: {fileID: 2113078672532657150}
+  - component: {fileID: 8668821503250564102}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -308,3 +282,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &8668821503250564102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553457701951803135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ef40596e96a4c4ea54e15a0caaa64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  item: {fileID: 0}
+  itemImage: {fileID: 1212664770590078719}
+  key: 0

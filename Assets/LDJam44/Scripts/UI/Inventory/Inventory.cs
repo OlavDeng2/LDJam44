@@ -5,75 +5,89 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public int inventorySlots = 6;
-    public List<IInventoryItem> inventoryItems = new List<IInventoryItem>();
+    public Item[,] inventoryItems = new Item[6, 4];
 
-    public event EventHandler<InventoryEventsArgs> itemAdded;
-    public event EventHandler<InventoryEventsArgs> itemRemoved;
-    public event EventHandler<InventoryEventsArgs> itemUsed;
+    public event EventHandler<InventoryEventsArgs> inventoryUpdated;
     public event EventHandler<InventoryEventsArgs> itemSelected;
 
-    // Start is called before the first frame update
-    public void AddItem(IInventoryItem item)
+    public void PickupItem(Item item)
     {
-
-        if (inventoryItems.Count < inventorySlots)
+        //loop through all the slots
+        for (int x = 0; x < inventoryItems.GetLength(0); x++)
         {
-            Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
-            if (collider.enabled)
+            for (int y = 0; y < inventoryItems.GetLength(1); y++)
             {
-                collider.enabled = false;
-                inventoryItems.Add(item);
-                item.OnPickup();
-
-                if (itemAdded != null)
+                //check if item is already in inventory
+                if (inventoryItems[x, y] != null)
                 {
-                    itemAdded(this, new InventoryEventsArgs(item));
+                    if (inventoryItems[x, y].name == item.name)
+                    {
+                        inventoryItems[x, y].amount += item.amount;
+                        item.OnPickup();
+
+                        if (inventoryUpdated != null)
+                        {
+                            inventoryUpdated(this, new InventoryEventsArgs(item));
+                            break;
+                        }
+                    }
                 }
-            }
+                //otherwise, find an empty slot
+                if (inventoryItems[x, y] == null)
+                {
+                    inventoryItems[x, y] = item;
+                    item.OnPickup();
 
-            
+                    if (inventoryUpdated != null)
+                    {
+                        inventoryUpdated(this, new InventoryEventsArgs(item));
+                        break;
+
+                    }
+                }
+            } 
         }
     }
-   
 
-    public void UseItem(IInventoryItem item)
+    public void AddItem(Item item, int x, int y)
     {
-        item.OnUse();
-        if (itemUsed != null)
+        if (inventoryItems[x, y] != null)
         {
-            itemUsed(this, new InventoryEventsArgs(item));
+            if (inventoryItems[x, y].name == item.name)
+            {
+                inventoryItems[x, y].amount += item.amount;
+            }
+        }
+
+        else if (inventoryItems[x, y] == null)
+        {
+            inventoryItems[x, y] = item;
+        }
+
+        if (inventoryUpdated != null)
+        {
+            inventoryUpdated(this, new InventoryEventsArgs(item));
         }
     }
 
-    public void SelectItem(IInventoryItem item)
+    public Item RemoveItem(int x, int y)
     {
-        
+        Item item = inventoryItems[x, y];
+        inventoryItems[x, y] = null;
+        if(inventoryUpdated!= null)
+        {
+            inventoryUpdated(this, new InventoryEventsArgs(item));
+        }
+
+
+        return item;
+    }
+
+    public void SelectItem(Item item)
+    {
         if (itemSelected != null)
         {
             itemSelected(this, new InventoryEventsArgs(item));
-        }
-    }
-
-    public void RemoveItem(IInventoryItem item)
-    {
-        
-        if (inventoryItems.Contains(item))
-        {
-            inventoryItems.Remove(item);
-
-            item.OnDrop();
-
-            Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
-            if (collider != null)
-            {
-                collider.enabled = true;
-            }
-
-            if (itemRemoved != null)
-            {
-                itemRemoved(this, new InventoryEventsArgs(item));
-            }
         }
     }
 }
