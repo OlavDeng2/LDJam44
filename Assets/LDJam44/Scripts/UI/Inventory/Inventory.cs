@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     public event EventHandler<InventoryEventsArgs> itemAdded;
     public event EventHandler<InventoryEventsArgs> itemRemoved;
     public event EventHandler<InventoryEventsArgs> itemUsed;
+    public event EventHandler<InventoryEventsArgs> itemSelected;
 
     // Start is called before the first frame update
     public void AddItem(IInventoryItem item)
@@ -37,6 +38,15 @@ public class Inventory : MonoBehaviour
         if (itemUsed != null)
         {
             itemUsed(this, new InventoryEventsArgs(item));
+        }
+    }
+
+    public void SelectItem(IInventoryItem item)
+    {
+        
+        if (itemSelected != null)
+        {
+            itemSelected(this, new InventoryEventsArgs(item));
         }
     }
 

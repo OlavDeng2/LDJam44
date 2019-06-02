@@ -40,11 +40,15 @@ public class Player : Character
     [Header("Data")]
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
+    public IInventoryItem currentItem = null;
 
     private void Start()
     {
         timeSinceLastShot = fireRate;
+        inventory.itemSelected += Inventory_itemSelected;
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -109,6 +113,15 @@ public class Player : Character
             else if (playerUI.isPaused)
             {
                 playerUI.UnPauseGame();
+            }
+        }
+
+        //use item
+        if(Input.GetButton("Fire1"))
+        {
+            if (currentItem != null)
+            {
+                currentItem.OnUse();
             }
         }
 
@@ -199,5 +212,11 @@ public class Player : Character
         {
             inventory.AddItem(item);
         }
+    }
+
+    //Get the item from inventory if item selected
+    private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
+    {
+        currentItem = e.Item;
     }
 }

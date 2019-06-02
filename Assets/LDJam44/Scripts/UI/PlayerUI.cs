@@ -147,8 +147,6 @@ public class PlayerUI : MonoBehaviour
             Image image = imageTransform.GetComponent<Image>();
             ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
 
-            Debug.Log("Test");
-
             if (!image.enabled)
             {
                 image.enabled = true;
