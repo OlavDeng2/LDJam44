@@ -140,7 +140,7 @@ public class PlayerUI : MonoBehaviour
 
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
-
+        bool spotInHotbar = false;
         foreach (Transform slot in inventoryPanelRegular)
         {
             Transform imageTransform = slot.GetChild(0).GetChild(0);
@@ -152,8 +152,27 @@ public class PlayerUI : MonoBehaviour
                 image.enabled = true;
                 image.sprite = e.Item.Image;
                 itemDragHandler.item = e.Item;
-
+                spotInHotbar = true;
                 break;
+            }
+        }
+
+        if(!spotInHotbar)
+        {
+            foreach (Transform slot in inventoryPanelOpen)
+            {
+                Transform imageTransform = slot.GetChild(0).GetChild(0);
+                Image image = imageTransform.GetComponent<Image>();
+                ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+
+                if (!image.enabled)
+                {
+                    image.enabled = true;
+                    image.sprite = e.Item.Image;
+                    itemDragHandler.item = e.Item;
+                    spotInHotbar = true;
+                    break;
+                }
             }
         }
     }

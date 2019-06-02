@@ -18,17 +18,23 @@ public class ItemClickHandler : MonoBehaviour
 
     private void Update()
     {
+        //only select the item when the appropriate button is pressed
         if(Input.GetKeyDown(key))
         {
-            button.onClick.Invoke();
+            inventory.SelectItem(GetItem());
         }
     }
-    // Start is called before the first frame update
+
+    //Get the item so we can drag it when the button is clicked
     public void OnItemClicked()
     {
-        ItemDragHandler dragHandler = gameObject.transform.Find("ItemImage").GetComponent<ItemDragHandler>();
-        IInventoryItem item = dragHandler.item;
+        GetItem();
+    }
 
-        inventory.SelectItem(item);
+    private IInventoryItem GetItem()
+    {
+        ItemDragHandler dragHandler = gameObject.transform.Find("ItemImage").GetComponent<ItemDragHandler>();
+        return dragHandler.item;
+
     }
 }

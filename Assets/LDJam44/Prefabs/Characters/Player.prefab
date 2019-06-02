@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 2261271483031834664}
   - component: {fileID: 5933497742205579969}
   m_Layer: 5
-  m_Name: Regular
+  m_Name: HotBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,6 +1307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: 6
+  height: 4
+  width: 6
 --- !u!1 &3895169823599224396
 GameObject:
   m_ObjectHideFlags: 0

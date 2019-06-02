@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public int slots = 6;
-    public List<IInventoryItem> mItems = new List<IInventoryItem>();
+    public int inventorySlots = 6;
+    public List<IInventoryItem> inventoryItems = new List<IInventoryItem>();
+
     public event EventHandler<InventoryEventsArgs> itemAdded;
     public event EventHandler<InventoryEventsArgs> itemRemoved;
     public event EventHandler<InventoryEventsArgs> itemUsed;
@@ -15,13 +16,14 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     public void AddItem(IInventoryItem item)
     {
-        if (mItems.Count < slots)
+
+        if (inventoryItems.Count < inventorySlots)
         {
             Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
             if (collider.enabled)
             {
                 collider.enabled = false;
-                mItems.Add(item);
+                inventoryItems.Add(item);
                 item.OnPickup();
 
                 if (itemAdded != null)
@@ -29,8 +31,11 @@ public class Inventory : MonoBehaviour
                     itemAdded(this, new InventoryEventsArgs(item));
                 }
             }
+
+            
         }
     }
+   
 
     public void UseItem(IInventoryItem item)
     {
@@ -52,9 +57,10 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(IInventoryItem item)
     {
-        if (mItems.Contains(item))
+        
+        if (inventoryItems.Contains(item))
         {
-            mItems.Remove(item);
+            inventoryItems.Remove(item);
 
             item.OnDrop();
 
