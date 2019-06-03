@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour
     public Inventory inventory;
     public InventoryItem item;
     public Image itemImage;
+    public int amount = 0;
 
     public KeyCode key;
     private Button button;
@@ -21,16 +22,17 @@ public class InventorySlot : MonoBehaviour
 
     private void Update()
     {
-        ////only select the item when the appropriate button is pressed
-        //if(Input.GetKeyDown(key))
-        //{
-        //    inventory.SelectItem(item);
-        //}
+        //only select the item when the appropriate button is pressed
+        if (Input.GetKeyDown(key))
+        {
+            inventory.SelectItem(item);
+        }
     }
 
     public void AddItem(InventoryItem itemToAdd)
     {
         item = itemToAdd;
+        amount += 1;
         if(!itemImage.enabled)
         {
             itemImage.enabled = true;
@@ -41,6 +43,7 @@ public class InventorySlot : MonoBehaviour
     public void RemoveItem()
     {
         item = null;
+        amount = 0;
         if(itemImage.enabled)
         {
             itemImage.sprite = null;

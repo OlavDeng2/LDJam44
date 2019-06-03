@@ -1306,6 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc279b89441a4294088d40aebfcbabfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventorySlots: []
 --- !u!1 &3895169823599224396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1802,7 @@ MonoBehaviour:
   mainMenu: MainMenu
   interactable: {fileID: 0}
   tutorial: {fileID: 0}
-  currentItem: {fileID: 11400000, guid: 7314ce9f85f8922419000feb5ed1a653, type: 2}
+  currentItem: {fileID: 0}
 --- !u!114 &5274386302105170222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,7 +1830,6 @@ MonoBehaviour:
   mainMenu: MainMenu
   gameOver: 0
   isPaused: 0
-  inventorySlots: []
 --- !u!50 &2144648354
 Rigidbody2D:
   serializedVersion: 4
@@ -3397,6 +3397,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 51
+      objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}
       propertyPath: key
@@ -4026,6 +4031,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}
@@ -5282,6 +5292,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}
       propertyPath: key
@@ -5662,6 +5677,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 52
+      objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}
       propertyPath: key
@@ -5791,6 +5811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}
@@ -6046,6 +6071,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668821503250564102, guid: ab527b47876dcc9459eb0bcd4618ad5a,
+        type: 3}
+      propertyPath: key
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 4225248803437604890, guid: ab527b47876dcc9459eb0bcd4618ad5a,
         type: 3}

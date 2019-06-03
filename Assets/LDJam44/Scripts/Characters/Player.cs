@@ -40,12 +40,12 @@ public class Player : Character
     [Header("Data")]
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
-    public InventoryItem currentItem = null;
+    public Item currentItem = null;
 
     private void Start()
     {
         timeSinceLastShot = fireRate;
-        //inventory.itemSelected += Inventory_itemSelected;
+        inventory.itemSelected += Inventory_itemSelected;
     }
 
 
@@ -201,16 +201,30 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //InventoryItem item = collision.collider.GetComponent<InventoryItem>();
-        //if (item != null)
-        //{
-        //    inventory.PickupItem(item);
-        //}
+        Item item = collision.gameObject.GetComponent<Item>();
+        
+        if (item != null)
+        {
+            inventory.PickupItem(item.inventoryItem);
+        }
     }
 
-    //Get the item from inventory if item selected
-    //private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
-    //{
-    //    currentItem = e.Item;
-    //}
+    //Get the item from inventory if item selected and spawn the prefab in the right spot
+    private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
+    {
+        //Remove old item
+        if(currentItem)
+        {
+            Destroy(currentItem.gameObject);
+            currentItem = null;
+        }
+
+        //Spawn item based on inventory item prefab
+        InventoryItem invItem = e.Item;
+        if(invItem!= null)
+        {
+            currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
+            currentItem.GetComponent<Collider2D>().enabled = false;
+        }
+    }
 }

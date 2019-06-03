@@ -5,89 +5,66 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InventorySlot[,] inventorySlots = new InventorySlot[6, 4];
+    public InventorySlot[] inventorySlots;
 
-    public event EventHandler<InventoryEventsArgs> inventoryUpdated;
     public event EventHandler<InventoryEventsArgs> itemSelected;
+
+    public void Start()
+    {
+        inventorySlots = GetComponentsInChildren<InventorySlot>(true);
+    }
+
 
     public void PickupItem(InventoryItem item)
     {
-        //loop through all the slots
-        //for (int x = 0; x < inventoryItems.GetLength(0); x++)
-        //{
-        //    for (int y = 0; y < inventoryItems.GetLength(1); y++)
-        //    {
-        //        //check if item is already in inventory
-        //        if (inventoryItems[x, y] != null)
-        //        {
-        //            if (inventoryItems[x, y].name == item.name)
-        //            {
-        //                inventoryItems[x, y].amount += item.amount;
-        //                item.OnPickup();
+        foreach(InventorySlot inventorySlot in inventorySlots)
+        {
+            if(inventorySlot.item != null)
+            {
+                if(item.name == inventorySlot.item.name)
+                {
+                    inventorySlot.amount += 1;
+                    break;
+                }
+            }
 
-        //                if (inventoryUpdated != null)
-        //                {
-        //                    inventoryUpdated(this, new InventoryEventsArgs(item));
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //        //otherwise, find an empty slot
-        //        if (inventoryItems[x, y] == null)
-        //        {
-        //            inventoryItems[x, y] = item;
-        //            item.OnPickup();
-
-        //            if (inventoryUpdated != null)
-        //            {
-        //                inventoryUpdated(this, new InventoryEventsArgs(item));
-        //                break;
-
-        //            }
-        //        }
-        //    } 
-        //}
+            else if(inventorySlot.item == null)
+            {
+                inventorySlot.AddItem(item);
+                break;
+            }
+        }
     }
 
-    public void AddItem(InventoryItem item, int x, int y)
+    public void MoveItem(InventorySlot initialSlot, InventorySlot targetSlot)
     {
-        //if (inventoryItems[x, y] != null)
-        //{
-        //    if (inventoryItems[x, y].name == item.name)
-        //    {
-        //        inventoryItems[x, y].amount += item.amount;
-        //    }
-        //}
-
-        //else if (inventoryItems[x, y] == null)
-        //{
-        //    inventoryItems[x, y] = item;
-        //}
-
-        //if (inventoryUpdated != null)
-        //{
-        //    inventoryUpdated(this, new InventoryEventsArgs(item));
-        //}
+        if (targetSlot.item != null)
+        {
+            if (initialSlot.item.name == targetSlot.item.name)
+            {
+                targetSlot.amount += initialSlot.amount;
+                initialSlot.RemoveItem();
+            }
+        }
+        
+        else if(targetSlot.item == null)
+        {
+            targetSlot.item = initialSlot.item;
+            targetSlot.amount = initialSlot.amount;
+            initialSlot.RemoveItem();
+        }
     }
 
-    //public InventoryItem RemoveItem(int x, int y)
-    //{
-        //Item item = inventoryItems[x, y];
-        //inventoryItems[x, y] = null;
-        //if(inventoryUpdated!= null)
-        //{
-        //    inventoryUpdated(this, new InventoryEventsArgs(item));
-        //}
+    public InventoryItem RemoveItem(int slot)
+    {
+        return inventorySlots[slot].item;
+    }
 
-
-        //return item;
-    //}
-
-    //public void SelectItem(InventoryItem item)
-    //{
-    //    if (itemSelected != null)
-    //    {
-    //        itemSelected(this, new InventoryEventsArgs(item));
-    //    }
-    //}
+    public void SelectItem(InventoryItem item)
+    {
+        if (itemSelected != null)
+        {
+            itemSelected(this, new InventoryEventsArgs(item));
+        }
+    }
 }
