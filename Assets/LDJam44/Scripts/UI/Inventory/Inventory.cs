@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
         {
             if(inventorySlot.item != null)
             {
-                if(item.name == inventorySlot.item.name)
+                if(item.name == inventorySlot.item.name && inventorySlot.amount < inventorySlot.item.maxStackCount)
                 {
                     inventorySlot.amount += 1;
                     break;
@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
     {
         if (targetSlot.item != null)
         {
-            if (initialSlot.item.name == targetSlot.item.name)
+            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount < targetSlot.item.maxStackCount)
             {
                 targetSlot.amount += initialSlot.amount;
                 initialSlot.RemoveItem();

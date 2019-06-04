@@ -297,4 +297,5 @@ MonoBehaviour:
   inventory: {fileID: 0}
   item: {fileID: 0}
   itemImage: {fileID: 1212664770590078719}
+  amount: 0
   key: 0
