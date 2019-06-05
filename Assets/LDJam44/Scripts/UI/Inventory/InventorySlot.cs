@@ -29,10 +29,10 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem itemToAdd)
+    public void AddItem(InventoryItem itemToAdd, int amountToAdd)
     {
         item = itemToAdd;
-        amount += 1;
+        amount += amountToAdd;
         if(!itemImage.enabled)
         {
             itemImage.enabled = true;

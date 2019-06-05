@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item);
+                inventorySlot.AddItem(item, 1);
                 break;
             }
         }
