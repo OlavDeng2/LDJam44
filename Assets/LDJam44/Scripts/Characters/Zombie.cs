@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie : Character
+public class Zombie : Enemy
 {
     public GameObject player;
     public Player playerScript;
@@ -20,7 +20,7 @@ public class Zombie : Character
         MoveTowardsPlayer();
         if(!alive)
         {
-            this.GetComponent<PooledObject>().ReturnToPool();
+            KillCharacter();
         }
     }
 

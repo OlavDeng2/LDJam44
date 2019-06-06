@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Settings")]
+    public InventoryItem[] dropableItems;
+    public int maxDroppedItems = 0;
+    public int minDroppedItems = 0;
+    
+    public override void KillCharacter()
     {
-        
+        base.KillCharacter();
+
+        //On death, drop the items
+        if(dropableItems.Length<= 0)
+        {
+            //get amount of items to drop
+            int itemDropCount = Random.Range(minDroppedItems, maxDroppedItems);
+            for(int i = 0; i <= itemDropCount; i++)
+            {
+                InventoryItem itemToDrop = dropableItems[Random.Range(0, dropableItems.Length)];
+            }
+        }
+
+        //return object to pool
+        this.GetComponent<PooledObject>().ReturnToPool();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void KillCharacter()
+    public virtual void KillCharacter()
     {
         alive = false;
     }

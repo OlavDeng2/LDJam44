@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedZombie : Character
+public class Bandit : Enemy
 {
     [Header("Gun")]
     public ObjectPool bulletPool;
@@ -42,7 +42,7 @@ public class RangedZombie : Character
 
         if (!alive)
         {
-            this.GetComponent<PooledObject>().ReturnToPool();
+            KillCharacter();
         }
 
 

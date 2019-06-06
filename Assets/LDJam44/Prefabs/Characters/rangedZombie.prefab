@@ -65,8 +65,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -45199807
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6a0900567f7e2f44a3220d84fd1ee89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -131,6 +131,9 @@ MonoBehaviour:
   damage: 10
   alive: 1
   moveSpeed: 0.025
+  dropableItems: []
+  maxDroppedItems: 0
+  minDroppedItems: 0
   bulletPool: {fileID: 0}
   bulletSpeed: 10
   totalAmmo: 90
