@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
     [Header("HUD")]
     public Text healthText;
     public Text ammoText;
+
+    [Header("Inventory")]
+    public Inventory inventory;
+    public GameObject HotBar;
+    public GameObject inventoryPanel;
+
 
     [Header("playerTalking")]
     public Text talkText;
@@ -113,4 +120,26 @@ public class PlayerUI : MonoBehaviour
         talkTextCanvas.SetActive(false);
         isTalking = false;
     }
+
+    //Inventory stuff
+    public void ToggleInventory()
+    {
+        if(!inventoryPanel.activeSelf)
+        {
+            inventoryPanel.SetActive(true);
+            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+
+        else if(inventoryPanel.activeSelf)
+        {
+            inventoryPanel.SetActive(false);
+            this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+    }
+
+    public void CloseInventory()
+    {
+        
+    }
 }
+

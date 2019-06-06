@@ -9,6 +9,7 @@ public class Player : Character
 {
     [Header("UI")]
     public PlayerUI playerUI;
+    public Inventory inventory;
 
     [Header("PlayerTalk")]
     string nothingToInteractWithText = "nothing";
@@ -39,16 +40,20 @@ public class Player : Character
     [Header("Data")]
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
+    public Item currentItem = null;
 
     private void Start()
     {
         timeSinceLastShot = fireRate;
+        inventory.itemSelected += Inventory_itemSelected;
     }
+
 
 
     // Update is called once per frame
     void Update()
     {
+
         //update UI
         playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
         playerUI.UpdateHealthText(health);
@@ -83,6 +88,12 @@ public class Player : Character
             
         }
 
+        if(Input.GetButtonDown("Inventory"))
+        {
+
+            playerUI.ToggleInventory();
+        }
+
         //if escape is pressed, pause the game
         if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
         {
@@ -96,6 +107,15 @@ public class Player : Character
             else if (playerUI.isPaused)
             {
                 playerUI.UnPauseGame();
+            }
+        }
+
+        //use item
+        if (Input.GetButton("Fire1"))
+        {
+            if (currentItem != null)
+            {
+                currentItem.UseItem();
             }
         }
 
@@ -176,6 +196,35 @@ public class Player : Character
                 currentAmmoInMag += totalAmmo;
                 totalAmmo = 0;
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Item item = collision.gameObject.GetComponent<Item>();
+        
+        if (item != null)
+        {
+            inventory.PickupItem(item.inventoryItem);
+        }
+    }
+
+    //Get the item from inventory if item selected and spawn the prefab in the right spot
+    private void Inventory_itemSelected(object sender, InventoryEventsArgs e)
+    {
+        //Remove old item
+        if(currentItem)
+        {
+            Destroy(currentItem.gameObject);
+            currentItem = null;
+        }
+
+        //Spawn item based on inventory item prefab
+        InventoryItem invItem = e.Item;
+        if(invItem!= null)
+        {
+            currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
+            currentItem.GetComponent<Collider2D>().enabled = false;
         }
     }
 }
