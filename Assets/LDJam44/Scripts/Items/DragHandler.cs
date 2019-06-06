@@ -28,7 +28,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         itemAmount = invSlot.amount;
         image = invSlot.itemImage.gameObject;
         startPos = image.transform.position;
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -59,6 +58,5 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         itemAmount = 0;
         image = null;
         canvasGroup.blocksRaycasts = true;
-
     }
 }

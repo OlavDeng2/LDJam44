@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 8512218063508131231, guid: 669e3c9e12d27ea42892afb64dbaab23,
     type: 3}
-  name: Item
+  name: TemporaryItem
+  maxStackCount: 2
   image: {fileID: 21300000, guid: 215c414b0f1dc3c4cabebc16be4f980c, type: 3}
