@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [Header("Data")]
     public InventorySlot[] inventorySlots;
-
     public event EventHandler<InventoryEventsArgs> itemSelected;
 
     public void Start()

@@ -336,9 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e8abcf61f3f242809422f559bc9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invSlot: {fileID: 0}
-  canvasGroup: {fileID: 0}
-  initialParent: {fileID: 0}
+  invSlot: {fileID: 8668821503250564102}
+  canvasGroup: {fileID: 5370180754481717668}
   item: {fileID: 0}
   itemAmount: 0
   image: {fileID: 0}
@@ -354,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc5af8f7b47c29428b5a481efb9917e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invSlot: {fileID: 0}
+  invSlot: {fileID: 8668821503250564102}
 --- !u!225 &5370180754481717668
 CanvasGroup:
   m_ObjectHideFlags: 0

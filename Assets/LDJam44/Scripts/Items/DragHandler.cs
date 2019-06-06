@@ -14,16 +14,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public static InventorySlot targetInvSlot;
     public InventoryItem item;
     public int itemAmount;
-
     //Image to drag
     public GameObject image;
     Vector3 startPos;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = false;
-        invSlot = gameObject.GetComponent<InventorySlot>();
         item = invSlot.item;
         itemAmount = invSlot.amount;
         image = invSlot.itemImage.gameObject;
@@ -37,9 +34,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //DragHandler.targetInvSlot = this.GetComponent<InventorySlot>();
-        Debug.Log(targetInvSlot);
-
         if(targetInvSlot == invSlot || targetInvSlot == null)
         {
             image.transform.position = startPos;

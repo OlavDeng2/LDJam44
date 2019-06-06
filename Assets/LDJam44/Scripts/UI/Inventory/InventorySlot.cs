@@ -5,19 +5,21 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Inventory inventory;
-    public InventoryItem item;
-    public Image itemImage;
-    public int amount = 0;
-
+    [Header("Settings")]
     public KeyCode key;
-    private Button button;
+
+
+    [Header("References")]
+    public Inventory inventory;
+    public Image itemImage;
+
+    [Header("Data")]
+    public InventoryItem item;
+    public int amount = 0;
 
     public void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
-        button = GetComponentInChildren<Button>();
-        
+        inventory = FindObjectOfType<Inventory>();        
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class InventorySlot : MonoBehaviour
         {
             itemImage.enabled = true;
             itemImage.sprite = item.image;
+            
         }
     }
 
