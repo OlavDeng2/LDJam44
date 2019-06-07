@@ -14,7 +14,7 @@ public class Enemy : Character
         base.KillCharacter();
 
         //On death, drop the items
-        if(dropableItems.Length<= 0)
+        if(dropableItems.Length < 0)
         {
             //get amount of items to drop
             int itemDropCount = Random.Range(minDroppedItems, maxDroppedItems);

@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1131678405618555639}
   - component: {fileID: 4659268649589202466}
   m_Layer: 0
-  m_Name: 'Pool: rangedZombie'
+  m_Name: 'Pool: Bandit'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,20 +190,11 @@ MonoBehaviour:
   playerSpawnPoints:
   - {fileID: 0}
   zombiePool: {fileID: 4060265245475301111}
-  rangedZombiePool: {fileID: 4659268649589202466}
-  enemySpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentScore: 0
+  zombieSpawnPoints: []
+  zombiesToSpawn: 5
+  banditPool: {fileID: 4659268649589202466}
+  banditSpawnPoints: []
+  banditsToSpawn: 5
   player: {fileID: 0}
 --- !u!1 &8277988336858804750
 GameObject:

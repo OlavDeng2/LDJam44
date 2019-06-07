@@ -28,6 +28,7 @@ public class Bandit : Enemy
     {
         //This just assumes that there will be only one player
         playerScript = FindObjectOfType<Player>();
+        bulletPool = GameObject.Find("Pool: Bullets").GetComponent<ObjectPool>() ;
         player = playerScript.gameObject;
     }
 

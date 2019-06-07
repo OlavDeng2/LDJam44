@@ -11,13 +11,17 @@ public class GameManager : MonoBehaviour
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
-    [Header("Enemy Settings")]
+    [Header("Zombie Settings")]
     public ObjectPool zombiePool;
-    public ObjectPool rangedZombiePool;
-    public Transform[] enemySpawnPoints;
+    public Transform[] zombieSpawnPoints;
+    public int zombiesToSpawn = 5;
+
+    [Header("Bandit Settings")]
+    public ObjectPool banditPool;
+    public Transform[] banditSpawnPoints;
+    public int banditsToSpawn = 5;
 
     [Header("Game Data")]
-    public float currentScore = 0;
     public PooledObject player;
 
 
@@ -26,13 +30,15 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayer();
         Time.timeScale = 1;
+
+        SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
+        SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-
         //If player is dead, game over
         if(!player.GetComponent<Character>().alive)
         {
@@ -56,10 +62,16 @@ public class GameManager : MonoBehaviour
         player.transform.position = randomSpawnPos.position;
     }
 
-    private void SpawnEnemies()
+    private void SpawnEnemies(Transform[] allSpawnpoints, int amountToSpawn, ObjectPool objectPool)
     {
-        
-        
+        foreach(Transform spawnPoint in allSpawnpoints)
+        {
+            for(int i = 0; i <= amountToSpawn; i++)
+            {
+                PooledObject enemy = objectPool.GetObject();
+                enemy.transform.position = spawnPoint.position;
+            }
+        }
     }
 
 }

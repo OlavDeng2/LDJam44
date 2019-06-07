@@ -23,6 +23,7 @@ public class PlayerUI : MonoBehaviour
     public bool isTalking = false;
 
     [Header("Canvases")]
+    public CanvasGroup canvasGroup;
     public GameObject gameMenuCanvas;
     public GameObject gameOverCanvas;
     public GameObject gameWinCanvas;
@@ -61,6 +62,7 @@ public class PlayerUI : MonoBehaviour
             gameOverCanvas.SetActive(true);
             Time.timeScale = 0;
             gameOver = true;
+            canvasGroup.blocksRaycasts = true;
         }
     }
     public void GameWin()
@@ -70,6 +72,7 @@ public class PlayerUI : MonoBehaviour
             gameWinCanvas.SetActive(true);
             Time.timeScale = 0;
             gameOver = true;
+            canvasGroup.blocksRaycasts = true;
         }
     }
 
@@ -127,19 +130,14 @@ public class PlayerUI : MonoBehaviour
         if(!inventoryPanel.activeSelf)
         {
             inventoryPanel.SetActive(true);
-            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            canvasGroup.blocksRaycasts = true;
         }
 
         else if(inventoryPanel.activeSelf)
         {
             inventoryPanel.SetActive(false);
-            this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            canvasGroup.blocksRaycasts = false;
         }
-    }
-
-    public void CloseInventory()
-    {
-        
     }
 }
 
