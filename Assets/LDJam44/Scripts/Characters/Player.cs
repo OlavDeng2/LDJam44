@@ -119,85 +119,37 @@ public class Player : Character
             }
         }
 
-
-        if (!isReloading)
+        if(Input.GetButtonUp("Fire1"))
         {
-            if (Input.GetButton("Fire1"))
+            if(currentItem != null && currentItem is Weapon)
             {
-                ShootGun(lookDirection);
+                Weapon weapon = currentItem as Weapon;
+                weapon.isCyclingGun = true;
             }
+        }
 
-            if (Input.GetButton("Reload"))
+
+        if (Input.GetButton("Reload"))
+        {
+            if (currentItem is Weapon)
             {
-                if (totalAmmo > 0)
+                Weapon weapon = currentItem as Weapon;
+                weapon.isReloading = true;
+            }
+        }
+
+        if (Input.GetButton("Switch Fire Mode"))
+        {
+            if (currentItem is Weapon)
+            {
+                Weapon weapon = currentItem as Weapon;
                 {
-                    isReloading = true;
+                    weapon.ChangeFireMode();
                 }
             }
         }
-
-        else if(isReloading)
-        {
-            timeSinceReloadStart += Time.deltaTime;
-            if(timeSinceReloadStart > timeToReload)
-            {
-                ReloadGun();
-                timeSinceReloadStart = 0f;
-                isReloading = false;
-            }
-        }
     }
 
-    private void ShootGun(Vector3 direction)
-    {
-        //Shoot if has more ammo than 0 in mag
-        if(currentAmmoInMag > 0)
-        {
-            if (timeSinceLastShot >= fireRate)
-            {
-                timeSinceLastShot = 0f;
-                currentAmmoInMag -= 1;
-
-                //New shoot
-                PooledObject bullet = bulletPool.GetObject();
-                bullet.transform.position = this.transform.position;
-                bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-                bullet.GetComponent<Bullet>().shooter = this.gameObject;
-                bullet.GetComponent<Bullet>().damage = damage;
-            }
-        }
-    }
-
-    private void ReloadGun()
-    {
-        if(totalAmmo > maxAmmoInMag)
-        {
-            int ammoToAdd = maxAmmoInMag - currentAmmoInMag;
-            totalAmmo -= ammoToAdd;
-
-            currentAmmoInMag = maxAmmoInMag;
-        }
-
-        //If total ammo is more than 0, but less than 30(checked by previous if statement)
-        else if (totalAmmo > 0)
-        {
-            int ammoToAdd = maxAmmoInMag - currentAmmoInMag;
-
-            //if the total ammo is more than requested, just fill the mag as usual
-            if(totalAmmo >= ammoToAdd)
-            {
-                currentAmmoInMag = maxAmmoInMag;
-                totalAmmo -= ammoToAdd;
-            }
-
-            //If total ammo is smaller than ammo to add, add whatever ammo is rest to the magazine
-            else if(totalAmmo <= ammoToAdd)
-            {
-                currentAmmoInMag += totalAmmo;
-                totalAmmo = 0;
-            }
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
