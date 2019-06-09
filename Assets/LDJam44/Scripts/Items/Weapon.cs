@@ -33,7 +33,7 @@ public class Weapon : Item
         if(isCyclingGun)
         {
             currentTime += Time.deltaTime;
-            if (currentCycleTime >= currentTime)
+            if (currentCycleTime <= currentTime)
             {
                 canUseItem = true;
                 currentTime = 0;
@@ -45,7 +45,7 @@ public class Weapon : Item
         if(isReloading)
         {
             currentTime += Time.deltaTime;
-            if (reloadTime >= currentTime)
+            if (reloadTime <= currentTime)
             {
                 currentTime = 0;
                 Reload();
@@ -61,22 +61,30 @@ public class Weapon : Item
 
             currentAmmo -= 1;
 
-            if ((FireMode)currentFireMode == FireMode.Manual)
+            if (availableFireModes[currentFireMode] == FireMode.Manual)
             {
+
+                Debug.Log("manual fire");
+
                 FireGun();
 
                 currentCycleTime = manualCyclingTime;
             }
 
-            if ((FireMode)currentFireMode == FireMode.SemiAuto)
+            if (availableFireModes[currentFireMode] == FireMode.SemiAuto)
             {
+
+                Debug.Log("semi auto fire");
+
                 FireGun();
 
                 currentCycleTime = 0;
             }
 
-            if ((FireMode)currentFireMode == FireMode.FullAuto)
+            if (availableFireModes[currentFireMode] == FireMode.FullAuto)
             {
+
+                Debug.Log("Full auto fire");
                 FireGun();
 
 
@@ -101,8 +109,10 @@ public class Weapon : Item
 
     public void ChangeFireMode()
     {
+
+        Debug.Log("switching fire mode");
         currentFireMode += 1;
-        if(currentFireMode <= availableFireModes.Count)
+        if(currentFireMode >= availableFireModes.Count)
         {
             currentFireMode = 0;
         }
@@ -119,6 +129,8 @@ public class Weapon : Item
         int totalAmmo = 0;
         int ammoToRemoveFromInv = 0;
 
+        Debug.Log(totalAmmo);
+
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in player.inventory.inventorySlots)
         {
@@ -126,6 +138,7 @@ public class Weapon : Item
             {
                 inventorySlots.Add(invSlot);
                 totalAmmo += invSlot.amount;
+                Debug.Log(totalAmmo);
             }
         }
 

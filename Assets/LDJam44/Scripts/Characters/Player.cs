@@ -16,19 +16,6 @@ public class Player : Character
 
     [Header("Gun")]
     public ObjectPool bulletPool;
-    public float bulletSpeed = 10;
-    public int totalAmmo = 90;
-    public int currentAmmoInMag = 30;
-    public int maxAmmoInMag = 30;
-    public float gunRange = 10;
-    public float fireRate = 0.1f; //how many seconds between shots
-    public float timeToReload = 2f;
-    public LayerMask enemyLayer;
-
-    [Header("Gun Data")]
-    public float timeSinceLastShot = 0f;
-    public float timeSinceReloadStart = 0f;
-    public bool isReloading = false;
 
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
@@ -44,7 +31,6 @@ public class Player : Character
 
     private void Start()
     {
-        timeSinceLastShot = fireRate;
         inventory.itemSelected += Inventory_itemSelected;
     }
 
@@ -55,16 +41,13 @@ public class Player : Character
     {
 
         //update UI
-        playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
         playerUI.UpdateHealthText(health);
 
         //keep counter going to keep track of when shot was last fired
-        timeSinceLastShot += Time.deltaTime;
 
         //Handle input
         MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
         Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-        //LookDirection(lookDirection );
 
         //Interact with something
         if (Input.GetButtonDown("Interact"))
@@ -131,7 +114,7 @@ public class Player : Character
         }
 
 
-        if (Input.GetButton("Reload"))
+        if (Input.GetButtonDown("Reload"))
         {
 
             if (currentItem is Weapon)
@@ -141,7 +124,7 @@ public class Player : Character
             }
         }
 
-        if (Input.GetButton("Switch Fire Mode"))
+        if (Input.GetButtonDown("Switch Fire Mode"))
         {
             if (currentItem is Weapon)
             {
@@ -180,8 +163,7 @@ public class Player : Character
         {
             currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
             currentItem.GetComponent<Item>().player = this;
-            currentItem.GetComponent<Item>().player = this;
-
+           
 
             currentItem.GetComponent<Collider2D>().enabled = false;
         }

@@ -52,7 +52,7 @@ MonoBehaviour:
   player: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
-  ammo: {fileID: 0}
+  ammo: {fileID: 11400000, guid: 8f5758c43287ed841af57df83ef7a028, type: 2}
   availableFireModes: 01000000
   ammoCapacity: 7
   currentAmmo: 0

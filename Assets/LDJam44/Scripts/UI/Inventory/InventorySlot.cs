@@ -35,6 +35,8 @@ public class InventorySlot : MonoBehaviour
     {
         item = itemToAdd;
         amount += amountToAdd;
+        
+
         if(!itemImage.enabled)
         {
             itemImage.enabled = true;
