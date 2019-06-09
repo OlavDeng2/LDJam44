@@ -205,7 +205,7 @@ public class Player : Character
         
         if (item != null)
         {
-            inventory.PickupItem(item.inventoryItem);
+            inventory.PickupItem(item.inventoryItem, item.amount);
         }
     }
 
@@ -224,6 +224,10 @@ public class Player : Character
         if(invItem!= null)
         {
             currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
+            currentItem.GetComponent<Item>().player = this;
+            currentItem.GetComponent<Item>().player = this;
+
+
             currentItem.GetComponent<Collider2D>().enabled = false;
         }
     }

@@ -27,7 +27,7 @@ public class InventorySlot : MonoBehaviour
         //only select the item when the appropriate button is pressed
         if (Input.GetKeyDown(key))
         {
-            inventory.SelectItem(item);
+            inventory.SelectItem(item, this);
         }
     }
 

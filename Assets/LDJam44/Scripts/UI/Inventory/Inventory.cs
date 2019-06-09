@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void PickupItem(InventoryItem item)
+    public void PickupItem(InventoryItem item, int itemAmount)
     {
         foreach(InventorySlot inventorySlot in inventorySlots)
         {
@@ -23,14 +23,14 @@ public class Inventory : MonoBehaviour
             {
                 if(item.name == inventorySlot.item.name && inventorySlot.amount < inventorySlot.item.maxStackCount)
                 {
-                    inventorySlot.amount += 1;
+                    inventorySlot.amount += itemAmount;
                     break;
                 }
             }
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item, 1);
+                inventorySlot.AddItem(item, itemAmount);
                 break;
             }
         }
@@ -55,16 +55,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public InventoryItem RemoveItem(int slot)
-    {
-        return inventorySlots[slot].item;
-    }
-
-    public void SelectItem(InventoryItem item)
+    public void SelectItem(InventoryItem item, InventorySlot invSlot)
     {
         if (itemSelected != null)
         {
-            itemSelected(this, new InventoryEventsArgs(item));
+            itemSelected(this, new InventoryEventsArgs(item, invSlot));
         }
     }
 }
