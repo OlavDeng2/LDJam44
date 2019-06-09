@@ -42,17 +42,22 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         
         else if(targetInvSlot != invSlot)
         {
-            if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) < targetInvSlot.item.maxStackCount)
+            if (targetInvSlot.item == null)
             {
                 targetInvSlot.AddItem(item, itemAmount);
                 image.transform.position = startPos;
                 invSlot.RemoveItem();
             }
 
+            else if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) < targetInvSlot.item.maxStackCount)
+            {
+                targetInvSlot.AddItem(item, (targetInvSlot.amount + itemAmount));
+                image.transform.position = startPos;
+                invSlot.RemoveItem();
+            }
             else;
             {
                 image.transform.position = startPos;
-
             }
 
         }
