@@ -105,11 +105,14 @@ public class Player : Character
         
         if(Input.GetButtonUp("Fire1"))
         {
-            //Cycle gun if it is a gun
+            //Cycle gun if it is a gun in manual or semi auto
             if(currentItem != null && currentItem is Weapon)
             {
                 Weapon weapon = currentItem as Weapon;
-                weapon.isCyclingGun = true;
+                if(weapon.availableFireModes[weapon.currentFireMode] != Weapon.FireMode.FullAuto)
+                {
+                    weapon.isCyclingGun = true;
+                }
             }
         }
 

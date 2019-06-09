@@ -89,7 +89,7 @@ public class Weapon : Item
 
 
                 currentCycleTime = automaticCyclingTime;
-                CycleBolt();
+                isCyclingGun = true;
             }
         }
     }
@@ -134,7 +134,7 @@ public class Weapon : Item
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in player.inventory.inventorySlots)
         {
-            if(invSlot.item = ammo)
+            if(invSlot.item == ammo)
             {
                 inventorySlots.Add(invSlot);
                 totalAmmo += invSlot.amount;
@@ -179,13 +179,16 @@ public class Weapon : Item
         //Remove ammo from the inventory
         foreach(InventorySlot invSlot in inventorySlots)
         {
-            
-            if(invSlot.amount > ammoToRemoveFromInv)
+
+            //if there is more ammo than the amount to remove, only remove the amount to remove from slot and break from loop
+            if (invSlot.amount > ammoToRemoveFromInv)
             {
                 invSlot.amount -= ammoToRemoveFromInv;
+                break;
             }
 
-            else if(invSlot.amount <= ammoToRemoveFromInv)
+            //if there is less ammo than amount to remove, remove it all and loop back
+            else if (invSlot.amount <= ammoToRemoveFromInv)
             {
                 ammoToRemoveFromInv -= invSlot.amount;
                 invSlot.RemoveItem();
