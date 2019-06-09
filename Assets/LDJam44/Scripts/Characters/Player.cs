@@ -119,8 +119,10 @@ public class Player : Character
             }
         }
 
+        
         if(Input.GetButtonUp("Fire1"))
         {
+            //Cycle gun if it is a gun
             if(currentItem != null && currentItem is Weapon)
             {
                 Weapon weapon = currentItem as Weapon;
@@ -131,6 +133,7 @@ public class Player : Character
 
         if (Input.GetButton("Reload"))
         {
+
             if (currentItem is Weapon)
             {
                 Weapon weapon = currentItem as Weapon;

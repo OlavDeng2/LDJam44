@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a05c825288b8f4fae85e75f75a69c2, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 2887696206167437513, guid: 8f79020eef7b10748ac71f09ca301917,
+    type: 3}
   name: Item
   maxStackCount: 1
   image: {fileID: 0}
