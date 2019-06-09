@@ -42,9 +42,19 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         
         else if(targetInvSlot != invSlot)
         {
-            targetInvSlot.AddItem(item, itemAmount);
-            image.transform.position = startPos;
-            invSlot.RemoveItem();
+            if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) < targetInvSlot.item.maxStackCount)
+            {
+                targetInvSlot.AddItem(item, itemAmount);
+                image.transform.position = startPos;
+                invSlot.RemoveItem();
+            }
+
+            else;
+            {
+                image.transform.position = startPos;
+
+            }
+
         }
 
         //reset data
