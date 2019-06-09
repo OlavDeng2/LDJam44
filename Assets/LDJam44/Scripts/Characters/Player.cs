@@ -166,7 +166,7 @@ public class Player : Character
         {
             currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
             currentItem.GetComponent<Item>().player = this;
-           
+            currentItem.GetComponent<Item>().invSlot = e.InvSlot;
 
             currentItem.GetComponent<Collider2D>().enabled = false;
         }
