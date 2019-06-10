@@ -158,6 +158,8 @@ public class Player : Character
         
         if (item != null)
         {
+            collision.gameObject.transform.SetParent(this.gameObject.transform);
+            collision.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             inventory.PickupItem(item.inventoryItem,collision.gameObject, item.amount);
         }
     }
