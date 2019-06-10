@@ -44,9 +44,11 @@ public class Weapon : Item
 
         if(isReloading)
         {
+            canUseItem = false;
             currentTime += Time.deltaTime;
             if (reloadTime <= currentTime)
             {
+                canUseItem = true;
                 currentTime = 0;
                 Reload();
                 isReloading = false;
@@ -104,6 +106,8 @@ public class Weapon : Item
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
         bullet.GetComponent<Bullet>().shooter = this.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
+
+        canUseItem = false;
 
     }
 
