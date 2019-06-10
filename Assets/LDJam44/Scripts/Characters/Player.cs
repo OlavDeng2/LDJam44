@@ -158,7 +158,7 @@ public class Player : Character
         
         if (item != null)
         {
-            inventory.PickupItem(item.inventoryItem, item.amount);
+            inventory.PickupItem(item.inventoryItem,collision.gameObject, item.amount);
         }
     }
 
@@ -168,7 +168,7 @@ public class Player : Character
         //Remove old item
         if(currentItem)
         {
-            Destroy(currentItem.gameObject);
+            currentItem.gameObject.SetActive(false);
             currentItem = null;
         }
 
@@ -176,7 +176,8 @@ public class Player : Character
         InventoryItem invItem = e.Item;
         if(invItem!= null)
         {
-            currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
+            e.InvSlot.itemGameobject.SetActive(true);
+            currentItem = e.InvSlot.itemGameobject.GetComponent<Item>();
             currentItem.GetComponent<Item>().player = this;
             currentItem.GetComponent<Item>().invSlot = e.InvSlot;
 

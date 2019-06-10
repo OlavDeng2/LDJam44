@@ -15,9 +15,8 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void PickupItem(InventoryItem item, int itemAmount)
+    public void PickupItem(InventoryItem item,GameObject gameObjectItem, int itemAmount)
     {
-        //Debug.Log("Picked up Item: " + item.name);
 
         foreach (InventorySlot inventorySlot in inventorySlots)
         {
@@ -33,7 +32,7 @@ public class Inventory : MonoBehaviour
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item, itemAmount);
+                inventorySlot.AddItem(item, gameObjectItem, itemAmount);
                 break;
             }
         }

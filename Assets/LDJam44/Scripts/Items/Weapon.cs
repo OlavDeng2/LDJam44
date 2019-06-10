@@ -19,7 +19,6 @@ public class Weapon : Item
     public float automaticCyclingTime = 1;
     public int range = 10;
     public float speed = 1;
-    public int shotgunBulletCount = 5;
     public float bulletDamage = 10;
 
     [Header("Data")]
@@ -97,7 +96,7 @@ public class Weapon : Item
         }
     }
 
-    public void FireGun()
+    public virtual void FireGun()
     {
         Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
 
@@ -105,7 +104,7 @@ public class Weapon : Item
         PooledObject bullet = player.bulletPool.GetObject();
         bullet.transform.position = this.transform.position;
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
-        bullet.GetComponent<Bullet>().shooter = this.gameObject;
+        bullet.GetComponent<Bullet>().shooter = player.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
 
         canUseItem = false;
