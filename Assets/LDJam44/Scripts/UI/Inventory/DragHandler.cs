@@ -49,7 +49,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 invSlot.RemoveItem();
             }
 
-            else if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) < targetInvSlot.item.maxStackCount)
+            else if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) <= targetInvSlot.item.maxStackCount)
             {
                 targetInvSlot.AddItem(item, (targetInvSlot.amount + itemAmount));
                 image.transform.position = startPos;

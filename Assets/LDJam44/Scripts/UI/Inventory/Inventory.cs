@@ -17,12 +17,15 @@ public class Inventory : MonoBehaviour
 
     public void PickupItem(InventoryItem item, int itemAmount)
     {
-        foreach(InventorySlot inventorySlot in inventorySlots)
+        //Debug.Log("Picked up Item: " + item.name);
+
+        foreach (InventorySlot inventorySlot in inventorySlots)
         {
             if(inventorySlot.item != null)
             {
-                if(item.name == inventorySlot.item.name && inventorySlot.amount < inventorySlot.item.maxStackCount)
+                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.maxStackCount)
                 {
+                    //Debug.Log("item in slot: " + inventorySlot.item.name);
                     inventorySlot.amount += itemAmount;
                     break;
                 }
@@ -40,7 +43,7 @@ public class Inventory : MonoBehaviour
     {
         if (targetSlot.item != null)
         {
-            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount < targetSlot.item.maxStackCount)
+            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.maxStackCount)
             {
                 targetSlot.amount += initialSlot.amount;
                 initialSlot.RemoveItem();

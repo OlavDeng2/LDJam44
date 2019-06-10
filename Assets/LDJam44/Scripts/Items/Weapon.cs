@@ -15,6 +15,7 @@ public class Weapon : Item
     public int currentAmmo = 0;
     public float reloadTime = 5;
     public float manualCyclingTime = 2;
+    public float semiCyclingTime = 1;
     public float automaticCyclingTime = 1;
     public int range = 10;
     public float speed = 1;
@@ -80,7 +81,7 @@ public class Weapon : Item
 
                 FireGun();
 
-                currentCycleTime = 0;
+                currentCycleTime = semiCyclingTime;
             }
 
             if (availableFireModes[currentFireMode] == FireMode.FullAuto)

@@ -99,6 +99,18 @@ public class Player : Character
             if (currentItem != null)
             {
                 currentItem.UseItem();
+
+
+                //Cycle gun if it is a gun in semi auto
+                if (currentItem != null && currentItem is Weapon)
+                {
+                    Weapon weapon = currentItem as Weapon;
+                    if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                    {
+                        weapon.isCyclingGun = true;
+                    }
+                }
+
             }
         }
 
@@ -109,7 +121,7 @@ public class Player : Character
             if(currentItem != null && currentItem is Weapon)
             {
                 Weapon weapon = currentItem as Weapon;
-                if(weapon.availableFireModes[weapon.currentFireMode] != Weapon.FireMode.FullAuto)
+                if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.Manual)
                 {
                     weapon.isCyclingGun = true;
                 }
