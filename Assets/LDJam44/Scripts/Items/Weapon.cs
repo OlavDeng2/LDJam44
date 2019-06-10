@@ -18,7 +18,7 @@ public class Weapon : Item
     public float semiCyclingTime = 1;
     public float automaticCyclingTime = 1;
     public int range = 10;
-    public float speed = 1;
+    public float speed = 10;
     public float bulletDamage = 10;
 
     [Header("Data")]
