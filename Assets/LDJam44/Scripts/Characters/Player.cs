@@ -125,6 +125,11 @@ public class Player : Character
                 {
                     weapon.isCyclingGun = true;
                 }
+
+                else if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                {
+                    weapon.canUseItem = true;
+                }
             }
         }
 

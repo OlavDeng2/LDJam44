@@ -35,7 +35,12 @@ public class Weapon : Item
             currentTime += Time.deltaTime;
             if (currentCycleTime <= currentTime)
             {
-                canUseItem = true;
+                //if weapon is
+                if((availableFireModes[currentFireMode] != FireMode.SemiAuto))
+                {
+                    canUseItem = true;
+
+                }
                 currentTime = 0;
                 CycleBolt();
                 isCyclingGun = false;

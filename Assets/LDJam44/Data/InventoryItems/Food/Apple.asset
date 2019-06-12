@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 3}
   name: Item
   maxStackCount: 1
-  image: {fileID: 21300000, guid: 215c414b0f1dc3c4cabebc16be4f980c, type: 3}
+  image: {fileID: 21300000, guid: 7f47cf552a7c2b74bb1b8398a01841b9, type: 3}
