@@ -27,7 +27,6 @@ public class Shop : Interactable
         {
             if (player.health > healthPerBuy)
             {
-                player.totalAmmo += bulletsPerHealth * healthPerBuy;
                 player.health -= healthPerBuy;
             }
         }

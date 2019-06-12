@@ -14,6 +14,7 @@ public class InventorySlot : MonoBehaviour
     public Image itemImage;
 
     [Header("Data")]
+    public GameObject itemGameobject;
     public InventoryItem item;
     public int amount = 0;
 
@@ -27,19 +28,20 @@ public class InventorySlot : MonoBehaviour
         //only select the item when the appropriate button is pressed
         if (Input.GetKeyDown(key))
         {
-            inventory.SelectItem(item);
+            inventory.SelectItem(item, this);
         }
     }
 
-    public void AddItem(InventoryItem itemToAdd, int amountToAdd)
+    public void AddItem(InventoryItem itemToAdd, GameObject gameObject, int amountToAdd)
     {
         item = itemToAdd;
         amount += amountToAdd;
+        itemGameobject = gameObject;
+
         if(!itemImage.enabled)
         {
             itemImage.enabled = true;
-            itemImage.sprite = item.image;
-            
+            itemImage.sprite = item.image;            
         }
     }
 

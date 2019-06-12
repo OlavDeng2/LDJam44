@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool spawnEnemies = false;
+
     [Header("Global Pools")]
     public ObjectPool bulletPool;
 
@@ -31,8 +33,12 @@ public class GameManager : MonoBehaviour
         SpawnPlayer();
         Time.timeScale = 1;
 
-        SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
-        SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
+        if(spawnEnemies)
+        {
+            SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
+            SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
+        }
+  
 
     }
 

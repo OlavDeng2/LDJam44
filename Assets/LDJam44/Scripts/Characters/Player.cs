@@ -16,19 +16,6 @@ public class Player : Character
 
     [Header("Gun")]
     public ObjectPool bulletPool;
-    public float bulletSpeed = 10;
-    public int totalAmmo = 90;
-    public int currentAmmoInMag = 30;
-    public int maxAmmoInMag = 30;
-    public float gunRange = 10;
-    public float fireRate = 0.1f; //how many seconds between shots
-    public float timeToReload = 2f;
-    public LayerMask enemyLayer;
-
-    [Header("Gun Data")]
-    public float timeSinceLastShot = 0f;
-    public float timeSinceReloadStart = 0f;
-    public bool isReloading = false;
 
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
@@ -44,7 +31,6 @@ public class Player : Character
 
     private void Start()
     {
-        timeSinceLastShot = fireRate;
         inventory.itemSelected += Inventory_itemSelected;
     }
 
@@ -55,16 +41,13 @@ public class Player : Character
     {
 
         //update UI
-        playerUI.UpdateAmmoText(currentAmmoInMag, totalAmmo);
         playerUI.UpdateHealthText(health);
 
         //keep counter going to keep track of when shot was last fired
-        timeSinceLastShot += Time.deltaTime;
 
         //Handle input
         MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
         Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-        //LookDirection(lookDirection );
 
         //Interact with something
         if (Input.GetButtonDown("Interact"))
@@ -116,88 +99,63 @@ public class Player : Character
             if (currentItem != null)
             {
                 currentItem.UseItem();
+
+
+                //Cycle gun if it is a gun in semi auto
+                if (currentItem != null && currentItem is Weapon)
+                {
+                    Weapon weapon = currentItem as Weapon;
+                    if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                    {
+                        weapon.isCyclingGun = true;
+                    }
+                }
+
             }
         }
 
-
-        if (!isReloading)
+        
+        if(Input.GetButtonUp("Fire1"))
         {
-            if (Input.GetButton("Fire1"))
+            //Cycle gun if it is a gun in manual or semi auto
+            if(currentItem != null && currentItem is Weapon)
             {
-                ShootGun(lookDirection);
-            }
-
-            if (Input.GetButton("Reload"))
-            {
-                if (totalAmmo > 0)
+                Weapon weapon = currentItem as Weapon;
+                if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.Manual)
                 {
-                    isReloading = true;
+                    weapon.isCyclingGun = true;
+                }
+
+                else if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                {
+                    weapon.canUseItem = true;
                 }
             }
         }
 
-        else if(isReloading)
+
+        if (Input.GetButtonDown("Reload"))
         {
-            timeSinceReloadStart += Time.deltaTime;
-            if(timeSinceReloadStart > timeToReload)
+
+            if (currentItem is Weapon)
             {
-                ReloadGun();
-                timeSinceReloadStart = 0f;
-                isReloading = false;
+                Weapon weapon = currentItem as Weapon;
+                weapon.isReloading = true;
+            }
+        }
+
+        if (Input.GetButtonDown("Switch Fire Mode"))
+        {
+            if (currentItem is Weapon)
+            {
+                Weapon weapon = currentItem as Weapon;
+                {
+                    weapon.ChangeFireMode();
+                }
             }
         }
     }
 
-    private void ShootGun(Vector3 direction)
-    {
-        //Shoot if has more ammo than 0 in mag
-        if(currentAmmoInMag > 0)
-        {
-            if (timeSinceLastShot >= fireRate)
-            {
-                timeSinceLastShot = 0f;
-                currentAmmoInMag -= 1;
-
-                //New shoot
-                PooledObject bullet = bulletPool.GetObject();
-                bullet.transform.position = this.transform.position;
-                bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-                bullet.GetComponent<Bullet>().shooter = this.gameObject;
-                bullet.GetComponent<Bullet>().damage = damage;
-            }
-        }
-    }
-
-    private void ReloadGun()
-    {
-        if(totalAmmo > maxAmmoInMag)
-        {
-            int ammoToAdd = maxAmmoInMag - currentAmmoInMag;
-            totalAmmo -= ammoToAdd;
-
-            currentAmmoInMag = maxAmmoInMag;
-        }
-
-        //If total ammo is more than 0, but less than 30(checked by previous if statement)
-        else if (totalAmmo > 0)
-        {
-            int ammoToAdd = maxAmmoInMag - currentAmmoInMag;
-
-            //if the total ammo is more than requested, just fill the mag as usual
-            if(totalAmmo >= ammoToAdd)
-            {
-                currentAmmoInMag = maxAmmoInMag;
-                totalAmmo -= ammoToAdd;
-            }
-
-            //If total ammo is smaller than ammo to add, add whatever ammo is rest to the magazine
-            else if(totalAmmo <= ammoToAdd)
-            {
-                currentAmmoInMag += totalAmmo;
-                totalAmmo = 0;
-            }
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -205,7 +163,9 @@ public class Player : Character
         
         if (item != null)
         {
-            inventory.PickupItem(item.inventoryItem);
+            collision.gameObject.transform.SetParent(this.gameObject.transform);
+            collision.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+            inventory.PickupItem(item.inventoryItem,collision.gameObject, item.amount);
         }
     }
 
@@ -215,7 +175,7 @@ public class Player : Character
         //Remove old item
         if(currentItem)
         {
-            Destroy(currentItem.gameObject);
+            currentItem.gameObject.SetActive(false);
             currentItem = null;
         }
 
@@ -223,7 +183,11 @@ public class Player : Character
         InventoryItem invItem = e.Item;
         if(invItem!= null)
         {
-            currentItem = Instantiate(invItem.itemPrefab, this.transform).GetComponent<Item>();
+            e.InvSlot.itemGameobject.SetActive(true);
+            currentItem = e.InvSlot.itemGameobject.GetComponent<Item>();
+            currentItem.GetComponent<Item>().player = this;
+            currentItem.GetComponent<Item>().invSlot = e.InvSlot;
+
             currentItem.GetComponent<Collider2D>().enabled = false;
         }
     }

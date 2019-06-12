@@ -15,22 +15,24 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void PickupItem(InventoryItem item)
+    public void PickupItem(InventoryItem item,GameObject gameObjectItem, int itemAmount)
     {
-        foreach(InventorySlot inventorySlot in inventorySlots)
+
+        foreach (InventorySlot inventorySlot in inventorySlots)
         {
             if(inventorySlot.item != null)
             {
-                if(item.name == inventorySlot.item.name && inventorySlot.amount < inventorySlot.item.maxStackCount)
+                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.maxStackCount)
                 {
-                    inventorySlot.amount += 1;
+                    //Debug.Log("item in slot: " + inventorySlot.item.name);
+                    inventorySlot.amount += itemAmount;
                     break;
                 }
             }
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item, 1);
+                inventorySlot.AddItem(item, gameObjectItem, itemAmount);
                 break;
             }
         }
@@ -40,7 +42,7 @@ public class Inventory : MonoBehaviour
     {
         if (targetSlot.item != null)
         {
-            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount < targetSlot.item.maxStackCount)
+            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.maxStackCount)
             {
                 targetSlot.amount += initialSlot.amount;
                 initialSlot.RemoveItem();
@@ -55,16 +57,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public InventoryItem RemoveItem(int slot)
-    {
-        return inventorySlots[slot].item;
-    }
-
-    public void SelectItem(InventoryItem item)
+    public void SelectItem(InventoryItem item, InventorySlot invSlot)
     {
         if (itemSelected != null)
         {
-            itemSelected(this, new InventoryEventsArgs(item));
+            itemSelected(this, new InventoryEventsArgs(item, invSlot));
         }
     }
 }

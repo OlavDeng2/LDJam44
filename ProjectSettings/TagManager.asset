@@ -53,7 +53,7 @@ TagManager:
   - name: Interactables
     uniqueID: 3763547097
     locked: 0
-  - name: Weapons
+  - name: Items
     uniqueID: 2333309623
     locked: 0
   - name: Characters
