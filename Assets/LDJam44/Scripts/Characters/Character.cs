@@ -13,6 +13,11 @@ public class Character : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 1;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip walkingAudioClip;
+    public AudioClip randomNoise;
+
     //The character should take damage
     public void TakeDamage(float damage)
     {
@@ -31,6 +36,15 @@ public class Character : MonoBehaviour
     public void MoveCharacter(Vector3 moveDirection)
     {
         gameObject.transform.position += moveDirection * moveSpeed;
+
+        if(walkingAudioClip != null)
+        {
+            if(!audioSource.isPlaying)
+            {
+                audioSource.clip = walkingAudioClip;
+                audioSource.Play();
+            }
+        }
     }
 
     public void LookDirection(Vector3 lookDirection)

@@ -23,6 +23,11 @@ public class Food : Item
                 Destroy(this.gameObject);
             }
 
+            if (useItemAudioClip != null)
+            {
+                audioSource.PlayOneShot(useItemAudioClip);
+            }
+
             canUseItem = false;
         }
         

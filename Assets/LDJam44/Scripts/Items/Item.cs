@@ -18,6 +18,11 @@ public class Item : MonoBehaviour
     public InventorySlot invSlot;
     public bool canUseItem = true;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip useItemAudioClip;
+
+
     public virtual void Update()
     {
        if(!canUseItem)
@@ -36,7 +41,12 @@ public class Item : MonoBehaviour
         if(canUseItem)
         {
             canUseItem = false;
-            throw new System.NotImplementedException();
+
+            if(useItemAudioClip != null)
+            {
+                audioSource.PlayOneShot(useItemAudioClip);
+            }
+            
         }
 
     }

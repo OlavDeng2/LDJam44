@@ -27,6 +27,12 @@ public class Weapon : Item
     public bool isCyclingGun = false;
     public bool isReloading = false;
 
+    [Header("Audio")]
+    public AudioClip shootAudioClip;
+    public AudioClip cycleBoltAudioClip;
+    public AudioClip changeFireModeAudioClip;
+    public AudioClip reloadAudioClip;
+
     public override void Update()
     {
         //cycle the gun
@@ -42,8 +48,7 @@ public class Weapon : Item
 
                 }
                 currentTime = 0;
-                CycleBolt();
-                isCyclingGun = false;
+                FinishCycleBolt();
             }
         }
 
@@ -55,8 +60,7 @@ public class Weapon : Item
             {
                 canUseItem = true;
                 currentTime = 0;
-                Reload();
-                isReloading = false;
+                FinishReload();
             }
         }
     }
@@ -96,7 +100,7 @@ public class Weapon : Item
 
 
                 currentCycleTime = automaticCyclingTime;
-                isCyclingGun = true;
+                StartCycleBolt();
             }
         }
     }
@@ -112,8 +116,13 @@ public class Weapon : Item
         bullet.GetComponent<Bullet>().shooter = player.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
 
-        canUseItem = false;
 
+        if (shootAudioClip != null)
+        {
+            audioSource.PlayOneShot(shootAudioClip);
+        }
+
+        canUseItem = false;
     }
 
     public void ChangeFireMode()
@@ -125,15 +134,44 @@ public class Weapon : Item
         {
             currentFireMode = 0;
         }
+
+        if (changeFireModeAudioClip != null)
+        {
+            audioSource.PlayOneShot(changeFireModeAudioClip);
+        }
     }
 
-    public void CycleBolt()
+    public void StartCycleBolt()
     {
         isCyclingGun = true;
+
+        if (cycleBoltAudioClip != null)
+        {
+            audioSource.PlayOneShot(cycleBoltAudioClip);
+        }
     }
 
-    public void Reload()
+    private void FinishCycleBolt()
     {
+        isCyclingGun = false;
+
+    }
+
+    public void StartReload()
+    {
+        isReloading = true;
+
+        if (reloadAudioClip != null)
+        {
+            audioSource.PlayOneShot(reloadAudioClip);
+        }
+    }
+
+    private void FinishReload()
+    {
+        isReloading = false;
+
+
         List<InventorySlot> inventorySlots = new List<InventorySlot>();
         int totalAmmo = 0;
         int ammoToRemoveFromInv = 0;
@@ -143,7 +181,7 @@ public class Weapon : Item
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in player.inventory.inventorySlots)
         {
-            if(invSlot.item == ammo)
+            if (invSlot.item == ammo)
             {
                 inventorySlots.Add(invSlot);
                 totalAmmo += invSlot.amount;
@@ -151,7 +189,7 @@ public class Weapon : Item
             }
         }
 
-        
+
         if (totalAmmo > ammoCapacity)
         {
             int ammoToAdd = ammoCapacity - currentAmmo;
@@ -186,7 +224,7 @@ public class Weapon : Item
         }
 
         //Remove ammo from the inventory
-        foreach(InventorySlot invSlot in inventorySlots)
+        foreach (InventorySlot invSlot in inventorySlots)
         {
 
             //if there is more ammo than the amount to remove, only remove the amount to remove from slot and break from loop
