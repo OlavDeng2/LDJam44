@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb051c710c68f204b8bb3d8a919c405a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMusic: []
+  gameMusic:
+  - {fileID: 8300000, guid: e070faf893c2a564abff0b3f384a8ecb, type: 3}
+  - {fileID: 8300000, guid: 2d7bab43694287a4d86c8da5da6318cb, type: 3}
+  - {fileID: 8300000, guid: 9388aaa864b458f42a44b64e8c9959a0, type: 3}
+  - {fileID: 8300000, guid: 1117c9c5cfee249499dbf585b79131a8, type: 3}
+  - {fileID: 8300000, guid: 460e561ee37ee2b4eb160eb5dbf26d77, type: 3}
   musicSource: {fileID: 8361530459590073731}
 --- !u!82 &8361530459590073731
 AudioSource:
