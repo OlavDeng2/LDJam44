@@ -13,6 +13,11 @@ public class Character : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 1;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip[] randomClips;
+    public AudioClip[] dyingClips;
+
     //The character should take damage
     public void TakeDamage(float damage)
     {
@@ -26,6 +31,11 @@ public class Character : MonoBehaviour
     public virtual void KillCharacter()
     {
         alive = false;
+
+        if (dyingClips.Length > 0)
+        {
+            audioSource.PlayOneShot(dyingClips[Random.Range(0, dyingClips.Length)]);
+        }
     }
 
     public void MoveCharacter(Vector3 moveDirection)
@@ -36,5 +46,17 @@ public class Character : MonoBehaviour
     public void LookDirection(Vector3 lookDirection)
     {
         gameObject.transform.right = lookDirection;
+    }
+
+    public void RandomClip(float chance)
+    {
+        float random = Random.Range(0, 1);
+        if(chance > random)
+        {
+            if (randomClips.Length > 0)
+            {
+                audioSource.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
+            }
+        }
     }
 }
