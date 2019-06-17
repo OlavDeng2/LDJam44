@@ -116,8 +116,7 @@ public class Weapon : Item
         bullet.GetComponent<Bullet>().shooter = player.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
 
-
-        if (shootAudioClips.Length < 0)
+        if (shootAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);
         }
@@ -128,14 +127,13 @@ public class Weapon : Item
     public void ChangeFireMode()
     {
 
-        Debug.Log("switching fire mode");
         currentFireMode += 1;
         if(currentFireMode >= availableFireModes.Count)
         {
             currentFireMode = 0;
         }
 
-        if (changeFireModeAudioClips.Length < 0)
+        if (changeFireModeAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(changeFireModeAudioClips[Random.Range(0, changeFireModeAudioClips.Length)]);
         }
@@ -145,7 +143,7 @@ public class Weapon : Item
     {
         isCyclingGun = true;
 
-        if (cycleBoltAudioClips.Length < 0)
+        if (cycleBoltAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(cycleBoltAudioClips[Random.Range(0, cycleBoltAudioClips.Length)]);
         }
@@ -161,7 +159,7 @@ public class Weapon : Item
     {
         isReloading = true;
 
-        if (reloadAudioClips.Length < 0)
+        if (reloadAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(reloadAudioClips[Random.Range(0, reloadAudioClips.Length)]);
         }

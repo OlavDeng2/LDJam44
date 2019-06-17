@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     {
         alive = false;
 
-        if (dyingClips.Length < 0)
+        if (dyingClips.Length > 0)
         {
             audioSource.PlayOneShot(dyingClips[Random.Range(0, dyingClips.Length)]);
         }

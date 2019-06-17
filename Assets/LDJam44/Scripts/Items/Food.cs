@@ -23,7 +23,7 @@ public class Food : Item
                 Destroy(this.gameObject);
             }
 
-            if (useItemAudioClips.Length < 0)
+            if (useItemAudioClips.Length > 0)
             {
                 audioSource.PlayOneShot(useItemAudioClips[UnityEngine.Random.Range(0, useItemAudioClips.Length)]);
             }
