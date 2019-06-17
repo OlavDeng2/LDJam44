@@ -47,4 +47,16 @@ public class Character : MonoBehaviour
     {
         gameObject.transform.right = lookDirection;
     }
+
+    public void RandomClip(float chance)
+    {
+        float random = Random.Range(0, 1);
+        if(chance > random)
+        {
+            if (randomClips.Length > 0)
+            {
+                audioSource.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
+            }
+        }
+    }
 }
