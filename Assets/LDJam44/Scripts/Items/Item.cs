@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip useItemAudioClip;
+    public AudioClip[] useItemAudioClips;
 
 
     public virtual void Update()
@@ -42,11 +42,10 @@ public class Item : MonoBehaviour
         {
             canUseItem = false;
 
-            if(useItemAudioClip != null)
+            if (useItemAudioClips.Length < 0)
             {
-                audioSource.PlayOneShot(useItemAudioClip);
+                audioSource.PlayOneShot(useItemAudioClips[UnityEngine.Random.Range(0, useItemAudioClips.Length)]);
             }
-            
         }
 
     }

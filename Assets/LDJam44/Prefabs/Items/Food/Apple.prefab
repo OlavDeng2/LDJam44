@@ -134,7 +134,10 @@ MonoBehaviour:
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 6666946081550474656}
-  useItemAudioClip: {fileID: 0}
+  useItemAudioClips:
+  - {fileID: 8300000, guid: d2c609f31914c204cb279347c5a89a78, type: 3}
+  - {fileID: 8300000, guid: f3938afb85e43eb4482ae89f0c8971a6, type: 3}
+  - {fileID: 8300000, guid: e40cdf6b306e5f046b6e821b0dcaaabf, type: 3}
   healAmount: 10
 --- !u!61 &1498306822018843052
 BoxCollider2D:

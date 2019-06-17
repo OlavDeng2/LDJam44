@@ -30,10 +30,11 @@ public class Shotgun : Weapon
             
         }
 
-        if (shootAudioClip != null)
+        if (shootAudioClips.Length < 0)
         {
-            audioSource.PlayOneShot(shootAudioClip);
+            audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);
         }
+
 
         canUseItem = false;
     }

@@ -55,7 +55,7 @@ MonoBehaviour:
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 2030676902020866927}
-  useItemAudioClip: {fileID: 0}
+  useItemAudioClips: []
   ammo: {fileID: 11400000, guid: 8f5758c43287ed841af57df83ef7a028, type: 2}
   availableFireModes: 01000000
   ammoCapacity: 7
@@ -71,10 +71,13 @@ MonoBehaviour:
   currentCycleTime: 0
   isCyclingGun: 0
   isReloading: 0
-  shootAudioClip: {fileID: 8300000, guid: ffc3ce9c8a786d74babce59d6b041d20, type: 3}
-  cycleBoltAudioClip: {fileID: 0}
-  changeFireModeAudioClip: {fileID: 0}
-  reloadAudioClip: {fileID: 0}
+  shootAudioClips:
+  - {fileID: 8300000, guid: ad1257874cc319f419a95d2c1fe33d23, type: 3}
+  cycleBoltAudioClips: []
+  changeFireModeAudioClips: []
+  reloadAudioClips:
+  - {fileID: 8300000, guid: 4de293b3eb5fcb14d8c8ca6a5c4f7870, type: 3}
+  - {fileID: 8300000, guid: bcddd792c282be64eb0c9b37253a2f05, type: 3}
 --- !u!61 &5603723554163569334
 BoxCollider2D:
   m_ObjectHideFlags: 0

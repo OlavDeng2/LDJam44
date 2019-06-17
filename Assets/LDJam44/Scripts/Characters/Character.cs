@@ -15,8 +15,8 @@ public class Character : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip walkingAudioClip;
-    public AudioClip randomNoise;
+    public AudioClip[] randomClips;
+    public AudioClip[] dyingClips;
 
     //The character should take damage
     public void TakeDamage(float damage)
@@ -31,20 +31,16 @@ public class Character : MonoBehaviour
     public virtual void KillCharacter()
     {
         alive = false;
+
+        if (dyingClips.Length < 0)
+        {
+            audioSource.PlayOneShot(dyingClips[Random.Range(0, dyingClips.Length)]);
+        }
     }
 
     public void MoveCharacter(Vector3 moveDirection)
     {
         gameObject.transform.position += moveDirection * moveSpeed;
-
-        if(walkingAudioClip != null)
-        {
-            if(!audioSource.isPlaying)
-            {
-                audioSource.clip = walkingAudioClip;
-                audioSource.Play();
-            }
-        }
     }
 
     public void LookDirection(Vector3 lookDirection)

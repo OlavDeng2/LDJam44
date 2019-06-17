@@ -28,10 +28,10 @@ public class Weapon : Item
     public bool isReloading = false;
 
     [Header("Audio")]
-    public AudioClip shootAudioClip;
-    public AudioClip cycleBoltAudioClip;
-    public AudioClip changeFireModeAudioClip;
-    public AudioClip reloadAudioClip;
+    public AudioClip[] shootAudioClips;
+    public AudioClip[] cycleBoltAudioClips;
+    public AudioClip[] changeFireModeAudioClips;
+    public AudioClip[] reloadAudioClips;
 
     public override void Update()
     {
@@ -117,9 +117,9 @@ public class Weapon : Item
         bullet.GetComponent<Bullet>().damage = bulletDamage;
 
 
-        if (shootAudioClip != null)
+        if (shootAudioClips.Length < 0)
         {
-            audioSource.PlayOneShot(shootAudioClip);
+            audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);
         }
 
         canUseItem = false;
@@ -135,9 +135,9 @@ public class Weapon : Item
             currentFireMode = 0;
         }
 
-        if (changeFireModeAudioClip != null)
+        if (changeFireModeAudioClips.Length < 0)
         {
-            audioSource.PlayOneShot(changeFireModeAudioClip);
+            audioSource.PlayOneShot(changeFireModeAudioClips[Random.Range(0, changeFireModeAudioClips.Length)]);
         }
     }
 
@@ -145,9 +145,9 @@ public class Weapon : Item
     {
         isCyclingGun = true;
 
-        if (cycleBoltAudioClip != null)
+        if (cycleBoltAudioClips.Length < 0)
         {
-            audioSource.PlayOneShot(cycleBoltAudioClip);
+            audioSource.PlayOneShot(cycleBoltAudioClips[Random.Range(0, cycleBoltAudioClips.Length)]);
         }
     }
 
@@ -161,9 +161,9 @@ public class Weapon : Item
     {
         isReloading = true;
 
-        if (reloadAudioClip != null)
+        if (reloadAudioClips.Length < 0)
         {
-            audioSource.PlayOneShot(reloadAudioClip);
+            audioSource.PlayOneShot(reloadAudioClips[Random.Range(0, reloadAudioClips.Length)]);
         }
     }
 
