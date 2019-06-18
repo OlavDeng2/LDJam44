@@ -112,6 +112,8 @@ public class Weapon : Item
 
         //New shoot
         PooledObject bullet = bulletPool.GetObject();
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+
         bullet.transform.position = this.transform.position;
 
         //set the angle of the bullet
@@ -120,9 +122,12 @@ public class Weapon : Item
 
 
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
-        bullet.GetComponent<Bullet>().shooter = character.gameObject;
-        bullet.GetComponent<Bullet>().damage = bulletDamage;
-        
+        bulletScript.shooter = character.gameObject;
+        bulletScript.damage = bulletDamage;
+        bulletScript.startPos = this.transform.position;
+        bulletScript.maxRange = range;
+
+
         if (shootAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);

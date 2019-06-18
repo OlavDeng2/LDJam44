@@ -21,14 +21,16 @@ public class Shotgun : Weapon
             Vector3 shootDirection = RotateVector(aimDirection, randomAngle);
             //Get bullet
             PooledObject bullet = bulletPool.GetObject();
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
 
             //set the angle of the bullet
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
             bullet.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             bullet.transform.position = this.transform.position;
-            bullet.GetComponent<Bullet>().shooter = character.gameObject;
-            bullet.GetComponent<Bullet>().damage = bulletDamage;
+            bulletScript.shooter = character.gameObject;
+            bulletScript.damage = bulletDamage;
+            bulletScript.startPos = this.transform.position;
 
             //Set random shoot direction based on cone based on bulletspread and aim direction
             bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * speed;
