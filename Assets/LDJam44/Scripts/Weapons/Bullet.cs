@@ -22,21 +22,17 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Character hitCharacter = collision.gameObject.GetComponent<Character>();
-        if (hitCharacter)
+        if (hitCharacter != null)
         {
             if(collision.gameObject != shooter)
             {
                 hitCharacter.TakeDamage(damage);
-                this.GetComponent<PooledObject>().ReturnToPool();
             }
         }
 
-        /*
-        else if (!hitCharacter);
+        if(hitCharacter == null)
         {
-            Debug.Log("hit");
-
             this.GetComponent<PooledObject>().ReturnToPool();
-        }*/
+        }
     }
 }

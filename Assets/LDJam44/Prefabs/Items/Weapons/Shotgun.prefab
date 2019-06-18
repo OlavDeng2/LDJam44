@@ -146,7 +146,7 @@ MonoBehaviour:
   semiCyclingTime: 1
   automaticCyclingTime: 1
   range: 10
-  speed: 10
+  speed: 20
   bulletDamage: 10
   currentFireMode: 0
   currentCycleTime: 0
@@ -330,5 +330,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 2446701549417867979, guid: d78aa427ebd9c12418cded1f4aa77317,
     type: 3}
-  spawnCount: 100
+  spawnCount: 30
   objects: []
