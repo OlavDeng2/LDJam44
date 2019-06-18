@@ -22,6 +22,21 @@ public class Enemy : Character
 
     }
 
+    public virtual void Update()
+    {
+
+
+        MoveEnemy();
+
+        if (!alive)
+        {
+            KillCharacter();
+        }
+
+    }
+
+
+
     public override void KillCharacter()
     {
         base.KillCharacter();
@@ -42,6 +57,7 @@ public class Enemy : Character
         this.GetComponent<PooledObject>().ReturnToPool();
 
     }
+
 
     public Vector3 GetPlayerDirection()
     {
@@ -71,6 +87,31 @@ public class Enemy : Character
             return 0;
         }
 
+    }
+
+    public virtual void MoveEnemy()
+    {
+        //TODO: do a raycast to check if enemy sight is being blocked, if not, go get the player
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, GetPlayerDirection());
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.GetComponent<Player>() != null)
+            {
+
+                //If the player is further away than max detection distance, dont move
+                if (GetPlayerDistance() >= maxDetectionDistance)
+                {
+                    MoveCharacter(new Vector3(0, 0, 0));
+                }
+
+                //Otherwise, move towards the player
+                else if (GetPlayerDistance() <= maxDetectionDistance)
+                {
+                    MoveCharacter(GetPlayerDirection());
+                }
+            }
+        }
     }
 
 }

@@ -130,9 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultHealth: 100
   health: 100
-  damage: 10
   alive: 1
-  moveSpeed: 0.025
+  moveSpeed: 2
   rigidBody: {fileID: 2144648354}
   audioSource: {fileID: 7483783749574746441}
   randomClips: []
@@ -140,23 +139,11 @@ MonoBehaviour:
   dropableItems: []
   maxDroppedItems: 0
   minDroppedItems: 0
-  bulletPool: {fileID: 0}
-  bulletSpeed: 10
-  totalAmmo: 90
-  currentAmmoInMag: 30
-  maxAmmoInMag: 30
-  fireRange: 8
-  gunRange: 10
-  fireRate: 1
-  timeToReload: 2
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  timeSinceLastShot: 0
-  timeSinceReloadStart: 0
-  isReloading: 0
+  maxDetectionDistance: 10
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  bulletPool: {fileID: 0}
+  fireRange: 8
 --- !u!50 &2144648354
 Rigidbody2D:
   serializedVersion: 4

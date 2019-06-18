@@ -4,22 +4,7 @@ using UnityEngine;
 
 public class Zombie : Enemy
 {
-    // Update is called once per frame
-    void Update()
-    {
-        MoveTowardsPlayer();
-        if(!alive)
-        {
-            KillCharacter();
-        }
-    }
-
-    private void MoveTowardsPlayer()
-    {
-
-        MoveCharacter(GetPlayerDirection());
-
-    }
+    public float damage = 100;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

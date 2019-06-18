@@ -112,10 +112,16 @@ public class Weapon : Item
         //New shoot
         PooledObject bullet = player.bulletPool.GetObject();
         bullet.transform.position = this.transform.position;
+
+        //set the angle of the bullet
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        bullet.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
         bullet.GetComponent<Bullet>().shooter = player.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
-
+        
         if (shootAudioClips.Length > 0)
         {
             audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);

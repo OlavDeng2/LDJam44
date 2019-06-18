@@ -50,9 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultHealth: 100
   health: 30
-  damage: 100
   alive: 1
-  moveSpeed: 1
+  moveSpeed: 5
   rigidBody: {fileID: 6109274319608535921}
   audioSource: {fileID: 4060881740739923696}
   randomClips: []
@@ -60,8 +59,10 @@ MonoBehaviour:
   dropableItems: []
   maxDroppedItems: 0
   minDroppedItems: 0
+  maxDetectionDistance: 10
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  damage: 100
 --- !u!61 &1041797769705767959
 BoxCollider2D:
   m_ObjectHideFlags: 0
