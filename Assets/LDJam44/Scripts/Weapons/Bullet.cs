@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        if(hitCharacter == null)
+        if(hitCharacter == null && collision.gameObject.GetComponent<Bullet>() == null)
         {
             this.GetComponent<PooledObject>().ReturnToPool();
         }
