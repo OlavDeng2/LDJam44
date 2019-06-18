@@ -36,22 +36,7 @@ public class Weapon : Item
 
     public override void Update()
     {
-        //cycle the gun
-        if(isCyclingGun)
-        {
-            currentTime += Time.deltaTime;
-            if (currentCycleTime <= currentTime)
-            {
-                //if weapon is
-                if((availableFireModes[currentFireMode] != FireMode.SemiAuto))
-                {
-                    canUseItem = true;
-
-                }
-                currentTime = 0;
-                FinishCycleBolt();
-            }
-        }
+        
 
         if(isReloading)
         {
@@ -64,6 +49,27 @@ public class Weapon : Item
                 FinishReload();
             }
         }
+
+        else if(!isReloading)
+        {
+            //cycle the gun
+            if (isCyclingGun)
+            {
+                currentTime += Time.deltaTime;
+                if (currentCycleTime <= currentTime)
+                {
+                    //if weapon is
+                    if ((availableFireModes[currentFireMode] != FireMode.SemiAuto))
+                    {
+                        canUseItem = true;
+
+                    }
+                    currentTime = 0;
+                    FinishCycleBolt();
+                }
+            }
+        }
+        
     }
 
     public override void UseItem()
@@ -252,6 +258,8 @@ public class Weapon : Item
             else if (invSlot.amount <= ammoToRemoveFromInv)
             {
                 ammoToRemoveFromInv -= invSlot.amount;
+
+                Debug.Log("All ammo from this item is used");
                 invSlot.RemoveItem();
             }
         }
