@@ -1991,7 +1991,7 @@ MonoBehaviour:
   health: 100
   damage: 40
   alive: 1
-  moveSpeed: 1
+  moveSpeed: 20
   rigidBody: {fileID: 2144648354}
   audioSource: {fileID: 6881185813971836133}
   randomClips: []
