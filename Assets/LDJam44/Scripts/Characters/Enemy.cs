@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Character
 {
     [Header("Settings")]
-    public InventoryItem[] dropableItems;
+    public GameObject[] dropableItems;
     public int maxDroppedItems = 0;
     public int minDroppedItems = 0;
     
@@ -20,7 +20,8 @@ public class Enemy : Character
             int itemDropCount = Random.Range(minDroppedItems, maxDroppedItems);
             for(int i = 0; i <= itemDropCount; i++)
             {
-                InventoryItem itemToDrop = dropableItems[Random.Range(0, dropableItems.Length)];
+                GameObject itemToDrop = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform.parent);
+                itemToDrop.transform.position = this.transform.position;
             }
         }
 

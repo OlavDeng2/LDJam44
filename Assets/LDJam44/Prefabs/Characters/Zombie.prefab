@@ -52,10 +52,11 @@ MonoBehaviour:
   health: 30
   damage: 100
   alive: 1
-  moveSpeed: 0.05
+  moveSpeed: 1
+  rigidBody: {fileID: 6109274319608535921}
   audioSource: {fileID: 4060881740739923696}
-  walkingAudioClip: {fileID: 0}
-  randomNoise: {fileID: 0}
+  randomClips: []
+  dyingClips: []
   dropableItems: []
   maxDroppedItems: 0
   minDroppedItems: 0

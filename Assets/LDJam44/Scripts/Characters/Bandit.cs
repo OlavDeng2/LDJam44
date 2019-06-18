@@ -39,7 +39,6 @@ public class Bandit : Enemy
         {
             MoveCharacter(GetPlayerDirection());
         }
-        LookDirection(GetPlayerDirection());
 
         if (!alive)
         {

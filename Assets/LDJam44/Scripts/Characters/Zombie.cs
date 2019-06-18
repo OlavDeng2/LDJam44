@@ -30,7 +30,6 @@ public class Zombie : Enemy
         {
             Vector3 directionToPlayer = Vector3.Normalize(player.transform.position - this.gameObject.transform.position);
             MoveCharacter(directionToPlayer);
-            LookDirection(directionToPlayer);
         }
     }
 

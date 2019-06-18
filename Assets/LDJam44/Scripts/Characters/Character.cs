@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed = 1;
+    public Rigidbody2D rigidBody;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -40,12 +41,7 @@ public class Character : MonoBehaviour
 
     public void MoveCharacter(Vector3 moveDirection)
     {
-        gameObject.transform.position += moveDirection * moveSpeed;
-    }
-
-    public void LookDirection(Vector3 lookDirection)
-    {
-        gameObject.transform.right = lookDirection;
+        rigidBody.velocity = moveDirection * moveSpeed;
     }
 
     public void RandomClip(float chance)
