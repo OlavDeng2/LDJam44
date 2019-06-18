@@ -31,6 +31,7 @@ public class Shotgun : Weapon
             bulletScript.shooter = character.gameObject;
             bulletScript.damage = bulletDamage;
             bulletScript.startPos = this.transform.position;
+            bulletScript.maxRange = range;
 
             //Set random shoot direction based on cone based on bulletspread and aim direction
             bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * speed;
