@@ -12,8 +12,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [Header("Data")]
     //Inventory specific stuff
     public static InventorySlot targetInvSlot;
-    public InventoryItem item;
-    GameObject gameObjectItem;
+    public GameObject item;
     public int itemAmount;
     //Image to drag
     public GameObject image;
@@ -23,7 +22,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         canvasGroup.blocksRaycasts = false;
         item = invSlot.item;
-        gameObjectItem = invSlot.itemGameobject;
 
         itemAmount = invSlot.amount;
         image = invSlot.itemImage.gameObject;
@@ -47,14 +45,14 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             if (targetInvSlot.item == null)
             {
-                targetInvSlot.AddItem(item, gameObjectItem, itemAmount);
+                targetInvSlot.AddItem(item, itemAmount);
                 image.transform.position = startPos;
                 invSlot.RemoveItem();
             }
 
-            else if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) <= targetInvSlot.item.maxStackCount)
+            else if (targetInvSlot.item == this.item && (targetInvSlot.amount + itemAmount) <= targetInvSlot.item.GetComponent<Item>().maxStackCount)
             {
-                targetInvSlot.AddItem(item, gameObjectItem, (targetInvSlot.amount + itemAmount));
+                targetInvSlot.AddItem(item, (targetInvSlot.amount + itemAmount));
                 image.transform.position = startPos;
                 invSlot.RemoveItem();
             }

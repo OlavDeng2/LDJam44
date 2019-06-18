@@ -14,8 +14,7 @@ public class InventorySlot : MonoBehaviour
     public Image itemImage;
 
     [Header("Data")]
-    public GameObject itemGameobject;
-    public InventoryItem item;
+    public GameObject item;
     public int amount = 0;
 
     public void Start()
@@ -32,16 +31,15 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem itemToAdd, GameObject gameObject, int amountToAdd)
+    public void AddItem(GameObject itemToAdd, int amountToAdd)
     {
         item = itemToAdd;
         amount += amountToAdd;
-        itemGameobject = gameObject;
 
         if(!itemImage.enabled)
         {
             itemImage.enabled = true;
-            itemImage.sprite = item.image;            
+            itemImage.sprite = item.GetComponent<Item>().image;            
         }
     }
 

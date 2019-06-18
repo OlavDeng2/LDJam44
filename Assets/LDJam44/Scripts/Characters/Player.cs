@@ -165,7 +165,7 @@ public class Player : Character
         {
             collision.gameObject.transform.SetParent(this.gameObject.transform);
             collision.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-            inventory.PickupItem(item.inventoryItem,collision.gameObject, item.amount);
+            inventory.PickupItem(collision.gameObject, item.amount);
         }
     }
 
@@ -180,13 +180,15 @@ public class Player : Character
         }
 
         //Spawn item based on inventory item prefab
-        InventoryItem invItem = e.Item;
+        GameObject invItem = e.Item;
         if(invItem!= null)
         {
-            e.InvSlot.itemGameobject.SetActive(true);
-            currentItem = e.InvSlot.itemGameobject.GetComponent<Item>();
-            currentItem.GetComponent<Item>().player = this;
-            currentItem.GetComponent<Item>().invSlot = e.InvSlot;
+
+
+            invItem.SetActive(true);
+            currentItem = invItem.GetComponent<Item>();
+            currentItem.player = this;
+            currentItem.invSlot = e.InvSlot;
 
             currentItem.GetComponent<Collider2D>().enabled = false;
         }

@@ -8,9 +8,9 @@ public class Item : MonoBehaviour
 {
     [Header("Settings")]
     public Sprite image = null;
-    public InventoryItem inventoryItem;
     public float timeBetweenUses = 1f;
     public int amount = 1; //Only for items on the ground
+    public int maxStackCount = 1;
 
     [Header("Data")]
     public float currentTime = 0f;
@@ -59,13 +59,13 @@ public class Item : MonoBehaviour
 
 public class InventoryEventsArgs : EventArgs
 {
-    public InventoryEventsArgs(InventoryItem item, InventorySlot invSlot)
+    public InventoryEventsArgs(GameObject item, InventorySlot invSlot)
     {
         Item = item;
         InvSlot = invSlot;
     }
 
-    public InventoryItem Item;
+    public GameObject Item;
     public InventorySlot InvSlot;
     
 }

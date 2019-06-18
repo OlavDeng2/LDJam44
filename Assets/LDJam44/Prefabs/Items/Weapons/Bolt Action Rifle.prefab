@@ -125,17 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ed0c8eeff04934d91c48224177b40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 8f9f5653703810d4fa1ef80381d5f59b, type: 3}
   inventoryItem: {fileID: 11400000, guid: f1c59085e5abffa4585326abd68c0b98, type: 2}
   timeBetweenUses: 1
   amount: 1
+  maxStackCount: 1
   currentTime: 0
   player: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 7751606128422501524}
   useItemAudioClips: []
-  ammo: {fileID: 11400000, guid: 8f5758c43287ed841af57df83ef7a028, type: 2}
+  ammo: {fileID: 6650633724502002497, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
   availableFireModes: 00000000
   ammoCapacity: 5
   currentAmmo: 0

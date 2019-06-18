@@ -15,14 +15,14 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void PickupItem(InventoryItem item,GameObject gameObjectItem, int itemAmount)
+    public void PickupItem(GameObject item, int itemAmount)
     {
 
         foreach (InventorySlot inventorySlot in inventorySlots)
         {
             if(inventorySlot.item != null)
             {
-                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.maxStackCount)
+                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.GetComponent<Item>().maxStackCount)
                 {
                     //Debug.Log("item in slot: " + inventorySlot.item.name);
                     inventorySlot.amount += itemAmount;
@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item, gameObjectItem, itemAmount);
+                inventorySlot.AddItem(item, itemAmount);
                 break;
             }
         }
@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
     {
         if (targetSlot.item != null)
         {
-            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.maxStackCount)
+            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.GetComponent<Item>().maxStackCount)
             {
                 targetSlot.amount += initialSlot.amount;
                 initialSlot.RemoveItem();
@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void SelectItem(InventoryItem item, InventorySlot invSlot)
+    public void SelectItem(GameObject item, InventorySlot invSlot)
     {
         if (itemSelected != null)
         {

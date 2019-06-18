@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5629f17a76c706d45bc7e417d6dcbe22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 44b1da79af6d7464ab0da72209b88f2d, type: 3}
+  image: {fileID: 21300000, guid: 08537fd3e30cbad4abbf8308b4cb7ea9, type: 3}
   inventoryItem: {fileID: 11400000, guid: 8f5758c43287ed841af57df83ef7a028, type: 2}
   timeBetweenUses: 1
   amount: 30
+  maxStackCount: 1
   currentTime: 0
   player: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
+  audioSource: {fileID: 0}
+  useItemAudioClips: []
 --- !u!61 &6451433424655493721
 BoxCollider2D:
   m_ObjectHideFlags: 0

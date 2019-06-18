@@ -7,7 +7,7 @@ public class Weapon : Item
     public enum FireMode { Manual, SemiAuto, FullAuto}
 
     [Header("References")]
-    public InventoryItem ammo;
+    public Item ammo;
 
     [Header("Settings")]
     public List<FireMode> availableFireModes;
@@ -179,11 +179,15 @@ public class Weapon : Item
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in player.inventory.inventorySlots)
         {
-            if (invSlot.item == ammo)
+            if (invSlot.item)
             {
-                inventorySlots.Add(invSlot);
-                totalAmmo += invSlot.amount;
-                Debug.Log(totalAmmo);
+                if(invSlot.item.GetComponent<Item>() is Ammo)
+                {
+                    inventorySlots.Add(invSlot);
+                    totalAmmo += invSlot.amount;
+                    Debug.Log(totalAmmo);
+                }
+                
             }
         }
 
