@@ -9,13 +9,9 @@ public class Player : Character
 {
     [Header("UI")]
     public PlayerUI playerUI;
-    public Inventory inventory;
 
     [Header("PlayerTalk")]
     string nothingToInteractWithText = "nothing";
-
-    [Header("Gun")]
-    public ObjectPool bulletPool;
 
     [Header("Canvases")]
     public GameObject gameMenuCanvas;
@@ -187,7 +183,7 @@ public class Player : Character
 
             invItem.SetActive(true);
             currentItem = invItem.GetComponent<Item>();
-            currentItem.player = this;
+            currentItem.character = this;
             currentItem.invSlot = e.InvSlot;
 
             currentItem.GetComponent<Collider2D>().enabled = false;

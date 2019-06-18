@@ -14,7 +14,7 @@ public class Item : MonoBehaviour
 
     [Header("Data")]
     public float currentTime = 0f;
-    public Player player;
+    public Character character;
     public InventorySlot invSlot;
     public bool canUseItem = true;
 

@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &327523012128150217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5960287273434684267}
+  - component: {fileID: 7262974145126612619}
+  m_Layer: 0
+  m_Name: 'Pool: Bullets'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5960287273434684267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327523012128150217}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.574434, y: 0.7708556, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 869965833568167336}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7262974145126612619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327523012128150217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16759acd94cd552489b5c0eb195bf747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 2446701549417867979, guid: d78aa427ebd9c12418cded1f4aa77317,
+    type: 3}
+  spawnCount: 100
+  objects: []
 --- !u!1 &1366390667349767000
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +157,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1038875450304738156}
+  - {fileID: 5960287273434684267}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -126,17 +174,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 8f9f5653703810d4fa1ef80381d5f59b, type: 3}
-  inventoryItem: {fileID: 11400000, guid: f1c59085e5abffa4585326abd68c0b98, type: 2}
   timeBetweenUses: 1
   amount: 1
   maxStackCount: 1
   currentTime: 0
-  player: {fileID: 0}
+  character: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 7751606128422501524}
   useItemAudioClips: []
   ammo: {fileID: 6650633724502002497, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
+  bulletPool: {fileID: 7262974145126612619}
   availableFireModes: 00000000
   ammoCapacity: 5
   currentAmmo: 0

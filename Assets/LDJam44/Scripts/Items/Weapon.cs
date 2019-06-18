@@ -8,6 +8,7 @@ public class Weapon : Item
 
     [Header("References")]
     public Item ammo;
+    public ObjectPool bulletPool;
 
     [Header("Settings")]
     public List<FireMode> availableFireModes;
@@ -110,7 +111,7 @@ public class Weapon : Item
         Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
 
         //New shoot
-        PooledObject bullet = player.bulletPool.GetObject();
+        PooledObject bullet = bulletPool.GetObject();
         bullet.transform.position = this.transform.position;
 
         //set the angle of the bullet
@@ -119,7 +120,7 @@ public class Weapon : Item
 
 
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
-        bullet.GetComponent<Bullet>().shooter = player.gameObject;
+        bullet.GetComponent<Bullet>().shooter = character.gameObject;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
         
         if (shootAudioClips.Length > 0)
@@ -183,7 +184,7 @@ public class Weapon : Item
         Debug.Log(totalAmmo);
 
         //Find the slots of the appropriate ammo and 
-        foreach (InventorySlot invSlot in player.inventory.inventorySlots)
+        foreach (InventorySlot invSlot in character.inventory.inventorySlots)
         {
             if (invSlot.item)
             {

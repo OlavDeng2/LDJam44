@@ -110,6 +110,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2508356961802868829}
+  - {fileID: 1362462240151892783}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -126,17 +127,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 98b14289db493754394c33f2607036f6, type: 3}
-  inventoryItem: {fileID: 11400000, guid: 3a0c4721b3f183540bc4edef9634e114, type: 2}
   timeBetweenUses: 1
   amount: 1
   maxStackCount: 1
   currentTime: 0
-  player: {fileID: 0}
+  character: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 2796442367640422001}
   useItemAudioClips: []
   ammo: {fileID: 6650633724502002497, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
+  bulletPool: {fileID: 5980946357207594136}
   availableFireModes: 00000000
   ammoCapacity: 7
   currentAmmo: 0
@@ -284,3 +285,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8106192798520291024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1362462240151892783}
+  - component: {fileID: 5980946357207594136}
+  m_Layer: 0
+  m_Name: 'Pool: Bullets'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1362462240151892783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8106192798520291024}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.574434, y: 0.7708556, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8061648425743308348}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5980946357207594136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8106192798520291024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16759acd94cd552489b5c0eb195bf747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 2446701549417867979, guid: d78aa427ebd9c12418cded1f4aa77317,
+    type: 3}
+  spawnCount: 100
+  objects: []

@@ -18,6 +18,9 @@ public class Character : MonoBehaviour
     public AudioClip[] randomClips;
     public AudioClip[] dyingClips;
 
+    [Header("Inventory")]
+    public Inventory inventory;
+
     //The character should take damage
     public void TakeDamage(float damage)
     {

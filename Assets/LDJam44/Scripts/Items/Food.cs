@@ -12,7 +12,7 @@ public class Food : Item
     {
         if(canUseItem)
         {
-            player.health += healAmount;
+            character.health += healAmount;
 
             //Decrease by 1
             invSlot.amount -= 1;
