@@ -6,8 +6,8 @@ public class Enemy : Character
 {
     [Header("Settings")]
     public GameObject[] dropableItems;
-    public int maxDroppedItems = 0;
-    public int minDroppedItems = 0;
+    public int maxItems = 0;
+    public int minItems = 0;
     public float maxDetectionDistance = 10; //distance at which the enemy can detect players
 
     [Header("Data")]
@@ -20,7 +20,37 @@ public class Enemy : Character
         playerScript = FindObjectOfType<Player>();
         player = playerScript.gameObject;
 
+        //Get the amount of items to drop
+        int itemCount = Random.Range(minItems, maxItems);
+        
+        if(itemCount > inventory.inventorySlots.Length)
+        {
+            //Set to max just incase there are not enough inventory slots
+            itemCount = inventory.inventorySlots.Length;
+
+            // loop as many times as there are items to add
+            for (int i = 0; i <= itemCount; i++)
+            {
+                GameObject itemToAddToInv = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform.parent);
+                itemToAddToInv.transform.position = this.transform.position;
+
+                if (inventory.inventorySlots[i].item == null)
+                {
+                    inventory.inventorySlots[i].item = itemToAddToInv;
+                    itemToAddToInv.SetActive(false);
+                }
+
+                else if (inventory.inventorySlots[i].item != null)
+                {
+                    break;
+                }
+
+
+            }
+        }
+        
     }
+
 
     public virtual void Update()
     {
@@ -41,18 +71,12 @@ public class Enemy : Character
     {
         base.KillCharacter();
 
-        //On death, drop the items
-        if(dropableItems.Length < 0)
+        foreach (InventorySlot invSlot in inventory.inventorySlots)
         {
-            //get amount of items to drop
-            int itemDropCount = Random.Range(minDroppedItems, maxDroppedItems);
-            for(int i = 0; i <= itemDropCount; i++)
-            {
-                GameObject itemToDrop = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform.parent);
-                itemToDrop.transform.position = this.transform.position;
-            }
+            invSlot.item.SetActive(true);
+            invSlot.item.transform.SetParent(transform.parent);
         }
-
+        
         //return object to pool
         this.GetComponent<PooledObject>().ReturnToPool();
 

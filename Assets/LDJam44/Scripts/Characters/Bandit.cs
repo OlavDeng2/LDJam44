@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bandit : Enemy
 {
     [Header("Gun")]
+    public Weapon gun;
     public ObjectPool bulletPool;
     public float fireRange = 8;
 
@@ -18,8 +19,6 @@ public class Bandit : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-
         if(GetPlayerDistance() >= fireRange)
         {
             MoveCharacter(GetPlayerDirection());
@@ -34,8 +33,16 @@ public class Bandit : Enemy
         if (GetPlayerDistance() <= fireRange)
         {
 
-            //ShootGun(GetPlayerDirection());
+            if(gun.currentAmmo > 0)
+            {
+                gun.UseItem();
+                gun.StartCycleBolt();
+            }
 
+            else if(gun.currentAmmo <= 0)
+            {
+                gun.StartReload();
+            }
         }
     }
 
