@@ -46,18 +46,13 @@ public class Enemy : Character
                 {
                     break;
                 }
-
-
             }
         }
-        
     }
 
 
     public virtual void Update()
     {
-
-
         MoveEnemy();
 
         if (!alive)

@@ -138,13 +138,19 @@ MonoBehaviour:
   randomClips: []
   dyingClips: []
   inventory: {fileID: 0}
-  dropableItems: []
-  maxDroppedItems: 0
-  minDroppedItems: 0
+  dropableItems:
+  - {fileID: 3493046890105563165, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
+  - {fileID: 3937084099054578677, guid: e1e90f57ddb511e49a2efc3deed0bcd5, type: 3}
+  - {fileID: 2292277793583176475, guid: 8b61f33aad21abd49aa3bbf9b31522ef, type: 3}
+  - {fileID: 6774549320780822798, guid: 111ae4d3e46848645be2c39a08e72f65, type: 3}
+  - {fileID: 6620772406404824367, guid: 4c05fb501d81d7049ba9a0fc3eb53b80, type: 3}
+  - {fileID: 6883553343774220413, guid: 7ab407978a86b3045841c7e3e397b097, type: 3}
+  maxItems: 0
+  minItems: 0
   maxDetectionDistance: 10
   player: {fileID: 0}
   playerScript: {fileID: 0}
-  bulletPool: {fileID: 0}
+  gun: {fileID: 0}
   fireRange: 8
 --- !u!50 &2144648354
 Rigidbody2D:
