@@ -14,7 +14,7 @@ public class Enemy : Character
     public GameObject player;
     public Player playerScript;
 
-    private void Start()
+    public virtual void Start()
     {
         //This just assumes that there will be only one player
         playerScript = FindObjectOfType<Player>();
@@ -37,6 +37,8 @@ public class Enemy : Character
                 if (inventory.inventorySlots[i].item == null)
                 {
                     inventory.inventorySlots[i].item = itemToAddToInv;
+                    //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
+                    inventory.inventorySlots[i].amount = Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount);
                     itemToAddToInv.SetActive(false);
                 }
 
@@ -74,6 +76,7 @@ public class Enemy : Character
         foreach (InventorySlot invSlot in inventory.inventorySlots)
         {
             invSlot.item.SetActive(true);
+            invSlot.item.GetComponent<Item>().amount = invSlot.amount;
             invSlot.item.transform.SetParent(transform.parent);
         }
         

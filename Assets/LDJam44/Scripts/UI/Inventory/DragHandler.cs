@@ -56,7 +56,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 image.transform.position = startPos;
                 invSlot.RemoveItem();
             }
-            else;
+            else
             {
                 image.transform.position = startPos;
             }

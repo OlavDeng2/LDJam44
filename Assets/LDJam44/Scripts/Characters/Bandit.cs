@@ -6,14 +6,13 @@ public class Bandit : Enemy
 {
     [Header("Gun")]
     public Weapon gun;
-    public ObjectPool bulletPool;
     public float fireRange = 8;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        GetSpawnWeapon();
 
-        bulletPool = GameObject.Find("Pool: Bullets").GetComponent<ObjectPool>() ;
+        base.Start();
     }
 
     // Update is called once per frame
@@ -29,19 +28,36 @@ public class Bandit : Enemy
             KillCharacter();
         }
 
-
-        if (GetPlayerDistance() <= fireRange)
+        if (gun != null)
         {
-
-            if(gun.currentAmmo > 0)
+            if (GetPlayerDistance() <= fireRange)
             {
-                gun.UseItem();
-                gun.StartCycleBolt();
+
+                if (gun.currentAmmo > 0)
+                {
+                    gun.UseItem();
+                    gun.StartCycleBolt();
+                }
+
+                else if (gun.currentAmmo <= 0)
+                {
+                    gun.StartReload();
+                }
             }
+        }
+        
+    }
 
-            else if(gun.currentAmmo <= 0)
+    public void GetSpawnWeapon()
+    {
+        foreach(InventorySlot invSlot in inventory.inventorySlots)
+        {
+            Weapon weapon = invSlot.item.GetComponent<Weapon>();
+            if(weapon != null)
             {
-                gun.StartReload();
+                gun = weapon;
+                invSlot.item.SetActive(true);
+                break;
             }
         }
     }
