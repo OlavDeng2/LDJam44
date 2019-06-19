@@ -10,9 +10,8 @@ public class Bandit : Enemy
 
     public override void Start()
     {
-        GetSpawnWeapon();
-
         base.Start();
+        GetSpawnWeapon();
     }
 
     // Update is called once per frame
