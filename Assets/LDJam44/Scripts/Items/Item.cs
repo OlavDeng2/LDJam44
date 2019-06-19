@@ -11,6 +11,8 @@ public class Item : MonoBehaviour
     public float timeBetweenUses = 1f;
     public int amount = 1; //Only for items on the ground
     public int maxStackCount = 1;
+    public int buyPrice = 20; //Price the player buys the item for
+    public int sellPrice = 10; //Price the player sells the item for
 
     [Header("Data")]
     public float currentTime = 0f;
