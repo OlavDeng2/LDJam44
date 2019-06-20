@@ -17,34 +17,36 @@ public class Bandit : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        if(GetPlayerDistance() >= fireRange)
+        if (!gamePaused && !gameOver)
         {
-            MoveCharacter(GetPlayerDirection());
+            if (GetPlayerDistance() >= fireRange)
+            {
+                MoveCharacter(GetPlayerDirection());
+            }
+
+            if (gun != null)
+            {
+                if (GetPlayerDistance() <= fireRange)
+                {
+
+                    if (gun.currentAmmo > 0)
+                    {
+                        gun.UseItem();
+                        gun.StartCycleBolt();
+                    }
+
+                    else if (gun.currentAmmo <= 0)
+                    {
+                        gun.StartReload();
+                    }
+                }
+            }
         }
 
         if (!alive)
         {
             KillCharacter();
         }
-
-        if (gun != null)
-        {
-            if (GetPlayerDistance() <= fireRange)
-            {
-
-                if (gun.currentAmmo > 0)
-                {
-                    gun.UseItem();
-                    gun.StartCycleBolt();
-                }
-
-                else if (gun.currentAmmo <= 0)
-                {
-                    gun.StartReload();
-                }
-            }
-        }
-        
     }
 
     public void GetSpawnWeapon()

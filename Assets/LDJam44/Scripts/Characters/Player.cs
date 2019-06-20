@@ -24,6 +24,10 @@ public class Player : Character
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
     public Item currentItem = null;
+    public GameManager gameManager;
+    public bool inventoryOpen = false;
+    public bool gamePaused = false;
+    public bool gameOver = false;
 
     private void Start()
     {
@@ -39,114 +43,126 @@ public class Player : Character
         //update UI
         playerUI.UpdateHealthText(health);
 
-        //keep counter going to keep track of when shot was last fired
 
-        //Handle input
-        MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
-        Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-
-        //Interact with something
-        if (Input.GetButtonDown("Interact"))
+        //can only do if the inventory is not open and game is not paused
+        if (!inventoryOpen && !gamePaused)
         {
-            if(interactable == null)
+            //Handle input
+            MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
+            Vector3 lookDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
+
+            //Interact with something
+            if (Input.GetButtonDown("Interact"))
             {
-                if(!playerUI.isTalking)
+                if (interactable == null)
                 {
-                    playerUI.InteractWithObjectTalk(nothingToInteractWithText);
+                    if (!playerUI.isTalking)
+                    {
+                        playerUI.InteractWithObjectTalk(nothingToInteractWithText);
+                    }
+                    else if (playerUI.isTalking)
+                    {
+                        playerUI.CloseTalk();
+                    }
                 }
-                else if(playerUI.isTalking)
+                else if (interactable != null)
                 {
-                    playerUI.CloseTalk();
+                    interactable.tryToInteract();
                 }
             }
-            else if (interactable != null)
+
+            //use item
+            if (Input.GetButton("Fire1"))
             {
-                interactable.tryToInteract();
+                if (currentItem != null)
+                {
+                    currentItem.UseItem();
+
+
+                    //Cycle gun if it is a gun in semi auto
+                    if (currentItem != null && currentItem is Weapon)
+                    {
+                        Weapon weapon = currentItem as Weapon;
+                        if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                        {
+                            weapon.isCyclingGun = true;
+                        }
+                    }
+
+                }
             }
 
-            
-        }
 
-        if(Input.GetButtonDown("Inventory"))
-        {
-
-            playerUI.ToggleInventory();
-        }
-
-        //if escape is pressed, pause the game
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
-        {
-
-            if (!playerUI.isPaused)
+            if (Input.GetButtonUp("Fire1"))
             {
-                playerUI.PauseGame();
-                
-            }
-
-            else if (playerUI.isPaused)
-            {
-                playerUI.UnPauseGame();
-            }
-        }
-
-        //use item
-        if (Input.GetButton("Fire1"))
-        {
-            if (currentItem != null)
-            {
-                currentItem.UseItem();
-
-
-                //Cycle gun if it is a gun in semi auto
+                //Cycle gun if it is a gun in manual or semi auto
                 if (currentItem != null && currentItem is Weapon)
                 {
                     Weapon weapon = currentItem as Weapon;
-                    if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                    if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.Manual)
                     {
                         weapon.isCyclingGun = true;
                     }
-                }
 
+                    else if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                    {
+                        weapon.canUseItem = true;
+                    }
+                }
+            }
+
+
+            if (Input.GetButtonDown("Reload"))
+            {
+
+                if (currentItem is Weapon)
+                {
+                    Weapon weapon = currentItem as Weapon;
+                    weapon.isReloading = true;
+                }
+            }
+
+            if (Input.GetButtonDown("Switch Fire Mode"))
+            {
+                if (currentItem is Weapon)
+                {
+                    Weapon weapon = currentItem as Weapon;
+                    {
+                        weapon.ChangeFireMode();
+                    }
+                }
             }
         }
 
+
+        //Only do if game is not paused and not over
+        if (!gamePaused && !gameOver)
+        {
+            if (Input.GetButtonDown("Inventory"))
+            {
+                playerUI.ToggleInventory();
+            }
+        }
         
-        if(Input.GetButtonUp("Fire1"))
+        //only do if game is not over
+        if(!gameOver)
         {
-            //Cycle gun if it is a gun in manual or semi auto
-            if(currentItem != null && currentItem is Weapon)
+            //if escape is pressed, pause the game
+            if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
             {
-                Weapon weapon = currentItem as Weapon;
-                if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.Manual)
+                if (!gameManager.isPaused)
                 {
-                    weapon.isCyclingGun = true;
+                    playerUI.PauseGame();
+                    gameManager.PauseGame();
+                    gamePaused = true;
+
                 }
 
-                else if(weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
+                else if (gameManager.isPaused)
                 {
-                    weapon.canUseItem = true;
-                }
-            }
-        }
-
-
-        if (Input.GetButtonDown("Reload"))
-        {
-
-            if (currentItem is Weapon)
-            {
-                Weapon weapon = currentItem as Weapon;
-                weapon.isReloading = true;
-            }
-        }
-
-        if (Input.GetButtonDown("Switch Fire Mode"))
-        {
-            if (currentItem is Weapon)
-            {
-                Weapon weapon = currentItem as Weapon;
-                {
-                    weapon.ChangeFireMode();
+                    gameManager.UnPauseGame();
+                    playerUI.UnPauseGame();
+                    gamePaused = false;
                 }
             }
         }
