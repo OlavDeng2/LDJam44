@@ -23,29 +23,31 @@ public class Enemy : Character
         //Get the amount of items to drop
         int itemCount = Random.Range(minItems, maxItems);
         
-        if(itemCount > inventory.inventorySlots.Length)
+        if(itemCount >= inventory.inventorySlots.Length)
         {
             //Set to max just incase there are not enough inventory slots
             itemCount = inventory.inventorySlots.Length;
 
-            // loop as many times as there are items to add
-            for (int i = 0; i <= itemCount; i++)
+            
+        }
+
+        // loop as many times as there are items to add
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject itemToAddToInv = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform);
+            itemToAddToInv.transform.position = this.transform.position;
+
+            if (inventory.inventorySlots[i].item == null)
             {
-                GameObject itemToAddToInv = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform.parent);
-                itemToAddToInv.transform.position = this.transform.position;
+                inventory.inventorySlots[i].item = itemToAddToInv;
+                //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
+                inventory.inventorySlots[i].amount = Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount);
+                itemToAddToInv.SetActive(false);
+            }
 
-                if (inventory.inventorySlots[i].item == null)
-                {
-                    inventory.inventorySlots[i].item = itemToAddToInv;
-                    //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
-                    inventory.inventorySlots[i].amount = Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount);
-                    itemToAddToInv.SetActive(false);
-                }
-
-                else if (inventory.inventorySlots[i].item != null)
-                {
-                    break;
-                }
+            else if (inventory.inventorySlots[i].item != null)
+            {
+                break;
             }
         }
     }
@@ -74,9 +76,12 @@ public class Enemy : Character
 
         foreach (InventorySlot invSlot in inventory.inventorySlots)
         {
-            invSlot.item.SetActive(true);
-            invSlot.item.GetComponent<Item>().amount = invSlot.amount;
-            invSlot.item.transform.SetParent(transform.parent);
+            if(invSlot.item != null)
+            {
+                invSlot.item.SetActive(true);
+                invSlot.item.GetComponent<Item>().amount = invSlot.amount;
+                invSlot.item.transform.SetParent(transform.parent);
+            }
         }
         
         //return object to pool

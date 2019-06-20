@@ -146,8 +146,8 @@ MonoBehaviour:
   - {fileID: 6774549320780822798, guid: 111ae4d3e46848645be2c39a08e72f65, type: 3}
   - {fileID: 6620772406404824367, guid: 4c05fb501d81d7049ba9a0fc3eb53b80, type: 3}
   - {fileID: 6883553343774220413, guid: 7ab407978a86b3045841c7e3e397b097, type: 3}
-  maxItems: 0
-  minItems: 0
+  maxItems: 2
+  minItems: 5
   maxDetectionDistance: 10
   player: {fileID: 0}
   playerScript: {fileID: 0}

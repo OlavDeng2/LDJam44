@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public event EventHandler<InventoryEventsArgs> itemSelected;
 
-    public void Start()
+    public void Awake()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>(true);
     }

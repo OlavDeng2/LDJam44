@@ -11,6 +11,7 @@ public class Bandit : Enemy
     public override void Start()
     {
         base.Start();
+
         GetSpawnWeapon();
     }
 
@@ -53,14 +54,16 @@ public class Bandit : Enemy
     {
         foreach(InventorySlot invSlot in inventory.inventorySlots)
         {
-            Weapon weapon = invSlot.item.GetComponent<Weapon>();
-            if(weapon != null)
+            if(invSlot.item != null)
             {
-                gun = weapon;
-                invSlot.item.SetActive(true);
-                break;
+                Weapon weapon = invSlot.item.GetComponent<Weapon>();
+                if (weapon != null)
+                {
+                    gun = weapon;
+                    invSlot.item.SetActive(true);
+                    break;
+                }
             }
         }
     }
-
 }
