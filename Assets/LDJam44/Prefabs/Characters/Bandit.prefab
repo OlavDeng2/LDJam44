@@ -138,6 +138,7 @@ MonoBehaviour:
   randomClips: []
   dyingClips: []
   inventory: {fileID: 0}
+  gameManager: {fileID: 0}
   dropableItems:
   - {fileID: 3493046890105563165, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
   - {fileID: 3937084099054578677, guid: e1e90f57ddb511e49a2efc3deed0bcd5, type: 3}
@@ -172,7 +173,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2144648353
 BoxCollider2D:
   m_ObjectHideFlags: 0
