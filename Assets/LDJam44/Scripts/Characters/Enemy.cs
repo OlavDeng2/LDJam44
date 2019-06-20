@@ -13,8 +13,6 @@ public class Enemy : Character
     [Header("Data")]
     public GameObject player;
     public Player playerScript;
-    public bool gamePaused = false;
-    public bool gameOver = false;
 
     public virtual void Start()
     {
@@ -55,7 +53,7 @@ public class Enemy : Character
 
     public virtual void Update()
     {
-        if (!gamePaused && !gameOver)
+        if (!gameManager.isPaused && !gameManager.gameOver)
         {
             MoveEnemy();
 

@@ -21,6 +21,9 @@ public class Character : MonoBehaviour
     [Header("Inventory")]
     public Inventory inventory;
 
+    [Header("Data")]
+    public GameManager gameManager;
+
     //The character should take damage
     public void TakeDamage(float damage)
     {

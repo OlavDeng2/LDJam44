@@ -24,14 +24,13 @@ public class Player : Character
     public Interactable interactable = null;
     public TutorialPoint tutorial = null;
     public Item currentItem = null;
-    public GameManager gameManager;
     public bool inventoryOpen = false;
-    public bool gamePaused = false;
-    public bool gameOver = false;
 
     private void Start()
     {
         inventory.itemSelected += Inventory_itemSelected;
+        
+        
     }
 
 
@@ -45,7 +44,7 @@ public class Player : Character
 
 
         //can only do if the inventory is not open and game is not paused
-        if (!inventoryOpen && !gamePaused)
+        if (!inventoryOpen && !gameManager.isPaused)
         {
             //Handle input
             MoveCharacter(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0)));
@@ -136,7 +135,7 @@ public class Player : Character
 
 
         //Only do if game is not paused and not over
-        if (!gamePaused && !gameOver)
+        if (!gameManager.isPaused && !gameManager.gameOver)
         {
             if (Input.GetButtonDown("Inventory"))
             {
@@ -145,7 +144,7 @@ public class Player : Character
         }
         
         //only do if game is not over
-        if(!gameOver)
+        if(!gameManager.gameOver)
         {
             //if escape is pressed, pause the game
             if (Input.GetKeyDown(KeyCode.Escape) && !playerUI.gameOver)
@@ -154,15 +153,12 @@ public class Player : Character
                 {
                     playerUI.PauseGame();
                     gameManager.PauseGame();
-                    gamePaused = true;
-
                 }
 
                 else if (gameManager.isPaused)
                 {
                     gameManager.UnPauseGame();
                     playerUI.UnPauseGame();
-                    gamePaused = false;
                 }
             }
         }

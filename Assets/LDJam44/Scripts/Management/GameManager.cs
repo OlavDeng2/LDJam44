@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,6 +64,7 @@ public class GameManager : MonoBehaviour
             for(int i = 0; i <= amountToSpawn; i++)
             {
                 PooledObject enemy = objectPool.GetObject();
+                enemy.GetComponent<Enemy>().gameManager = this;
                 enemy.transform.position = spawnPoint.position;
             }
         }
@@ -74,23 +74,15 @@ public class GameManager : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0;
+
+
     }
 
     public void UnPauseGame()
     {
         isPaused = false;
         Time.timeScale = 1;
+
     }
 
-}
-public class PauseEventArgs : EventArgs
-{
-    public PauseEventArgs(bool paused)
-    {
-        Pause = paused;
-    }
-
-    public bool Pause;
-    public InventorySlot InvSlot;
-    
 }
