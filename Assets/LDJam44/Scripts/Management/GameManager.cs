@@ -39,16 +39,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //If player is dead, game over
-        if(!player.GetComponent<Character>().alive)
-        {
-            player.GetComponent<Player>().playerUI.GameOver();
-        }
-    }
-
     private void SpawnPlayer()
     {
         if(player)
