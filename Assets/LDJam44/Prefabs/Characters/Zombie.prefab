@@ -57,7 +57,7 @@ MonoBehaviour:
   audioSource: {fileID: 4060881740739923696}
   randomClips: []
   dyingClips: []
-  inventory: {fileID: 0}
+  inventory: {fileID: 5375165995206697083}
   gameManager: {fileID: 0}
   dropableItems:
   - {fileID: 6883553343774220413, guid: 7ab407978a86b3045841c7e3e397b097, type: 3}
@@ -379,3 +379,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1646384954091279237}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5375165995206697083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6647680952487474174, guid: f12ff0c0bc4ff514ca7050617d25046c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1646384954091279237}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc279b89441a4294088d40aebfcbabfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
