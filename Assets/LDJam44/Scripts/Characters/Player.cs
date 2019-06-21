@@ -80,19 +80,19 @@ public class Player : Character
             {
                 if (currentItem != null)
                 {
-                    currentItem.UseItem();
-
-
                     //Cycle gun if it is a gun in semi auto
                     if (currentItem != null && currentItem is Weapon)
                     {
                         Weapon weapon = currentItem as Weapon;
+
+                        weapon.aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
                         if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
                         {
                             weapon.isCyclingGun = true;
                         }
                     }
 
+                    currentItem.UseItem();
                 }
             }
 

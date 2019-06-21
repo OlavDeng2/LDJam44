@@ -33,6 +33,7 @@ public class Bandit : Enemy
                     if (gun.currentAmmo > 0)
                     {
                         gun.UseItem();
+                        gun.aimDirection = GetPlayerDirection();
                         gun.StartCycleBolt();
                     }
 

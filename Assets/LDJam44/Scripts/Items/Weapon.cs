@@ -27,6 +27,8 @@ public class Weapon : Item
     public float currentCycleTime = 0;
     public bool isCyclingGun = false;
     public bool isReloading = false;
+    public Vector3 aimDirection = new Vector3(0, 0, 0);
+
 
     [Header("Audio")]
     public AudioClip[] shootAudioClips;
@@ -114,8 +116,6 @@ public class Weapon : Item
 
     public virtual void FireGun()
     {
-        Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-
         //New shoot
         PooledObject bullet = bulletPool.GetObject();
         Bullet bulletScript = bullet.GetComponent<Bullet>();

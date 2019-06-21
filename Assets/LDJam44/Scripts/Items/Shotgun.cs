@@ -10,9 +10,6 @@ public class Shotgun : Weapon
 
     public override void FireGun()
     {
-
-        Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-
         //spawn bullets based on amount of bullets
         for(int i = 0; i <= shotgunBulletCount; i++)
         {
