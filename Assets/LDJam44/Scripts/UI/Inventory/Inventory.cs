@@ -7,12 +7,23 @@ public class Inventory : MonoBehaviour
 {
     [Header("Data")]
     public InventorySlot[] inventorySlots;
+    
+    //Events
     public event EventHandler<InventoryEventsArgs> itemSelected;
+    public event EventHandler<InventoryEventsArgs> itemAdded;
+    public event EventHandler<InventoryEventsArgs> itemRemoved;
+
+
 
 
     public void Awake()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>(true);
+
+        foreach(InventorySlot invSlot in inventorySlots)
+        {
+            invSlot.inventory = this;
+        }
     }
 
 
@@ -63,6 +74,22 @@ public class Inventory : MonoBehaviour
         if (itemSelected != null)
         {
             itemSelected(this, new InventoryEventsArgs(item, invSlot));
+        }
+    }
+
+    public void ItemAdded(GameObject item, InventorySlot invSlot)
+    {
+        if (itemAdded != null)
+        {
+            itemAdded(this, new InventoryEventsArgs(item, invSlot));
+        }
+    }
+
+    public void ItemRemoved(GameObject item, InventorySlot invSlot)
+    {
+        if (itemRemoved != null)
+        {
+            itemRemoved(this, new InventoryEventsArgs(item, invSlot));
         }
     }
 }

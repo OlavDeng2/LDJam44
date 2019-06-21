@@ -12,15 +12,12 @@ public class InventorySlot : MonoBehaviour
     [Header("References")]
     public Inventory inventory;
     public Image itemImage;
+    public Text amountText;
+    public Text priceText;
 
     [Header("Data")]
     public GameObject item;
     public int amount = 0;
-
-    public void Start()
-    {
-        inventory = FindObjectOfType<Inventory>();        
-    }
 
     private void Update()
     {
@@ -41,10 +38,16 @@ public class InventorySlot : MonoBehaviour
             itemImage.enabled = true;
             itemImage.sprite = item.GetComponent<Item>().image;            
         }
+        amountText.enabled = true;
+        amountText.text = amount.ToString();
+
+        inventory.ItemAdded(item, this);
     }
 
     public void RemoveItem()
     {
+        inventory.ItemRemoved(item, this);
+
         item = null;
         amount = 0;
         if(itemImage.enabled)
@@ -52,5 +55,8 @@ public class InventorySlot : MonoBehaviour
             itemImage.sprite = null;
             itemImage.enabled = false;
         }
+
+        amountText.enabled = false;
+        amountText.text = amount.ToString();
     }
 }

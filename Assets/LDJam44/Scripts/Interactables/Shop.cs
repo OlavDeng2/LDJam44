@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ public class Shop : Interactable
     public Inventory playerInventory;
     public GameManager gameManager;
 
+    [Header("Settings")]
+    public GameObject[] shopItems;
+
     [Header("Data")]
     public bool canOpenStore = false;
     public bool storeIsOpen = false;
@@ -20,12 +24,21 @@ public class Shop : Interactable
     private void Start()
     {
 
+        shopInventory.itemAdded += Inventory_ItemAdded;
+        shopInventory.itemRemoved += Inventory_ItemRemoved;
+
         shopUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
 
         //TODO: Get a random selection of items for the store to hold based on the store loot table and place them in the inventory
     }
 
+    
+
+
+    private void Update()
+    {
+    }
 
     public void OpenStore()
     {
@@ -84,5 +97,18 @@ public class Shop : Interactable
         {
             CloseStore();
         }
+    }
+
+
+    //To do the sale/buy of items when an item was either added or removed from the shop inventory
+    private void Inventory_ItemAdded(object sender, InventoryEventsArgs e)
+    {
+        player.health += e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().sellPrice;
+    }
+
+    private void Inventory_ItemRemoved(object sender, InventoryEventsArgs e)
+    {
+        player.health -= e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice;
+
     }
 }
