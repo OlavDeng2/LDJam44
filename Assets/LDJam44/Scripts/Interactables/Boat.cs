@@ -9,5 +9,6 @@ public class Boat : Interactable
         base.Interact();
 
         player.playerUI.GameWin();
+        FindObjectOfType<GameManager>().PauseGame();
     }
 }

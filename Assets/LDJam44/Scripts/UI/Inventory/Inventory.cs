@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public event EventHandler<InventoryEventsArgs> itemSelected;
 
+
     public void Awake()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>(true);
@@ -17,7 +18,7 @@ public class Inventory : MonoBehaviour
 
     public void PickupItem(GameObject item, int itemAmount)
     {
-
+        
         foreach (InventorySlot inventorySlot in inventorySlots)
         {
             if(inventorySlot.item != null)
