@@ -220,7 +220,7 @@ public class Weapon : Item
             currentAmmo = ammoCapacity;
         }
 
-        //If total ammo is more than 0, but less than 30(checked by previous if statement)
+        //If total ammo is more than 0, but less than totalammo(checked by previous if statement)
         else if (totalAmmo > 0)
         {
             int ammoToAdd = ammoCapacity - currentAmmo;
@@ -238,8 +238,8 @@ public class Weapon : Item
             else if (totalAmmo <= ammoToAdd)
             {
                 currentAmmo += totalAmmo;
-                totalAmmo = 0;
                 ammoToRemoveFromInv = totalAmmo;
+                totalAmmo = 0;
 
             }
         }
@@ -252,6 +252,7 @@ public class Weapon : Item
             if (invSlot.amount > ammoToRemoveFromInv)
             {
                 invSlot.amount -= ammoToRemoveFromInv;
+                invSlot.item.GetComponent<Item>().amount -= ammoToRemoveFromInv;
                 break;
             }
 
@@ -259,8 +260,6 @@ public class Weapon : Item
             else if (invSlot.amount <= ammoToRemoveFromInv)
             {
                 ammoToRemoveFromInv -= invSlot.amount;
-
-                Debug.Log("All ammo from this item is used");
                 invSlot.RemoveItem();
             }
         }
