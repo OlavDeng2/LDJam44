@@ -35,13 +35,14 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(targetInvSlot == invSlot || targetInvSlot == null)
+        //return item back to orignal
+        if(targetInvSlot == invSlot)
         {
             image.transform.position = startPos;
         }
 
-        
-        else if(targetInvSlot != invSlot)
+        //move the item
+        else if(targetInvSlot != invSlot && targetInvSlot != null)
         {
             if (targetInvSlot.item == null)
             {
@@ -56,17 +57,26 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 image.transform.position = startPos;
                 invSlot.RemoveItem();
             }
-            else
-            {
-                image.transform.position = startPos;
-            }
+        }
 
+        //Drop the item
+        else if (targetInvSlot == null)
+        {
+
+            //set location + 10 on the z axis so it isnt hidden from the camera
+            invSlot.item.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3 (0, 0, 10);
+            invSlot.item.gameObject.SetActive(true);
+            invSlot.item.GetComponent<Collider2D>().enabled = true;
+            invSlot.item.transform.parent = null;
+            invSlot.RemoveItem();
+            image.transform.position = startPos;
         }
 
         //reset data
         item = null;
         itemAmount = 0;
         image = null;
+        targetInvSlot = null;
         canvasGroup.blocksRaycasts = true;
     }
 }
