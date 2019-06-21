@@ -60,7 +60,9 @@ public class Bandit : Enemy
                 if (weapon != null)
                 {
                     gun = weapon;
+                    weapon.character = this;
                     invSlot.item.SetActive(true);
+                    invSlot.item.GetComponent<Collider2D>().enabled = false;
                     break;
                 }
             }

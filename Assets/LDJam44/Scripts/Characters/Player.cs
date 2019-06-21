@@ -42,6 +42,11 @@ public class Player : Character
         //update UI
         playerUI.UpdateHealthText(health);
 
+        if(health <= 0)
+        {
+            KillCharacter();
+        }
+
 
         //can only do if the inventory is not open and game is not paused
         if (!inventoryOpen && !gameManager.isPaused)
@@ -140,6 +145,15 @@ public class Player : Character
             if (Input.GetButtonDown("Inventory"))
             {
                 playerUI.ToggleInventory();
+                if(playerUI.inventoryPanel.activeSelf)
+                {
+                    inventoryOpen = true;
+                }
+
+                else if(!playerUI.inventoryPanel.activeSelf)
+                {
+                    inventoryOpen = false;
+                }
             }
         }
         
@@ -200,5 +214,12 @@ public class Player : Character
 
             currentItem.GetComponent<Collider2D>().enabled = false;
         }
+    }
+
+    public override void KillCharacter()
+    {
+        alive = false;
+        playerUI.GameOver();
+        gameManager.PauseGame();
     }
 }

@@ -192,8 +192,9 @@ public class Weapon : Item
         int totalAmmo = 0;
         int ammoToRemoveFromInv = 0;
 
-        Debug.Log(totalAmmo);
+        Debug.Log(character.inventory.inventorySlots);
 
+        
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in character.inventory.inventorySlots)
         {
