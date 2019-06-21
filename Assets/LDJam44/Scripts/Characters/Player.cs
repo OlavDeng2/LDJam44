@@ -138,6 +138,11 @@ public class Player : Character
             }
         }
 
+        //set move to 0 if the game is paused or inventory is open
+        else if (inventoryOpen || gameManager.isPaused)
+        {
+            MoveCharacter(Vector3.Normalize(new Vector3(0, 0, 0)));
+        }
 
         //Only do if game is not paused and not over
         if (!gameManager.isPaused && !gameManager.gameOver)
