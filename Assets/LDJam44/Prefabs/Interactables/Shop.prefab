@@ -879,7 +879,16 @@ MonoBehaviour:
   shopInventory: {fileID: 4033549826333966559}
   playerInventory: {fileID: 2430878486716100881}
   gameManager: {fileID: 0}
-  shopItems: []
+  shopItems:
+  - {fileID: 6883553343774220413, guid: 7ab407978a86b3045841c7e3e397b097, type: 3}
+  - {fileID: 6774549320780822798, guid: 111ae4d3e46848645be2c39a08e72f65, type: 3}
+  - {fileID: 3493046890105563165, guid: db14686824e1a8b42af3bbbd6ac05d83, type: 3}
+  - {fileID: 3937084099054578677, guid: e1e90f57ddb511e49a2efc3deed0bcd5, type: 3}
+  - {fileID: 2292277793583176475, guid: 8b61f33aad21abd49aa3bbf9b31522ef, type: 3}
+  - {fileID: 2887696206167437513, guid: 8f79020eef7b10748ac71f09ca301917, type: 3}
+  - {fileID: 6620772406404824367, guid: 4c05fb501d81d7049ba9a0fc3eb53b80, type: 3}
+  maxItems: 10
+  minItems: 1
   canOpenStore: 0
   storeIsOpen: 0
 --- !u!61 &6091492582540064842

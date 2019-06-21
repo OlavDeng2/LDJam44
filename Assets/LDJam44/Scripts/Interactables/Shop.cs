@@ -14,6 +14,8 @@ public class Shop : Interactable
 
     [Header("Settings")]
     public GameObject[] shopItems;
+    public int maxItems = 5;
+    public int minItems = 1;
 
     [Header("Data")]
     public bool canOpenStore = false;
@@ -30,14 +32,37 @@ public class Shop : Interactable
         shopUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
 
-        //TODO: Get a random selection of items for the store to hold based on the store loot table and place them in the inventory
-    }
+        //Get the amount of items
+        int itemCount = UnityEngine.Random.Range(minItems, maxItems);
 
-    
+        if (itemCount >= shopInventory.inventorySlots.Length)
+        {
+            //Set to max just incase there are not enough inventory slots
+            itemCount = shopInventory.inventorySlots.Length;
 
 
-    private void Update()
-    {
+        }
+
+        // loop as many times as there are items to add
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject itemToAddToInv = Instantiate(shopItems[UnityEngine.Random.Range(0, shopItems.Length)], this.transform);
+            itemToAddToInv.transform.position = this.transform.position;
+
+            if (shopInventory.inventorySlots[i].item == null)
+            {
+                //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
+                shopInventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount)) ;
+                itemToAddToInv.SetActive(false);
+            }
+
+            else if (shopInventory.inventorySlots[i].item != null)
+            {
+                break;
+            }
+        }
+
+
     }
 
     public void OpenStore()
@@ -56,6 +81,8 @@ public class Shop : Interactable
             {
                 int amountToAdd = player.inventory.inventorySlots[i].amount;
                 playerInventory.inventorySlots[i].AddItem(itemToAdd, amountToAdd);
+                playerInventory.inventorySlots[i].priceText.enabled = true;
+                playerInventory.inventorySlots[i].priceText.text = (itemToAdd.GetComponent<Item>().amount * itemToAdd.GetComponent<Item>().sellPrice).ToString();
                 player.inventory.inventorySlots[i].RemoveItem();
 
             }
@@ -99,16 +126,22 @@ public class Shop : Interactable
         }
     }
 
-
-    //To do the sale/buy of items when an item was either added or removed from the shop inventory
     private void Inventory_ItemAdded(object sender, InventoryEventsArgs e)
     {
-        player.health += e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().sellPrice;
+        if(storeIsOpen)
+        {
+            player.health += e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().sellPrice;
+            e.InvSlot.priceText.enabled = true;
+            e.InvSlot.priceText.text = (e.InvSlot.item.GetComponent<Item>().amount * e.InvSlot.item.GetComponent<Item>().buyPrice).ToString();
+        }
     }
 
     private void Inventory_ItemRemoved(object sender, InventoryEventsArgs e)
     {
-        player.health -= e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice;
-
+        if(storeIsOpen)
+        {
+            player.health -= e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice;
+            e.InvSlot.priceText.enabled = false;
+        }
     }
 }

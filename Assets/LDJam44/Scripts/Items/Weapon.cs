@@ -253,6 +253,7 @@ public class Weapon : Item
             {
                 invSlot.amount -= ammoToRemoveFromInv;
                 invSlot.item.GetComponent<Item>().amount -= ammoToRemoveFromInv;
+                invSlot.amountText.text = invSlot.amount.ToString();
                 break;
             }
 

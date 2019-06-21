@@ -31,7 +31,10 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(GameObject itemToAdd, int amountToAdd)
     {
         item = itemToAdd;
+        item.gameObject.transform.SetParent(this.gameObject.transform);
+        item.GetComponent<Item>().amount = amountToAdd;
         amount += amountToAdd;
+
 
         if(!itemImage.enabled)
         {

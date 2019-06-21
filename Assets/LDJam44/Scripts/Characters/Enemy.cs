@@ -39,9 +39,8 @@ public class Enemy : Character
 
             if (inventory.inventorySlots[i].item == null)
             {
-                inventory.inventorySlots[i].item = itemToAddToInv;
                 //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
-                inventory.inventorySlots[i].amount = Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount);
+                inventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount));
                 itemToAddToInv.SetActive(false);
             }
 
