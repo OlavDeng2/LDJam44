@@ -63,6 +63,8 @@ public class Bandit : Enemy
                     gun = weapon;
                     weapon.character = this;
                     invSlot.item.SetActive(true);
+                    invSlot.item.transform.SetParent(this.transform);
+                    invSlot.item.transform.position = this.transform.position;
                     invSlot.item.GetComponent<Collider2D>().enabled = false;
                     break;
                 }

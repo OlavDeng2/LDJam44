@@ -203,6 +203,8 @@ public class Player : Character
         if(currentItem)
         {
             currentItem.gameObject.SetActive(false);
+            currentItem.transform.SetParent(currentItem.invSlot.transform);
+            currentItem.transform.position = currentItem.invSlot.transform.position;
             currentItem = null;
         }
 
@@ -216,6 +218,8 @@ public class Player : Character
             currentItem = invItem.GetComponent<Item>();
             currentItem.character = this;
             currentItem.invSlot = e.InvSlot;
+            currentItem.transform.SetParent(this.gameObject.transform);
+            currentItem.transform.position = this.gameObject.transform.position;
 
             currentItem.GetComponent<Collider2D>().enabled = false;
         }
