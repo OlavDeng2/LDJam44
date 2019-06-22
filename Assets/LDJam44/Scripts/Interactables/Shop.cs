@@ -28,6 +28,8 @@ public class Shop : Interactable
 
         shopInventory.itemAdded += Inventory_ItemAdded;
         shopInventory.itemRemoved += Inventory_ItemRemoved;
+        playerInventory.itemAdded += PlayerInventory_ItemAdded;
+        playerInventory.itemRemoved += PlayerInventory_ItemRemoved;
 
         shopUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
@@ -53,6 +55,9 @@ public class Shop : Interactable
             {
                 //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
                 shopInventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount)) ;
+                shopInventory.inventorySlots[i].priceText.enabled = true;
+                shopInventory.inventorySlots[i].priceText.text = (itemToAddToInv.GetComponent<Item>().amount * itemToAddToInv.GetComponent<Item>().buyPrice).ToString();
+
                 itemToAddToInv.SetActive(false);
             }
 
@@ -64,6 +69,7 @@ public class Shop : Interactable
 
 
     }
+
 
     public void OpenStore()
     {
@@ -143,5 +149,17 @@ public class Shop : Interactable
             player.health -= e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice;
             e.InvSlot.priceText.enabled = false;
         }
+    }
+
+
+    private void PlayerInventory_ItemRemoved(object sender, InventoryEventsArgs e)
+    {
+        e.InvSlot.priceText.enabled = false;
+    }
+
+    private void PlayerInventory_ItemAdded(object sender, InventoryEventsArgs e)
+    {
+        e.InvSlot.priceText.enabled = true;
+        e.InvSlot.priceText.text = (e.InvSlot.item.GetComponent<Item>().amount * e.InvSlot.item.GetComponent<Item>().sellPrice).ToString();
     }
 }
