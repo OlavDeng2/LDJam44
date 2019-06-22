@@ -401,6 +401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  inventoryItemLayer: Inventory Item
+  itemLayer: Items
   inventory: {fileID: 0}
   itemImage: {fileID: 1212664770590078719}
   amountText: {fileID: 702339634012706942}

@@ -81,6 +81,7 @@ public class Enemy : Character
                 invSlot.item.GetComponent<Collider2D>().enabled = true;
                 invSlot.item.GetComponent<Item>().amount = invSlot.amount;
                 invSlot.item.transform.parent = null;
+                invSlot.RemoveItem();
             }
         }
         

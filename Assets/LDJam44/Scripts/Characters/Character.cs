@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("references")]
+    public GameObject hand;
+
     [Header("Health")]
     public float defaultHealth = 100;
     public float health = 100;

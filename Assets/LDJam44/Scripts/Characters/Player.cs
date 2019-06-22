@@ -7,15 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    [Header("UI")]
+    [Header("References")]
     public PlayerUI playerUI;
 
     [Header("PlayerTalk")]
     string nothingToInteractWithText = "nothing";
-
-    [Header("Canvases")]
-    public GameObject gameMenuCanvas;
-    public GameObject gameOverCanvas;
 
     [Header("Scenes")]
     public string mainMenu = "MainMenu";
@@ -29,11 +25,7 @@ public class Player : Character
     private void Start()
     {
         inventory.itemSelected += Inventory_itemSelected;
-        
-        
     }
-
-
 
     // Update is called once per frame
     void Update()
