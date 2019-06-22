@@ -76,6 +76,7 @@ public class Shop : Interactable
         storeIsOpen = true;
         shopUI.SetActive(true);
         gameManager.PauseGame();
+        player.playerUI.HotBar.SetActive(false);
 
 
         //Get all of the players items (this assumes player inventory length is same on the shop and the actual player)
@@ -100,6 +101,8 @@ public class Shop : Interactable
         storeIsOpen = false;
         shopUI.SetActive(false);
         gameManager.UnPauseGame();
+        player.playerUI.HotBar.SetActive(true);
+
 
         //sync the new player inventory to the actual player
         //Remove all of the stuff in the player inventory of the shop
@@ -114,6 +117,8 @@ public class Shop : Interactable
 
             }
         }
+
+
     }
 
     public override void Interact()
