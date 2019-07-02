@@ -35,14 +35,20 @@ public class InventorySlot : MonoBehaviour
         item.GetComponent<Item>().amount = amountToAdd;
         amount += amountToAdd;
 
-
-        if(!itemImage.enabled)
+        if(itemImage != null)
         {
-            itemImage.enabled = true;
-            itemImage.sprite = item.GetComponent<Item>().image;            
+            if (!itemImage.enabled)
+            {
+                itemImage.enabled = true;
+                itemImage.sprite = item.GetComponent<Item>().image;
+            }
         }
-        amountText.enabled = true;
-        amountText.text = amount.ToString();
+
+        if(amountText != null)
+        {
+            amountText.enabled = true;
+            amountText.text = amount.ToString();
+        }
 
         inventory.ItemAdded(item, this);
     }
@@ -53,13 +59,19 @@ public class InventorySlot : MonoBehaviour
 
         item = null;
         amount = 0;
-        if(itemImage.enabled)
+        if(itemImage != null)
         {
-            itemImage.sprite = null;
-            itemImage.enabled = false;
+            if (itemImage.enabled)
+            {
+                itemImage.sprite = null;
+                itemImage.enabled = false;
+            }
         }
 
-        amountText.enabled = false;
-        amountText.text = amount.ToString();
+        if(amountText != null)
+        {
+            amountText.enabled = false;
+            amountText.text = amount.ToString();
+        }
     }
 }

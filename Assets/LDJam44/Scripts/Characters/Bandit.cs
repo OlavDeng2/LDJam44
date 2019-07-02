@@ -13,6 +13,12 @@ public class Bandit : Enemy
         base.Start();
 
         GetSpawnWeapon();
+
+        if(gun != null)
+        {
+            gun.StartReload();
+
+        }
     }
 
     // Update is called once per frame

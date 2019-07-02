@@ -29,7 +29,6 @@ public class Weapon : Item
     public bool isReloading = false;
     public Vector3 aimDirection = new Vector3(0, 0, 0);
 
-
     [Header("Audio")]
     public AudioClip[] shootAudioClips;
     public AudioClip[] cycleBoltAudioClips;
@@ -38,8 +37,6 @@ public class Weapon : Item
 
     public override void Update()
     {
-        
-
         if(isReloading)
         {
             canUseItem = false;
@@ -64,28 +61,22 @@ public class Weapon : Item
                     if ((availableFireModes[currentFireMode] != FireMode.SemiAuto))
                     {
                         canUseItem = true;
-
                     }
                     currentTime = 0;
                     FinishCycleBolt();
                 }
             }
         }
-        
     }
 
     public override void UseItem()
     {
         if (canUseItem && currentAmmo > 0)
         {
-
             currentAmmo -= 1;
 
             if (availableFireModes[currentFireMode] == FireMode.Manual)
             {
-
-                Debug.Log("manual fire");
-
                 FireGun();
 
                 currentCycleTime = manualCyclingTime;
@@ -93,9 +84,6 @@ public class Weapon : Item
 
             if (availableFireModes[currentFireMode] == FireMode.SemiAuto)
             {
-
-                Debug.Log("semi auto fire");
-
                 FireGun();
 
                 currentCycleTime = semiCyclingTime;
@@ -103,10 +91,7 @@ public class Weapon : Item
 
             if (availableFireModes[currentFireMode] == FireMode.FullAuto)
             {
-
-                Debug.Log("Full auto fire");
                 FireGun();
-
 
                 currentCycleTime = automaticCyclingTime;
                 StartCycleBolt();
@@ -192,9 +177,6 @@ public class Weapon : Item
         int totalAmmo = 0;
         int ammoToRemoveFromInv = 0;
 
-        Debug.Log(character.inventory.inventorySlots);
-
-        
         //Find the slots of the appropriate ammo and 
         foreach (InventorySlot invSlot in character.inventory.inventorySlots)
         {
@@ -204,7 +186,6 @@ public class Weapon : Item
                 {
                     inventorySlots.Add(invSlot);
                     totalAmmo += invSlot.amount;
-                    Debug.Log(totalAmmo);
                 }
                 
             }
@@ -253,7 +234,10 @@ public class Weapon : Item
             {
                 invSlot.amount -= ammoToRemoveFromInv;
                 invSlot.item.GetComponent<Item>().amount -= ammoToRemoveFromInv;
-                invSlot.amountText.text = invSlot.amount.ToString();
+                if(invSlot.amountText != null)
+                {
+                    invSlot.amountText.text = invSlot.amount.ToString();
+                }
                 break;
             }
 
