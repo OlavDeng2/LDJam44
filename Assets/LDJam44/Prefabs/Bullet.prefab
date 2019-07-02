@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697718724581699027}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6967385315254658315}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &7196426284252968974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   shooter: {fileID: 0}
-  bulletSurviveTime: 10
-  currentTime: 0
+  startPos: {x: 0, y: 0, z: 0}
+  maxRange: 10
 --- !u!50 &4562148002303150068
 Rigidbody2D:
   serializedVersion: 4
@@ -158,7 +158,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446701549417867979}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

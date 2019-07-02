@@ -10,9 +10,6 @@ public class Shotgun : Weapon
 
     public override void FireGun()
     {
-
-        Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-
         //spawn bullets based on amount of bullets
         for(int i = 0; i <= shotgunBulletCount; i++)
         {
@@ -20,10 +17,18 @@ public class Shotgun : Weapon
 
             Vector3 shootDirection = RotateVector(aimDirection, randomAngle);
             //Get bullet
-            PooledObject bullet = player.bulletPool.GetObject();
+            PooledObject bullet = bulletPool.GetObject();
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+            //set the angle of the bullet
+            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+            bullet.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
             bullet.transform.position = this.transform.position;
-            bullet.GetComponent<Bullet>().shooter = player.gameObject;
-            bullet.GetComponent<Bullet>().damage = bulletDamage;
+            bulletScript.shooter = character.gameObject;
+            bulletScript.damage = bulletDamage;
+            bulletScript.startPos = this.transform.position;
+            bulletScript.maxRange = range;
 
             //Set random shoot direction based on cone based on bulletspread and aim direction
             bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * speed;

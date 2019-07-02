@@ -8,13 +8,15 @@ public class Item : MonoBehaviour
 {
     [Header("Settings")]
     public Sprite image = null;
-    public InventoryItem inventoryItem;
     public float timeBetweenUses = 1f;
     public int amount = 1; //Only for items on the ground
+    public int maxStackCount = 1;
+    public int buyPrice = 20; //Price the player buys the item for
+    public int sellPrice = 10; //Price the player sells the item for
 
     [Header("Data")]
     public float currentTime = 0f;
-    public Player player;
+    public Character character;
     public InventorySlot invSlot;
     public bool canUseItem = true;
 
@@ -47,25 +49,18 @@ public class Item : MonoBehaviour
                 audioSource.PlayOneShot(useItemAudioClips[UnityEngine.Random.Range(0, useItemAudioClips.Length)]);
             }
         }
-
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        gameObject.SetActive(false);
     }
 }
 
 public class InventoryEventsArgs : EventArgs
 {
-    public InventoryEventsArgs(InventoryItem item, InventorySlot invSlot)
+    public InventoryEventsArgs(GameObject item, InventorySlot invSlot)
     {
         Item = item;
         InvSlot = invSlot;
     }
 
-    public InventoryItem Item;
+    public GameObject Item;
     public InventorySlot InvSlot;
     
 }

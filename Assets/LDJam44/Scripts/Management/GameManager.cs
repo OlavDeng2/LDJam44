@@ -6,25 +6,24 @@ public class GameManager : MonoBehaviour
 {
     public bool spawnEnemies = false;
 
-    [Header("Global Pools")]
-    public ObjectPool bulletPool;
-
     [Header("Player Settings")]
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
     [Header("Zombie Settings")]
     public ObjectPool zombiePool;
-    public Transform[] zombieSpawnPoints;
+    public SpawnPoint[] zombieSpawnPoints;
     public int zombiesToSpawn = 5;
 
     [Header("Bandit Settings")]
     public ObjectPool banditPool;
-    public Transform[] banditSpawnPoints;
+    public SpawnPoint[] banditSpawnPoints;
     public int banditsToSpawn = 5;
 
     [Header("Game Data")]
     public PooledObject player;
+    public bool isPaused = false;
+    public bool gameOver = false;
 
 
     // Start is called before the first frame update
@@ -38,18 +37,6 @@ public class GameManager : MonoBehaviour
             SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
             SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
         }
-  
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //If player is dead, game over
-        if(!player.GetComponent<Character>().alive)
-        {
-            player.GetComponent<Player>().playerUI.GameOver();
-        }
     }
 
     private void SpawnPlayer()
@@ -59,25 +46,37 @@ public class GameManager : MonoBehaviour
             player.ReturnToPool();
         }
         //select a random spawnpoint to spawn player
-        Transform randomSpawnPos = playerSpawnPoints[Random.Range(0, playerSpawnPoints.Length - 1)];
+        Transform randomSpawnPos = playerSpawnPoints[UnityEngine.Random.Range(0, playerSpawnPoints.Length - 1)];
         player = playerPool.GetObject();
         Player playerScript = player.GetComponent<Player>();
-        playerScript.bulletPool = bulletPool;
         playerScript.health = playerScript.defaultHealth;
+        playerScript.gameManager = this;
         
         player.transform.position = randomSpawnPos.position;
     }
 
-    private void SpawnEnemies(Transform[] allSpawnpoints, int amountToSpawn, ObjectPool objectPool)
+    private void SpawnEnemies(SpawnPoint[] allSpawnpoints, int amountToSpawn, ObjectPool objectPool)
     {
-        foreach(Transform spawnPoint in allSpawnpoints)
+        foreach(SpawnPoint spawnPoint in allSpawnpoints)
         {
-            for(int i = 0; i <= amountToSpawn; i++)
+            for(int i = 0; i < spawnPoint.amountToSpawn; i++)
             {
                 PooledObject enemy = objectPool.GetObject();
-                enemy.transform.position = spawnPoint.position;
+                enemy.GetComponent<Enemy>().gameManager = this;
+                enemy.transform.position = spawnPoint.transform.position;
             }
         }
     }
 
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+    }
 }

@@ -12,16 +12,12 @@ public class InventorySlot : MonoBehaviour
     [Header("References")]
     public Inventory inventory;
     public Image itemImage;
+    public Text amountText;
+    public Text priceText;
 
     [Header("Data")]
-    public GameObject itemGameobject;
-    public InventoryItem item;
+    public GameObject item;
     public int amount = 0;
-
-    public void Start()
-    {
-        inventory = FindObjectOfType<Inventory>();        
-    }
 
     private void Update()
     {
@@ -32,27 +28,51 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem itemToAdd, GameObject gameObject, int amountToAdd)
+    public void AddItem(GameObject itemToAdd, int amountToAdd)
     {
         item = itemToAdd;
+        itemToAdd.SetActive(false);
+        //item.gameObject.transform.SetParent(this.gameObject.transform);
+        item.GetComponent<Item>().amount = amountToAdd;
         amount += amountToAdd;
-        itemGameobject = gameObject;
 
-        if(!itemImage.enabled)
+        if(itemImage != null)
         {
-            itemImage.enabled = true;
-            itemImage.sprite = item.image;            
+            if (!itemImage.enabled)
+            {
+                itemImage.enabled = true;
+                itemImage.sprite = item.GetComponent<Item>().image;
+            }
         }
+
+        if(amountText != null)
+        {
+            amountText.enabled = true;
+            amountText.text = amount.ToString();
+        }
+
+        inventory.ItemAdded(item, this);
     }
 
     public void RemoveItem()
     {
+        inventory.ItemRemoved(item, this);
+
         item = null;
         amount = 0;
-        if(itemImage.enabled)
+        if(itemImage != null)
         {
-            itemImage.sprite = null;
-            itemImage.enabled = false;
+            if (itemImage.enabled)
+            {
+                itemImage.sprite = null;
+                itemImage.enabled = false;
+            }
+        }
+
+        if(amountText != null)
+        {
+            amountText.enabled = false;
+            amountText.text = amount.ToString();
         }
     }
 }

@@ -7,7 +7,8 @@ public class Weapon : Item
     public enum FireMode { Manual, SemiAuto, FullAuto}
 
     [Header("References")]
-    public InventoryItem ammo;
+    public Item ammo;
+    public ObjectPool bulletPool;
 
     [Header("Settings")]
     public List<FireMode> availableFireModes;
@@ -26,6 +27,7 @@ public class Weapon : Item
     public float currentCycleTime = 0;
     public bool isCyclingGun = false;
     public bool isReloading = false;
+    public Vector3 aimDirection = new Vector3(0, 0, 0);
 
     [Header("Audio")]
     public AudioClip[] shootAudioClips;
@@ -35,23 +37,6 @@ public class Weapon : Item
 
     public override void Update()
     {
-        //cycle the gun
-        if(isCyclingGun)
-        {
-            currentTime += Time.deltaTime;
-            if (currentCycleTime <= currentTime)
-            {
-                //if weapon is
-                if((availableFireModes[currentFireMode] != FireMode.SemiAuto))
-                {
-                    canUseItem = true;
-
-                }
-                currentTime = 0;
-                FinishCycleBolt();
-            }
-        }
-
         if(isReloading)
         {
             canUseItem = false;
@@ -63,20 +48,35 @@ public class Weapon : Item
                 FinishReload();
             }
         }
+
+        else if(!isReloading)
+        {
+            //cycle the gun
+            if (isCyclingGun)
+            {
+                currentTime += Time.deltaTime;
+                if (currentCycleTime <= currentTime)
+                {
+                    //if weapon is
+                    if ((availableFireModes[currentFireMode] != FireMode.SemiAuto))
+                    {
+                        canUseItem = true;
+                    }
+                    currentTime = 0;
+                    FinishCycleBolt();
+                }
+            }
+        }
     }
 
     public override void UseItem()
     {
         if (canUseItem && currentAmmo > 0)
         {
-
             currentAmmo -= 1;
 
             if (availableFireModes[currentFireMode] == FireMode.Manual)
             {
-
-                Debug.Log("manual fire");
-
                 FireGun();
 
                 currentCycleTime = manualCyclingTime;
@@ -84,9 +84,6 @@ public class Weapon : Item
 
             if (availableFireModes[currentFireMode] == FireMode.SemiAuto)
             {
-
-                Debug.Log("semi auto fire");
-
                 FireGun();
 
                 currentCycleTime = semiCyclingTime;
@@ -94,10 +91,7 @@ public class Weapon : Item
 
             if (availableFireModes[currentFireMode] == FireMode.FullAuto)
             {
-
-                Debug.Log("Full auto fire");
                 FireGun();
-
 
                 currentCycleTime = automaticCyclingTime;
                 StartCycleBolt();
@@ -107,14 +101,23 @@ public class Weapon : Item
 
     public virtual void FireGun()
     {
-        Vector3 aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
-
         //New shoot
-        PooledObject bullet = player.bulletPool.GetObject();
+        PooledObject bullet = bulletPool.GetObject();
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+
         bullet.transform.position = this.transform.position;
+
+        //set the angle of the bullet
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        bullet.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
         bullet.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
-        bullet.GetComponent<Bullet>().shooter = player.gameObject;
-        bullet.GetComponent<Bullet>().damage = bulletDamage;
+        bulletScript.shooter = character.gameObject;
+        bulletScript.damage = bulletDamage;
+        bulletScript.startPos = this.transform.position;
+        bulletScript.maxRange = range;
+
 
         if (shootAudioClips.Length > 0)
         {
@@ -174,16 +177,17 @@ public class Weapon : Item
         int totalAmmo = 0;
         int ammoToRemoveFromInv = 0;
 
-        Debug.Log(totalAmmo);
-
         //Find the slots of the appropriate ammo and 
-        foreach (InventorySlot invSlot in player.inventory.inventorySlots)
+        foreach (InventorySlot invSlot in character.inventory.inventorySlots)
         {
-            if (invSlot.item == ammo)
+            if (invSlot.item)
             {
-                inventorySlots.Add(invSlot);
-                totalAmmo += invSlot.amount;
-                Debug.Log(totalAmmo);
+                if(invSlot.item.GetComponent<Item>() is Ammo)
+                {
+                    inventorySlots.Add(invSlot);
+                    totalAmmo += invSlot.amount;
+                }
+                
             }
         }
 
@@ -197,7 +201,7 @@ public class Weapon : Item
             currentAmmo = ammoCapacity;
         }
 
-        //If total ammo is more than 0, but less than 30(checked by previous if statement)
+        //If total ammo is more than 0, but less than totalammo(checked by previous if statement)
         else if (totalAmmo > 0)
         {
             int ammoToAdd = ammoCapacity - currentAmmo;
@@ -215,8 +219,8 @@ public class Weapon : Item
             else if (totalAmmo <= ammoToAdd)
             {
                 currentAmmo += totalAmmo;
-                totalAmmo = 0;
                 ammoToRemoveFromInv = totalAmmo;
+                totalAmmo = 0;
 
             }
         }
@@ -229,6 +233,11 @@ public class Weapon : Item
             if (invSlot.amount > ammoToRemoveFromInv)
             {
                 invSlot.amount -= ammoToRemoveFromInv;
+                invSlot.item.GetComponent<Item>().amount -= ammoToRemoveFromInv;
+                if(invSlot.amountText != null)
+                {
+                    invSlot.amountText.text = invSlot.amount.ToString();
+                }
                 break;
             }
 

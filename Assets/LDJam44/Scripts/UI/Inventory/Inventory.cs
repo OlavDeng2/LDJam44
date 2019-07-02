@@ -7,22 +7,34 @@ public class Inventory : MonoBehaviour
 {
     [Header("Data")]
     public InventorySlot[] inventorySlots;
+    
+    //Events
     public event EventHandler<InventoryEventsArgs> itemSelected;
+    public event EventHandler<InventoryEventsArgs> itemAdded;
+    public event EventHandler<InventoryEventsArgs> itemRemoved;
 
-    public void Start()
+
+
+
+    public void Awake()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>(true);
+
+        foreach(InventorySlot invSlot in inventorySlots)
+        {
+            invSlot.inventory = this;
+        }
     }
 
 
-    public void PickupItem(InventoryItem item,GameObject gameObjectItem, int itemAmount)
+    public void PickupItem(GameObject item, int itemAmount)
     {
-
+        
         foreach (InventorySlot inventorySlot in inventorySlots)
         {
             if(inventorySlot.item != null)
             {
-                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.maxStackCount)
+                if(item == inventorySlot.item && (inventorySlot.amount + itemAmount) <= inventorySlot.item.GetComponent<Item>().maxStackCount)
                 {
                     //Debug.Log("item in slot: " + inventorySlot.item.name);
                     inventorySlot.amount += itemAmount;
@@ -32,7 +44,7 @@ public class Inventory : MonoBehaviour
 
             else if(inventorySlot.item == null)
             {
-                inventorySlot.AddItem(item, gameObjectItem, itemAmount);
+                inventorySlot.AddItem(item, itemAmount);
                 break;
             }
         }
@@ -42,7 +54,7 @@ public class Inventory : MonoBehaviour
     {
         if (targetSlot.item != null)
         {
-            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.maxStackCount)
+            if (initialSlot.item.name == targetSlot.item.name && targetSlot.amount <= targetSlot.item.GetComponent<Item>().maxStackCount)
             {
                 targetSlot.amount += initialSlot.amount;
                 initialSlot.RemoveItem();
@@ -57,11 +69,27 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void SelectItem(InventoryItem item, InventorySlot invSlot)
+    public void SelectItem(GameObject item, InventorySlot invSlot)
     {
         if (itemSelected != null)
         {
             itemSelected(this, new InventoryEventsArgs(item, invSlot));
+        }
+    }
+
+    public void ItemAdded(GameObject item, InventorySlot invSlot)
+    {
+        if (itemAdded != null)
+        {
+            itemAdded(this, new InventoryEventsArgs(item, invSlot));
+        }
+    }
+
+    public void ItemRemoved(GameObject item, InventorySlot invSlot)
+    {
+        if (itemRemoved != null)
+        {
+            itemRemoved(this, new InventoryEventsArgs(item, invSlot));
         }
     }
 }

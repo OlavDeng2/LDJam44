@@ -35,7 +35,6 @@ public class PlayerUI : MonoBehaviour
 
     [Header("Data")]
     public bool gameOver = false;
-    public bool isPaused = false;
 
     private void Start()
     {
@@ -94,8 +93,6 @@ public class PlayerUI : MonoBehaviour
         {
             gameMenuCanvas.SetActive(true);
         }
-        Time.timeScale = 0;
-        isPaused = true;
 
     }
 
@@ -105,8 +102,6 @@ public class PlayerUI : MonoBehaviour
         {
             gameMenuCanvas.SetActive(false);
         }
-        Time.timeScale = 1;
-        isPaused = false;
     }
 
     //Stuff for talk

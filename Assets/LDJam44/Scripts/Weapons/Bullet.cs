@@ -6,21 +6,15 @@ public class Bullet : MonoBehaviour
 {
     public float damage = 100;
     public GameObject shooter;
-    public float bulletSurviveTime = 10;
-    public float currentTime = 0;
+    public Vector3 startPos = new Vector3(0, 0, 0);
+    public float maxRange = 10f;
 
-    private void Start()
-    {
-        currentTime = 0;
-    }
-
+    
     private void Update()
     {
-        //temporary fix to eventually despawn the bullet
-        currentTime += Time.deltaTime;
-        if(currentTime > bulletSurviveTime)
+
+        if(Vector3.Magnitude(startPos - this.transform.position) > maxRange)
         {
-            currentTime = 0;
             this.GetComponent<PooledObject>().ReturnToPool();
         }
     }
@@ -28,22 +22,17 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Character hitCharacter = collision.gameObject.GetComponent<Character>();
-        if (hitCharacter)
+        if (hitCharacter != null)
         {
             if(collision.gameObject != shooter)
             {
-                currentTime = 0;
                 hitCharacter.TakeDamage(damage);
-                this.GetComponent<PooledObject>().ReturnToPool();
             }
         }
 
-        /*
-        else if (!hitCharacter);
+        if(hitCharacter == null && collision.gameObject.GetComponent<Bullet>() == null)
         {
-            Debug.Log("hit");
-
             this.GetComponent<PooledObject>().ReturnToPool();
-        }*/
+        }
     }
 }

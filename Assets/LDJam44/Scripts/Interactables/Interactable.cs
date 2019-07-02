@@ -51,6 +51,7 @@ public class Interactable : MonoBehaviour
             {
                 player.interactable = null;
                 player = null;
+                playerHasTalked = false;
             }
         }
         

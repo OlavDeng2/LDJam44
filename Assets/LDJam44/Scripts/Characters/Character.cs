@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("references")]
+    public GameObject hand;
+
     [Header("Health")]
     public float defaultHealth = 100;
     public float health = 100;
-    public float damage = 100;
     public bool alive = true;
 
     [Header("Movement")]
     public float moveSpeed = 1;
+    public Rigidbody2D rigidBody;
 
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip[] randomClips;
     public AudioClip[] dyingClips;
+
+    [Header("Inventory")]
+    public Inventory inventory;
+
+    [Header("Data")]
+    public GameManager gameManager;
 
     //The character should take damage
     public void TakeDamage(float damage)
@@ -40,12 +49,7 @@ public class Character : MonoBehaviour
 
     public void MoveCharacter(Vector3 moveDirection)
     {
-        gameObject.transform.position += moveDirection * moveSpeed;
-    }
-
-    public void LookDirection(Vector3 lookDirection)
-    {
-        gameObject.transform.right = lookDirection;
+        rigidBody.velocity = moveDirection * moveSpeed;
     }
 
     public void RandomClip(float chance)

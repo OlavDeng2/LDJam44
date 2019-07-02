@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 4943934517081144830, guid: 924ce6d77805adf43bd068490c33651a,
     type: 3}
-  spawnCount: 50
+  spawnCount: 200
   objects: []
 --- !u!1 &5003011274703958629
 GameObject:
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 5523471019990400206, guid: 3eeaed242c61cf6448d6c1dd18b0c278,
     type: 3}
-  spawnCount: 50
+  spawnCount: 200
   objects: []
 --- !u!1 &8002499228802211392
 GameObject:
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ec24a3e45d2644ba8dc543254f4852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 1420806283247782665}
+  spawnEnemies: 0
   playerPool: {fileID: 4674654115912162990}
   playerSpawnPoints:
   - {fileID: 0}
@@ -196,53 +196,8 @@ MonoBehaviour:
   banditSpawnPoints: []
   banditsToSpawn: 5
   player: {fileID: 0}
---- !u!1 &8277988336858804750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3632400911766908340}
-  - component: {fileID: 1420806283247782665}
-  m_Layer: 0
-  m_Name: 'Pool: Bullets'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3632400911766908340
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8277988336858804750}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.574434, y: 0.7708556, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5690484080032466564}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1420806283247782665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8277988336858804750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16759acd94cd552489b5c0eb195bf747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 2446701549417867979, guid: d78aa427ebd9c12418cded1f4aa77317,
-    type: 3}
-  spawnCount: 100
-  objects: []
+  isPaused: 0
+  gameOver: 0
 --- !u!1 &8806556104832028353
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +228,6 @@ Transform:
   - {fileID: 1261082281154549324}
   - {fileID: 4293861487206879199}
   - {fileID: 1131678405618555639}
-  - {fileID: 3632400911766908340}
   m_Father: {fileID: 2534944088199883680}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

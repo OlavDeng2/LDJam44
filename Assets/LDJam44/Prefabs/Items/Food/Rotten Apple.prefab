@@ -125,10 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd81801b0ca6a4b9c63fb41281ee6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 4b821f466386d17488cc28fa7f5ae2a2, type: 3}
   inventoryItem: {fileID: 11400000, guid: b149953bb532de04783d053e51fc05de, type: 2}
   timeBetweenUses: 1
   amount: 1
+  maxStackCount: 1
   currentTime: 0
   player: {fileID: 0}
   invSlot: {fileID: 0}
