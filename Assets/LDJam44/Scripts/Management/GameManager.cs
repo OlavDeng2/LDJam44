@@ -12,12 +12,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Zombie Settings")]
     public ObjectPool zombiePool;
-    public Transform[] zombieSpawnPoints;
+    public SpawnPoint[] zombieSpawnPoints;
     public int zombiesToSpawn = 5;
 
     [Header("Bandit Settings")]
     public ObjectPool banditPool;
-    public Transform[] banditSpawnPoints;
+    public SpawnPoint[] banditSpawnPoints;
     public int banditsToSpawn = 5;
 
     [Header("Game Data")]
@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
             SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
             SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
         }
-  
-
     }
 
     private void SpawnPlayer()
@@ -57,15 +55,15 @@ public class GameManager : MonoBehaviour
         player.transform.position = randomSpawnPos.position;
     }
 
-    private void SpawnEnemies(Transform[] allSpawnpoints, int amountToSpawn, ObjectPool objectPool)
+    private void SpawnEnemies(SpawnPoint[] allSpawnpoints, int amountToSpawn, ObjectPool objectPool)
     {
-        foreach(Transform spawnPoint in allSpawnpoints)
+        foreach(SpawnPoint spawnPoint in allSpawnpoints)
         {
-            for(int i = 0; i <= amountToSpawn; i++)
+            for(int i = 0; i < spawnPoint.amountToSpawn; i++)
             {
                 PooledObject enemy = objectPool.GetObject();
                 enemy.GetComponent<Enemy>().gameManager = this;
-                enemy.transform.position = spawnPoint.position;
+                enemy.transform.position = spawnPoint.transform.position;
             }
         }
     }
@@ -74,15 +72,11 @@ public class GameManager : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0;
-
-
     }
 
     public void UnPauseGame()
     {
         isPaused = false;
         Time.timeScale = 1;
-
     }
-
 }
