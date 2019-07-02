@@ -57,7 +57,6 @@ public class Enemy : Character
         if (!gameManager.isPaused && !gameManager.gameOver)
         {
             MoveEnemy();
-
         }
 
         if (!alive)
@@ -126,9 +125,9 @@ public class Enemy : Character
         //TODO: do a raycast to check if enemy sight is being blocked, if not, go get the player
         RaycastHit2D hit = Physics2D.Raycast(transform.position, GetPlayerDirection());
 
-        if (hit.collider != null)
+        //if (hit.collider != null)
         {
-            if (hit.collider.GetComponent<Player>() != null)
+            //if (hit.collider.GetComponent<Player>() != null)
             {
 
                 //If the player is further away than max detection distance, dont move

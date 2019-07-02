@@ -203,8 +203,6 @@ public class Player : Character
         GameObject invItem = e.Item;
         if(invItem!= null)
         {
-
-
             invItem.SetActive(true);
             currentItem = invItem.GetComponent<Item>();
             currentItem.character = this;
