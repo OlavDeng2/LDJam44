@@ -175,11 +175,10 @@ public class Player : Character
         }
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.gameObject.GetComponent<Item>();
-        
+
         if (item != null)
         {
             collision.gameObject.transform.SetParent(this.gameObject.transform);

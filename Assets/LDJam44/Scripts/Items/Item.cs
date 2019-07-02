@@ -49,13 +49,6 @@ public class Item : MonoBehaviour
                 audioSource.PlayOneShot(useItemAudioClips[UnityEngine.Random.Range(0, useItemAudioClips.Length)]);
             }
         }
-
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        gameObject.SetActive(false);
     }
 }
 
