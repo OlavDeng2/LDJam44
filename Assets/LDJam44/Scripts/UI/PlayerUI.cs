@@ -11,7 +11,7 @@ public class PlayerUI : MonoBehaviour
     public Text healthText;
     public Slider healthBar;
     public Text ammoText;
-    public GameObject ammoIndicator;
+    //public GameObject ammoIndicator;
 
     [Header("Inventory")]
     public Inventory inventory;
@@ -53,13 +53,13 @@ public class PlayerUI : MonoBehaviour
     public void HideAmmoUI()
     {
         ammoText.gameObject.SetActive(false);
-        ammoIndicator.SetActive(false);
+        //ammoIndicator.SetActive(false);
     }
 
     public void ShowAmmoUI()
     {
         ammoText.gameObject.SetActive(true);
-        ammoIndicator.SetActive(true);
+        //ammoIndicator.SetActive(true);
     }
 
     public void ReloadAmmoUI()

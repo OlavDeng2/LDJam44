@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LDJam44/Scenes/Game.unity
     guid: 03569e120b6137f41ba4215c5a25a9df
+  - enabled: 1
+    path: Assets/LDJam44/Scenes/Game 1.unity
+    guid: 7ead19bef523a174da76a23f49f2589c
   m_configObjects: {}

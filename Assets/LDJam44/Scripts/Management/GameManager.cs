@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour
     public SpawnPoint[] zombieSpawnPoints;
     public int zombiesToSpawn = 5;
 
+    //We no longer doing bandits
+    /*
     [Header("Bandit Settings")]
     public ObjectPool banditPool;
     public SpawnPoint[] banditSpawnPoints;
     public int banditsToSpawn = 5;
+    */
 
     [Header("Game Data")]
     public PooledObject player;
@@ -35,7 +38,9 @@ public class GameManager : MonoBehaviour
         if(spawnEnemies)
         {
             SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
-            SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
+            
+            //We are not spawning bandits anymore
+            //SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
         }
     }
 
