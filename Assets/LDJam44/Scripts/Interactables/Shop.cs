@@ -141,7 +141,7 @@ public class Shop : Interactable
     {
         if(storeIsOpen)
         {
-            player.health += e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().sellPrice;
+            player.TakeDamage(-(e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().sellPrice));
             e.InvSlot.priceText.enabled = true;
             e.InvSlot.priceText.text = (e.InvSlot.item.GetComponent<Item>().amount * e.InvSlot.item.GetComponent<Item>().buyPrice).ToString();
         }
@@ -151,7 +151,7 @@ public class Shop : Interactable
     {
         if(storeIsOpen)
         {
-            player.health -= e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice;
+            player.TakeDamage(e.Item.GetComponent<Item>().amount * e.Item.GetComponent<Item>().buyPrice);
             e.InvSlot.priceText.enabled = false;
         }
     }

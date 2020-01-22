@@ -6,6 +6,13 @@ public class GameManager : MonoBehaviour
 {
     public bool spawnEnemies = false;
 
+    [Header("Game Settings")]
+    public int currentRound = 5;
+    public int initialZombies = 5;
+    public float timeToNextRound = 60f; //time after killing last zombie til new round starts
+    public float roundTime = 60f; // The amount of time in a round, in seconds.
+    public float currentTime = 0f;
+
     [Header("Player Settings")]
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
@@ -13,7 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("Zombie Settings")]
     public ObjectPool zombiePool;
     public SpawnPoint[] zombieSpawnPoints;
-    public int zombiesToSpawn = 5;
+    //public int zombiesToSpawn = 5;
 
     //We no longer doing bandits
     /*
@@ -34,14 +41,44 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayer();
         Time.timeScale = 1;
+    }
 
-        if(spawnEnemies)
+    private void Update()
+    {
+        /*
+
+        //keep counting if on break
+        if(!spawnEnemies &&currentTime <= timeToNextRound)
         {
-            SpawnEnemies(zombieSpawnPoints, zombiesToSpawn, zombiePool);
-            
+            currentTime += Time.deltaTime;
+        }
+        //if break is over, reset time and start round
+        else if(!spawnEnemies && currentTime >= timeToNextRound)
+        {
+            currentRound += 1;
+            spawnEnemies = true;
+            currentTime = 0f;
+        }
+
+        //spwn enemies if you can spawn enemies and the round time isnt over yet
+        if (spawnEnemies && currentTime <= roundTime)
+        {
+            SpawnEnemies(zombieSpawnPoints, initialZombies * currentRound, zombiePool);
+
+            currentTime += Time.deltaTime;
             //We are not spawning bandits anymore
             //SpawnEnemies(banditSpawnPoints, banditsToSpawn, banditPool);
         }
+
+        else if (spawnEnemies && currentTime >= roundTime)
+        {
+            spawnEnemies = false;
+
+            //reset the time
+            currentTime = 0f;
+        }
+
+    */
     }
 
     private void SpawnPlayer()
