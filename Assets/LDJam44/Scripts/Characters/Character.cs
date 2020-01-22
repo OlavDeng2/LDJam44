@@ -28,7 +28,7 @@ public class Character : MonoBehaviour
     public GameManager gameManager;
 
     //The character should take damage
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         if( health <= 0f)

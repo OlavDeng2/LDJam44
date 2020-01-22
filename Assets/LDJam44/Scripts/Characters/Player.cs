@@ -25,15 +25,13 @@ public class Player : Character
     private void Start()
     {
         inventory.itemSelected += Inventory_itemSelected;
+        playerUI.UpdateHealthUI(health);
+        playerUI.HideAmmoUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //update UI
-        playerUI.UpdateHealthText(health);
-
         if(health <= 0)
         {
             KillCharacter();
@@ -78,9 +76,10 @@ public class Player : Character
                         Weapon weapon = currentItem as Weapon;
 
                         weapon.aimDirection = Vector3.Normalize((Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10)) - this.transform.position);
+
                         if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
                         {
-                            weapon.isCyclingGun = true;
+                            weapon.StartCycleBolt();
                         }
                     }
 
@@ -97,7 +96,7 @@ public class Player : Character
                     Weapon weapon = currentItem as Weapon;
                     if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.Manual)
                     {
-                        weapon.isCyclingGun = true;
+                        weapon.StartCycleBolt();
                     }
 
                     else if (weapon.availableFireModes[weapon.currentFireMode] == Weapon.FireMode.SemiAuto)
@@ -114,7 +113,7 @@ public class Player : Character
                 if (currentItem is Weapon)
                 {
                     Weapon weapon = currentItem as Weapon;
-                    weapon.isReloading = true;
+                    weapon.StartReload();
                 }
             }
 
@@ -193,6 +192,17 @@ public class Player : Character
         //Remove old item
         if(currentItem)
         {
+            //remove the events
+            if (currentItem.GetComponent<Item>() is Weapon)
+            {
+                Weapon weapon = currentItem.GetComponent<Item>() as Weapon;
+
+                weapon.fireGun -= Weapon_FireGun;
+                weapon.startReload -= Weapon_StartReload;
+                weapon.endReload -= Weapon_EndReload;
+                playerUI.HideAmmoUI();
+            }
+
             currentItem.gameObject.SetActive(false);
             currentItem.transform.SetParent(currentItem.invSlot.transform);
             currentItem.transform.position = currentItem.invSlot.transform.position;
@@ -211,7 +221,35 @@ public class Player : Character
             currentItem.transform.position = this.gameObject.transform.position;
 
             currentItem.GetComponent<Collider2D>().enabled = false;
+
+            //add events
+            if(invItem.GetComponent<Item>() is Weapon)
+            {
+                Weapon weapon = invItem.GetComponent<Item>() as Weapon;
+
+                weapon.fireGun += Weapon_FireGun;
+                weapon.startReload += Weapon_StartReload;
+                weapon.endReload += Weapon_EndReload;
+                playerUI.ShowAmmoUI();
+                playerUI.UpdateAmmoUI(weapon.currentAmmo);
+
+            }
         }
+    }
+
+    private void Weapon_EndReload(object sender, WeaponEventsArgs e)
+    {
+        playerUI.UpdateAmmoUI(e.Weapon.currentAmmo);
+    }
+
+    private void Weapon_StartReload(object sender, WeaponEventsArgs e)
+    {
+        playerUI.ReloadAmmoUI();
+    }
+
+    private void Weapon_FireGun(object sender, WeaponEventsArgs e)
+    {
+        playerUI.UpdateAmmoUI(e.Weapon.currentAmmo);
     }
 
     public override void KillCharacter()
@@ -219,5 +257,13 @@ public class Player : Character
         alive = false;
         playerUI.GameOver();
         gameManager.PauseGame();
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        //update UI
+        playerUI.UpdateHealthUI(health);
     }
 }

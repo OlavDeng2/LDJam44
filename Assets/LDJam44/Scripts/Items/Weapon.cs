@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,10 @@ public class Weapon : Item
     public bool isCyclingGun = false;
     public bool isReloading = false;
     public Vector3 aimDirection = new Vector3(0, 0, 0);
+
+    public event EventHandler<WeaponEventsArgs> startReload;
+    public event EventHandler<WeaponEventsArgs> endReload;
+    public event EventHandler<WeaponEventsArgs> fireGun;
 
     [Header("Audio")]
     public AudioClip[] shootAudioClips;
@@ -75,6 +80,8 @@ public class Weapon : Item
         {
             currentAmmo -= 1;
 
+            FireGunEvent(this);
+
             if (availableFireModes[currentFireMode] == FireMode.Manual)
             {
                 FireGun();
@@ -121,7 +128,7 @@ public class Weapon : Item
 
         if (shootAudioClips.Length > 0)
         {
-            audioSource.PlayOneShot(shootAudioClips[Random.Range(0, shootAudioClips.Length)]);
+            audioSource.PlayOneShot(shootAudioClips[UnityEngine.Random.Range(0, shootAudioClips.Length)]);
         }
 
         canUseItem = false;
@@ -138,7 +145,7 @@ public class Weapon : Item
 
         if (changeFireModeAudioClips.Length > 0)
         {
-            audioSource.PlayOneShot(changeFireModeAudioClips[Random.Range(0, changeFireModeAudioClips.Length)]);
+            audioSource.PlayOneShot(changeFireModeAudioClips[UnityEngine.Random.Range(0, changeFireModeAudioClips.Length)]);
         }
     }
 
@@ -148,7 +155,7 @@ public class Weapon : Item
 
         if (cycleBoltAudioClips.Length > 0)
         {
-            audioSource.PlayOneShot(cycleBoltAudioClips[Random.Range(0, cycleBoltAudioClips.Length)]);
+            audioSource.PlayOneShot(cycleBoltAudioClips[UnityEngine.Random.Range(0, cycleBoltAudioClips.Length)]);
         }
     }
 
@@ -162,16 +169,17 @@ public class Weapon : Item
     {
         isReloading = true;
 
+        StartReloadEvent(this);
+
         if (reloadAudioClips.Length > 0)
         {
-            audioSource.PlayOneShot(reloadAudioClips[Random.Range(0, reloadAudioClips.Length)]);
+            audioSource.PlayOneShot(reloadAudioClips[UnityEngine.Random.Range(0, reloadAudioClips.Length)]);
         }
     }
 
     private void FinishReload()
     {
         isReloading = false;
-
 
         List<InventorySlot> inventorySlots = new List<InventorySlot>();
         int totalAmmo = 0;
@@ -248,5 +256,42 @@ public class Weapon : Item
                 invSlot.RemoveItem();
             }
         }
+        EndReloadEvent(this);
     }
+
+
+    public void StartReloadEvent(Weapon weapon)
+    {
+        if (startReload != null)
+        {
+            startReload(this, new WeaponEventsArgs(weapon));
+        }
+    }
+
+    public void EndReloadEvent(Weapon weapon)
+    {
+        if (endReload != null)
+        {
+            endReload(this, new WeaponEventsArgs(weapon));
+        }
+    }
+
+    public void FireGunEvent(Weapon weapon)
+    {
+        if (startReload != null)
+        {
+            fireGun(this, new WeaponEventsArgs(weapon));
+        }
+    }
+}
+
+
+public class WeaponEventsArgs : EventArgs
+{
+    public WeaponEventsArgs(Weapon weapon)
+    {
+        Weapon = weapon;
+    }
+
+    public Weapon Weapon;
 }

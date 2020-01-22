@@ -9,7 +9,9 @@ public class PlayerUI : MonoBehaviour
 {
     [Header("HUD")]
     public Text healthText;
+    public Slider healthBar;
     public Text ammoText;
+    public GameObject ammoIndicator;
 
     [Header("Inventory")]
     public Inventory inventory;
@@ -43,15 +45,32 @@ public class PlayerUI : MonoBehaviour
         loadingScreen.SetActive(false);
     }
 
-    public void UpdateAmmoText(int currentAmmoInMag, int totalAmmo)
+    public void UpdateAmmoUI(int currentAmmoInMag)
     {
-        ammoText.text = currentAmmoInMag + "/" + totalAmmo;
+        ammoText.text = currentAmmoInMag.ToString();
     }
 
-    public void UpdateHealthText(float health)
+    public void HideAmmoUI()
+    {
+        ammoText.gameObject.SetActive(false);
+        ammoIndicator.SetActive(false);
+    }
+
+    public void ShowAmmoUI()
+    {
+        ammoText.gameObject.SetActive(true);
+        ammoIndicator.SetActive(true);
+    }
+
+    public void ReloadAmmoUI()
+    {
+        ammoText.text = "Reloading";
+    }
+
+    public void UpdateHealthUI(float health)
     {
         healthText.text = "Health: " + health;
-
+        healthBar.value = health;
     }
 
     public void GameOver()
