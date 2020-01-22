@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayer();
         Time.timeScale = 1;
+
+        SpawnEnemies(zombieSpawnPoints, initialZombies * currentRound, zombiePool);
+
     }
 
     private void Update()
