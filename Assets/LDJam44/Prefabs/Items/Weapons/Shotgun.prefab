@@ -130,6 +130,8 @@ MonoBehaviour:
   timeBetweenUses: 1
   amount: 1
   maxStackCount: 1
+  buyPrice: 20
+  sellPrice: 10
   currentTime: 0
   character: {fileID: 0}
   invSlot: {fileID: 0}
@@ -152,6 +154,7 @@ MonoBehaviour:
   currentCycleTime: 0
   isCyclingGun: 0
   isReloading: 0
+  aimDirection: {x: 0, y: 0, z: 0}
   shootAudioClips:
   - {fileID: 8300000, guid: ad1257874cc319f419a95d2c1fe33d23, type: 3}
   cycleBoltAudioClips:
@@ -196,7 +199,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6620772406404824367}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -210,7 +213,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -245,7 +248,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
