@@ -87,6 +87,10 @@ public class Enemy : Character
         //return object to pool
         this.GetComponent<PooledObject>().ReturnToPool();
 
+        //reset the pooled object to default
+        health = defaultHealth;
+        
+
     }
 
 

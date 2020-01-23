@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
             {
                 PooledObject enemy = objectPool.GetObject();
                 enemy.GetComponent<Enemy>().gameManager = this;
+                enemy.GetComponent<Enemy>().alive = true;
                 enemy.transform.position = spawnPoint.transform.position;
             }
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7636224316551401337}
   - component: {fileID: 5742073615431402293}
   - component: {fileID: 3691904187914763747}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Assault Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1093621714068002071}
   - component: {fileID: 2592536489978530839}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1961657673
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b099800f2cffe8a488b4d9ec6baa7b50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7539500576252911377}
   - component: {fileID: 6540682969271147019}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 'Pool: Bullets'
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6440569467125753152}
   - component: {fileID: 2254158827497795670}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1961657673
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4b821f466386d17488cc28fa7f5ae2a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2983752369559847716}
   - component: {fileID: 8550245411906552923}
   - component: {fileID: 6436636870708110970}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotten Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,12 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 4b821f466386d17488cc28fa7f5ae2a2, type: 3}
-  inventoryItem: {fileID: 11400000, guid: b149953bb532de04783d053e51fc05de, type: 2}
   timeBetweenUses: 1
   amount: 1
   maxStackCount: 1
+  buyPrice: 20
+  sellPrice: 10
   currentTime: 0
-  player: {fileID: 0}
+  character: {fileID: 0}
   invSlot: {fileID: 0}
   canUseItem: 1
   audioSource: {fileID: 6436636870708110970}
