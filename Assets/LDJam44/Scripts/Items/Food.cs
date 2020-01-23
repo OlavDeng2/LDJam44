@@ -12,7 +12,7 @@ public class Food : Item
     {
         if(canUseItem)
         {
-            character.health += healAmount;
+            character.TakeDamage(-healAmount);
 
             //Decrease by 1
             invSlot.amount -= 1;

@@ -84,7 +84,7 @@ MonoBehaviour:
   defaultHealth: 100
   health: 30
   alive: 1
-  moveSpeed: 5
+  moveSpeed: 3
   rigidBody: {fileID: 6109274319608535921}
   audioSource: {fileID: 4060881740739923696}
   randomClips: []
@@ -322,7 +322,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -45199807
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 6019453725058403666, guid: 0c2134f89836a2740890013342499946,
     type: 3}

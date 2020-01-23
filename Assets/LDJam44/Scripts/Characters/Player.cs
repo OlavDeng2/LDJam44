@@ -21,6 +21,7 @@ public class Player : Character
     public TutorialPoint tutorial = null;
     public Item currentItem = null;
     public bool inventoryOpen = false;
+    //public GameObject hand;
 
     private void Start()
     {
@@ -180,7 +181,8 @@ public class Player : Character
 
         if (item != null)
         {
-            collision.gameObject.transform.SetParent(this.gameObject.transform);
+            //set parent to hand
+            collision.gameObject.transform.SetParent(hand.transform);
             collision.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             inventory.PickupItem(collision.gameObject, item.amount);
         }
@@ -217,8 +219,8 @@ public class Player : Character
             currentItem = invItem.GetComponent<Item>();
             currentItem.character = this;
             currentItem.invSlot = e.InvSlot;
-            currentItem.transform.SetParent(this.gameObject.transform);
-            currentItem.transform.position = this.gameObject.transform.position;
+            currentItem.transform.SetParent(hand.transform);
+            currentItem.transform.position = hand.transform.position;
 
             currentItem.GetComponent<Collider2D>().enabled = false;
 
