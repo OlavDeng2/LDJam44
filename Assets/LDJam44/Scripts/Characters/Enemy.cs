@@ -6,14 +6,53 @@ public class Enemy : Character
 {
     [Header("Settings")]
     public GameObject[] dropableItems;
-    public int maxItems = 0;
     public int minItems = 0;
+    public int maxItems = 0;
     public float maxDetectionDistance = 10; //distance at which the enemy can detect players
 
     [Header("Data")]
     public GameObject player;
     public Player playerScript;
 
+    //Do it on enable due to using the pooling system
+    public virtual void OnEnable()
+    {
+        //This just assumes that there will be only one player
+        playerScript = FindObjectOfType<Player>();
+        player = playerScript.gameObject;
+
+        //Get the amount of items to drop
+        int itemCount = Random.Range(minItems, maxItems);
+
+        if (itemCount >= inventory.inventorySlots.Length)
+        {
+            //Set to max just incase there are not enough inventory slots
+            itemCount = inventory.inventorySlots.Length;
+
+
+        }
+
+        // loop as many times as there are items to add
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject itemToAddToInv = Instantiate(dropableItems[Random.Range(0, dropableItems.Length)], this.transform);
+            itemToAddToInv.transform.position = this.transform.position;
+
+            if (inventory.inventorySlots[i].item == null)
+            {
+                //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
+                inventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount));
+                itemToAddToInv.SetActive(false);
+            }
+
+            else if (inventory.inventorySlots[i].item != null)
+            {
+                break;
+            }
+        }
+    }
+
+    /*
     public virtual void Start()
     {
         //This just assumes that there will be only one player
@@ -49,7 +88,7 @@ public class Enemy : Character
                 break;
             }
         }
-    }
+    }*/
 
 
     public virtual void Update()

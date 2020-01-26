@@ -8,9 +8,9 @@ public class Bandit : Enemy
     public Weapon gun;
     public float fireRange = 8;
 
-    public override void Start()
+    public override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
 
         GetSpawnWeapon();
 
