@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
             if(collision.gameObject != shooter)
             {
                 hitCharacter.TakeDamage(damage);
+                this.GetComponent<PooledObject>().ReturnToPool();
             }
         }
 
