@@ -92,4 +92,16 @@ public class Inventory : MonoBehaviour
             itemRemoved(this, new InventoryEventsArgs(item, invSlot));
         }
     }
+
+    public void ClearInventory()
+    {
+        foreach(InventorySlot invslot in inventorySlots)
+        {
+            if(invslot.item != null)
+            {
+                Debug.Log(invslot.item);
+                invslot.RemoveItem();
+            }
+        }
+    }
 }

@@ -186,15 +186,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEnemies: 0
+  inbetweenRounds: 1
+  currentRound: 0
+  initialZombies: 1
+  timeToNextRound: 10
+  roundTime: 60
+  currentTime: 0
+  spawnTime: 5
+  timeSinceLastSpawn: 0
   playerPool: {fileID: 4674654115912162990}
   playerSpawnPoints:
   - {fileID: 0}
+  shopPool: {fileID: 0}
+  shopSpawnPoint: {fileID: 0}
   zombiePool: {fileID: 4060265245475301111}
   zombieSpawnPoints: []
-  zombiesToSpawn: 5
-  banditPool: {fileID: 4659268649589202466}
-  banditSpawnPoints: []
-  banditsToSpawn: 5
   player: {fileID: 0}
   isPaused: 0
   gameOver: 0

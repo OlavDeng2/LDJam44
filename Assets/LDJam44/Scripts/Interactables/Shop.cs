@@ -16,6 +16,10 @@ public class Shop : Interactable
     public GameObject[] shopItems;
     public int maxItems = 5;
     public int minItems = 1;
+    public GameObject[] lootTable1;
+    public GameObject[] lootTable2;
+    public GameObject[] lootTable3;
+    public GameObject[] lootTable4;
 
     [Header("Data")]
     public bool canOpenStore = false;
@@ -34,39 +38,7 @@ public class Shop : Interactable
         shopUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
 
-        //Get the amount of items
-        int itemCount = UnityEngine.Random.Range(minItems, maxItems);
-
-        if (itemCount >= shopInventory.inventorySlots.Length)
-        {
-            //Set to max just incase there are not enough inventory slots
-            itemCount = shopInventory.inventorySlots.Length;
-
-
-        }
-
-        // loop as many times as there are items to add
-        for (int i = 0; i < itemCount; i++)
-        {
-            GameObject itemToAddToInv = Instantiate(shopItems[UnityEngine.Random.Range(0, shopItems.Length)], this.transform);
-            itemToAddToInv.transform.position = this.transform.position;
-
-            if (shopInventory.inventorySlots[i].item == null)
-            {
-                //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
-                shopInventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount)) ;
-                shopInventory.inventorySlots[i].priceText.enabled = true;
-                shopInventory.inventorySlots[i].priceText.text = (itemToAddToInv.GetComponent<Item>().amount * itemToAddToInv.GetComponent<Item>().buyPrice).ToString();
-
-                itemToAddToInv.SetActive(false);
-            }
-
-            else if (shopInventory.inventorySlots[i].item != null)
-            {
-                break;
-            }
-        }
-
+        RefreshStore();
 
     }
 
@@ -117,8 +89,42 @@ public class Shop : Interactable
 
             }
         }
+    }
 
+    public void RefreshStore()
+    {
+        //Add the items to the store
+        //Get the amount of items
+        int itemCount = UnityEngine.Random.Range(minItems, maxItems);
 
+        if (itemCount >= shopInventory.inventorySlots.Length)
+        {
+            //Set to max just incase there are not enough inventory slots
+            itemCount = shopInventory.inventorySlots.Length;
+        }
+
+        
+        // loop as many times as there are items to add
+        for (int i = 0; i < itemCount; i++)
+        {
+            GameObject itemToAddToInv = Instantiate(shopItems[UnityEngine.Random.Range(0, shopItems.Length)], this.transform);
+            itemToAddToInv.transform.position = this.transform.position;
+
+            if (shopInventory.inventorySlots[i].item == null)
+            {
+                //Get random amount to add to the inventory slot between 1 and max stack amount (so should always be 1 if max stack amount is 1)
+                shopInventory.inventorySlots[i].AddItem(itemToAddToInv, UnityEngine.Random.Range(1, itemToAddToInv.GetComponent<Item>().maxStackCount));
+                shopInventory.inventorySlots[i].priceText.enabled = true;
+                shopInventory.inventorySlots[i].priceText.text = (itemToAddToInv.GetComponent<Item>().amount * itemToAddToInv.GetComponent<Item>().buyPrice).ToString();
+
+            }
+
+            else if (shopInventory.inventorySlots[i].item != null)
+            {
+                Destroy(itemToAddToInv);
+                return;
+            }
+        }
     }
 
     public override void Interact()
@@ -166,5 +172,10 @@ public class Shop : Interactable
     {
         e.InvSlot.priceText.enabled = true;
         e.InvSlot.priceText.text = (e.InvSlot.item.GetComponent<Item>().amount * e.InvSlot.item.GetComponent<Item>().sellPrice).ToString();
+    }
+
+    public void UpdateLootTable(GameObject[] lootTable)
+    {
+        shopItems = lootTable;
     }
 }

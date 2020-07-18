@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LDJam44/Scenes/MainMenu.unity
     guid: daa7f34b996beac4db82e19c78177172
-  - enabled: 1
+  - enabled: 0
     path: Assets/LDJam44/Scenes/Game.unity
     guid: 03569e120b6137f41ba4215c5a25a9df
   - enabled: 1

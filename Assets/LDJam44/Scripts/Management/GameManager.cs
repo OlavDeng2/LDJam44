@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public ObjectPool playerPool;
     public Transform[] playerSpawnPoints;
 
+    [Header("Shop Settings")]
+    public GameObject shop;
+
     [Header("Zombie Settings")]
     public ObjectPool zombiePool;
     public SpawnPoint[] zombieSpawnPoints;
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             currentTime += Time.deltaTime;
         }
+
         //if break is over, reset time and start round
         else if(inbetweenRounds && currentTime >= timeToNextRound * currentRound)
         {
@@ -55,6 +59,27 @@ public class GameManager : MonoBehaviour
             spawnEnemies = true;
             inbetweenRounds = false;
             currentTime = 0f;
+            Shop shopScript = shop.GetComponent<Shop>();
+
+            switch (currentRound)
+            {
+                case 1:
+                    shopScript.UpdateLootTable(shopScript.lootTable1);
+                    break;
+                case 5:
+                    shopScript.UpdateLootTable(shopScript.lootTable2);
+                    break;
+                case 10:
+                    shopScript.UpdateLootTable(shopScript.lootTable3);
+                    break;
+                case 15:
+                    shopScript.UpdateLootTable(shopScript.lootTable4);
+                    break;
+                default:
+                    break;
+            }
+
+            shopScript.RefreshStore();
         }
 
         //spwn enemies if you can spawn enemies and the round time isnt over yet
