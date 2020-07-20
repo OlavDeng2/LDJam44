@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 4807866919669346710}
-  defaultHealth: 100
+  defaultHealth: 30
   health: 30
   alive: 1
   moveSpeed: 3
