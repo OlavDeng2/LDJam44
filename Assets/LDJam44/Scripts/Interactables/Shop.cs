@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 
 public class Shop : Interactable
 {
@@ -13,7 +14,7 @@ public class Shop : Interactable
     public GameManager gameManager;
 
     [Header("Settings")]
-    public GameObject[] shopItems;
+    private GameObject[] shopItems;
     public int maxItems = 5;
     public int minItems = 1;
     public GameObject[] lootTable1;
@@ -37,6 +38,8 @@ public class Shop : Interactable
 
         shopUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
+
+        UpdateLootTable(lootTable1);
 
         RefreshStore();
 
